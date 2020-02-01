@@ -34,6 +34,7 @@ System components that are building blocks of the design:
  * Local Web Server: used to serve/execute UI-DNN-Sim in all instances; used to serve/execute UI-DNN in MVP
  * Azure Blob Storage: alternate publishing location for UI-DNN (as stretch goal)
 ![solution concept](https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model/blob/master/solution%20concept.png)
+
 Figure 1: Proposed architecture
 Many design decisions have not been made yet. Three notable decisions evident above:
   * “Similarity” DNN models will be kept local (and not published to Azure) based on current best practices due to the complexity of executing them.
@@ -65,6 +66,8 @@ Image Similarity:
 API:
 * Run 00, 01, and 03 image classification Jypyter notebooks
 * Summarize pain points with CVBP
+
+...
  
 Release #2 (due by Week 7):
 
@@ -77,10 +80,10 @@ Image Similarity:
 
 API: 
 * Deploy API using the provided CVBP notebooks to cloud
+
 ...
 
 Release #3 (due by Week 9):
-Addition/modification/deletion of a VM into/in/from a Project:
 
 UI-DNN-Sim:
 * Implement simple UI-DNN-Sim HTML interface for testing published “similarity” DNN models via local web server
@@ -92,6 +95,7 @@ Image Similarity:
 API:
 * Expand from taking single image input to do batch scoring with multiple images as input
 * Deploy API to the cloud
+
 ...
 
 Release #4 (due by Week 11):
@@ -104,6 +108,7 @@ UI-DNN & UI-DNN-Sim:
 
 Image Similarity:
 * Explore options to upload “similarity” DNN models to cloud, execute if action is plausible
+
 ...
 
 Release #5 (due by Week 13):
