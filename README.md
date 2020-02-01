@@ -34,3 +34,8 @@ System components that are building blocks of the design:
  * Local Web Server: used to serve/execute UI-DNN-Sim in all instances; used to serve/execute UI-DNN in MVP
  * Azure Blob Storage: alternate publishing location for UI-DNN (as stretch goal)
 ![solution concept](https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model/blob/master/solution%20concept.png)
+Figure 1: Proposed architecture
+Many design decisions have not been made yet. Three notable decisions evident above:
+  * “Similarity” DNN models will be kept local (and not published to Azure) based on current best practices due to the complexity of executing them.
+  * UI-DNN-Sim as separate code: since it will return a list of similar images to be displayed (vs. text / bounding boxes for the other models), the interface will differ significantly; also, since it will only interface with local models and code, there is no requirement to publish this element to Azure Blob Storage.
+  * Server requirement (local or cloud) for UI elements: REST APIs and local file APIs (for loading test images) cannot be accessed if the HTML/Javascript files are not loaded and access via a web server. These are web standards and cannot be avoided. 
