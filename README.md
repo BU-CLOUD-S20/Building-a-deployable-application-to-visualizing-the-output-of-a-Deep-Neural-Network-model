@@ -48,3 +48,54 @@ Stretch goals are:
   * Allows for the use of webcam as input.
   * Improve visualizations for UI-DNN such as adding interactive components and has appropriate UI for cell phone.
 ## 6.Release Planning:
+Plans and meeting notes are on the Trello board: https://trello.com/b/Cz7rU2Kz
+
+Release #1 (due by Week 5):
+Document and upload work to CVBP via code review
+UI: 
+* Implement simple UI-DNN HTML interface for testing published DNN models via local web server
+	* Site shows uploaded image
+	* Site shows uploaded image with hard-coded rectangle co-ordinates
+Image Similarity:
+* Run “similarity” DNN model via provided Jupyter notebooks (00, 01, 12)
+* Summarize pain points with CVBP
+API:
+* Run 00, 01, and 03 image classification Jypyter notebooks
+* Summarize pain points with CVBP
+ 
+Release #2 (due by Week 7):
+UI-DNN: 
+* Site shows uploaded image with API-returned rectangle co-ordinates
+* Add drop-down menu to supports image classification and object detection
+Image Similarity:
+* Precomputes features for reference set, and stores on disk 
+API: 
+* Deploy API using the provided CVBP notebooks to cloud
+...
+
+Release #3 (due by Week 9):
+Addition/modification/deletion of a VM into/in/from a Project:
+UI-DNN-Sim:
+* Implement simple UI-DNN-Sim HTML interface for testing published “similarity” DNN models via local web server
+	* Site returns list of similar images to be displayed based on features
+Image Similarity:
+* Run website from local PC
+API:
+* Expand from taking single image input to do batch scoring with multiple images as input
+* Deploy API to the cloud
+...
+
+Release #4 (due by Week 11):
+UI-DNN:
+* Add plotly to the interface for better visualization and interactive elements of the UI
+UI-DNN & UI-DNN-Sim:
+* Allow for realtime webcam images captured by UI-DNN or UI-DNN-Sim as an input to test models
+Image Similarity:
+* Explore options to upload “similarity” DNN models to cloud, execute if action is plausible
+...
+
+Release #5 (due by Week 13):
+* Addition/modification of UI interactive elements:
+	* Appropriate interface for cell phone
+*  Add Azure Blob Storage as an alternate publishing location for UI-DNN 
+
