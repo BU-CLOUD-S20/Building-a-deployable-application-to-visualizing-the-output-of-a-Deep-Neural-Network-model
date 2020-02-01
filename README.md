@@ -33,4 +33,4 @@ System components that are building blocks of the design:
  * REST API: communication end-point where UI-DNN and Azure-published models interact
  * Local Web Server: used to serve/execute UI-DNN-Sim in all instances; used to serve/execute UI-DNN in MVP
  * Azure Blob Storage: alternate publishing location for UI-DNN (as stretch goal)
-
+![solution concept](https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model/blob/master/solution%20concept.png)
