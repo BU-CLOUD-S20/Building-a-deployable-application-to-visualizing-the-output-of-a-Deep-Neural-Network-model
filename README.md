@@ -39,3 +39,12 @@ Many design decisions have not been made yet. Three notable decisions evident ab
   * “Similarity” DNN models will be kept local (and not published to Azure) based on current best practices due to the complexity of executing them.
   * UI-DNN-Sim as separate code: since it will return a list of similar images to be displayed (vs. text / bounding boxes for the other models), the interface will differ significantly; also, since it will only interface with local models and code, there is no requirement to publish this element to Azure Blob Storage.
   * Server requirement (local or cloud) for UI elements: REST APIs and local file APIs (for loading test images) cannot be accessed if the HTML/Javascript files are not loaded and access via a web server. These are web standards and cannot be avoided. 
+## 5.Acceptance criteria
+Minimum acceptance criteria is a running UI (UI-DNN) that allows users to publish their DNN models to Azure Container/Kubernetes and output visualizations for multiple DNN scenarios; except for UI of “similarity” DNN models (UI-DNN-Sim) which will be kept local and visualization will be output on local web server.
+Stretch goals are:
+  * Do precomputing of “similarity” DNN models and run models via cloud service.
+  * Use Azure blob storage as an alternate publishing location for UI-DNN.
+  * REST API expands from single image to taking multiple images as input; “batch scoring”
+  * Allows for the use of webcam as input.
+  * Improve visualizations for UI-DNN such as adding interactive components and has appropriate UI for cell phone.
+## 6.Release Planning:
