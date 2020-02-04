@@ -54,6 +54,7 @@ Stretch goals are:
 * Improve visualizations for UI-DNN such as adding interactive components and has appropriate UI for cell phone.
 ## 6.Release Planning:
 Plans are on Taiga: https://tree.taiga.io/project/mosayyebzadeh-building-deployable-application-visualizing-the-output-deep-neural-network/backlog
+
 Release #1 (due by Week 5):
 
 UI: 
