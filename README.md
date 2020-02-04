@@ -55,52 +55,71 @@ Stretch goals are:
 ## 6.Release Planning:
 Plans are on Taiga: https://tree.taiga.io/project/mosayyebzadeh-building-deployable-application-visualizing-the-output-deep-neural-network/backlog
 Release #1 (due by Week 5):
+
 UI: 
 * Implement simple UI-DNN HTML interface for testing published DNN models via local web server
 	* Site shows uploaded image
 	* Site shows uploaded image with hard-coded rectangle co-ordinates
+
 Image Similarity:
 * Run “similarity” DNN model via provided Jupyter notebooks (00, 01, 12)
 * Summarize pain points with CVBP
+
 API:
 * Run 00, 01, and 03 image classification Jypyter notebooks
 * Summarize pain points with CVBP
+
 …
  
 Release #2 (due by Week 7):
+
 UI-DNN: 
 * Site shows uploaded image with API-returned rectangle co-ordinates
 * Add drop-down menu to supports image classification and object detection
+
 Image Similarity:
 * Precomputes features for reference set, and stores on disk 
 * Can load precomputed features and compare with a query image (on local machine, code is provided in the notebooks)
+
 API: 
 * Deploy API using the provided CVBP notebooks to cloud
+
 …
  
 Release #3 (due by Week 9):
+
 UI-DNN:
 * Add plotly to the interface for better visualization and interactive elements of the UI
+
 UI-DNN-Sim:
 * Implement simple UI-DNN-Sim HTML interface for testing published “similarity” DNN models via local web server
 	* Site returns list of similar images to be displayed based on features
 * Run website from local PC
+
 API:
 * Expand from taking single image input to do batch scoring with multiple images as input
 * Deploy API to the cloud
+
 …
  
 Release #4 (due by Week 11):
+
 Document and upload work to CVBP via code review
+
 UI-DNN & UI-DNN-Sim:
 * Allow for realtime webcam images captured by UI-DNN or UI-DNN-Sim as an input to test models
+
 Image Similarity:
 * Explore options to upload “similarity” DNN models to cloud, execute if action is plausible
+
 Evangelism:
 * Blog about the work and share on social media
+
 …
- 
+
+
 Release #5 (due by Week 13):
+
 Document and upload work to CVBP via code review
 * Addition/modification of UI interactive elements:
 	* Appropriate interface for cell phone
