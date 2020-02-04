@@ -11,20 +11,20 @@ Target Audience:
 ## 3. Scope and Features of the Project
 * UI/Frontend
     * Simple site for users to upload and view images and DNN results
-    * Allows images to be shown with either hard coded or API-returned rectangle coordinates for object classification and tracing
+    * Allows images to be shown with API-returned rectangle coordinates for object classification and tracing
     * Supports visualizations for multiple DNN scenarios, as well as the ability to switch between them
     * Flexible display to accommodate tablet and mobile devices
-    * Uses Plotly to enable basic interactivity
+    * Enable basic interactivity e.g. using Plotly
     * Allows images to be uploaded from other sources, such as webcam
 * REST API
     * Can deploy and run DNN model via provided Jupyter notebooks
-    * Can run model either locally or via cloud service
+        * Can run model via cloud service
     * Can take single image as input, or do batch scoring with multiple images
-    * API scenarios include Classification, Similarity, Detection, Keypoints, Action recognition, and Crowd counting, but can support user defined scenarios as well
+    * API scenarios include Classification, Similarity, Detection, and possibly keypoints, but can support user defined scenarios as well
 * Image Similarity
-    * Precomputes features for reference set, and stores them on disk for later use
-    * Can do precomputing locally or via cloud service
-    * Can run model either locally or via cloud service
+   * Implement UI which, given a query image, shows the top N similar reference images.
+   * Precomputes features locally for reference set, and stores them on disk for later use
+   * Can deploy UI to the cloud
 ## 4. Solution Concept
 System components that are building blocks of the design:
  * Jupyter Notebooks: walk users through creating and “publishing” DNN models
