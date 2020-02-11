@@ -7,12 +7,12 @@ Mentors: Patrick Buehler, JS Tan
 
 #### Contents
 
-[1. Vision and Goals Of The Project](#vision-goals)
-[2. Users/Personas Of The Project](#users-personas)
-[3. Scope and Features of the Project](#scope-features)
-[4. Solution Concept](#solution-concept)
-[5. Acceptance Criteria](#acceptance-criteria)
-[6. Release Planning](#release-planning)
+1. [Vision and Goals Of The Project](#vision-goals)
+2. [Users/Personas Of The Project](#users-personas)
+3. [Scope and Features of the Project](#scope-features)
+4. [Solution Concept](#solution-concept)
+5. [Acceptance Criteria](#acceptance-criteria)
+6. [Release Planning](#release-planning)
 
 <a name="vision-goals"/>
 
