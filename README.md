@@ -18,7 +18,7 @@ Mentors: Patrick Buehler, JS Tan
 
 ## 1. Vision and Goals Of The Project
 
-Develope an application for users to deploy their operationalized models in the cloud. This application includes a front-end UI and the computer vision repository. 
+Develop an application for users to deploy their operationalized models in the cloud. This application includes a front-end UI and the computer vision repository. 
 * Providing a user interface that allows user to visualize the output of a deployed computer vision model. Users can improve on and gain insights from their deployed model by storing test images in a file system and examined for correctness through the user interface. This user interface should be deployed to the cloud.
 * Providing a modular way for different models and different input/output signatures.
 
