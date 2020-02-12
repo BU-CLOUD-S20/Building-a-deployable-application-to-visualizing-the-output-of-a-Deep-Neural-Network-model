@@ -5,9 +5,7 @@ Develope an application for users to deploy their operationalized models in the 
 * Providing a modular way for different models and different input/output signatures.
 ## 2. Users/Personas Of The Project
 Target Audience:
-* General Data scientist and Software Engineers
-* Quick Start for professional computer vision expert
-* Practitioners who wants to deploy computer vision model in the cloud
+* General Data Scientist, Software Engineers, and professional computer vision expert who are developing/testing Deep Neural Network (DNN) wants easier way to visualize the output
 ## 3. Scope and Features of the Project
 * UI/Frontend
     * Simple site for users to upload and view images and DNN results
