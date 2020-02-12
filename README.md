@@ -18,9 +18,9 @@ Mentors: Patrick Buehler, JS Tan
 
 ## 1. Vision and Goals Of The Project
 
-Develop an application for users to deploy their operationalized models in the cloud. This application includes a front-end UI and the computer vision repository. 
-* Providing a user interface that allows user to visualize the output of a deployed computer vision model. Users can improve on and gain insights from their deployed model by storing test images in a file system and examined for correctness through the user interface. This user interface should be deployed to the cloud.
-* Providing a modular way for different models and different input/output signatures.
+Develop an application for users to deploy their operationalized models in the cloud. This application includes a front-end UI for the computer vision repository. 
+* Provide a user interface that allows users to visualize the output of a deployed computer vision model. Users can improve on and gain insights from their deployed model by storing test images in a file system and examining them for correctness through the user interface. This user interface should be deployed to the cloud.
+* Provide a modular way for different models and different input/output signatures.
 
 <a name="users-personas"/>
 
@@ -28,9 +28,7 @@ Develop an application for users to deploy their operationalized models in the c
 
 Target Audience:
 
-* General Data scientist and Software Engineers
-* Quick Start for professional computer vision expert
-* Practitioners who wants to deploy computer vision model in the cloud
+* General data scientists, software engineers, and professional computer vision experts who are developing/testing Deep Neural Networks (DNNs) that want an easier way to visualize their outputs
 
 <a name="scope-features"/>
 
@@ -41,11 +39,11 @@ Target Audience:
     * Allows images to be shown with API-returned rectangle coordinates for object classification and tracing
     * Supports visualizations for multiple DNN scenarios, as well as the ability to switch between them
     * Flexible display to accommodate tablet and mobile devices
-    * Enable basic interactivity e.g. using Plotly
+    * Enable basic interactivity
     * Allows images to be uploaded from other sources, such as webcam
 * REST API
     * Can deploy and run DNN model via provided Jupyter notebooks
-        * Can run model via cloud service
+    * Can run model via cloud service
     * Can take single image as input, or do batch scoring with multiple images
     * API scenarios include Classification, Similarity, Detection, and possibly keypoints, but can support user defined scenarios as well
 * Image Similarity
@@ -66,6 +64,7 @@ System components that are building blocks of the design:
  * Capture Images: realtime webcam images captured by UI-DNN or UI-DNN-Sim to test models
  * Azure Container/Kubernetes: DNN model publishing locations, with focus on simplicity and low cost (e.g., CPU vs GPU resources) - can publish to either service
  * REST API: communication end-point where UI elements and Azure-published models interact
+     * Models must implement scoring functions as outlined in the Miscrosoft CVBP repository
  * Local Web Server: used to serve/execute UI elements in MVP
  * Azure Blob Storage: alternate publishing location for UI elements (as stretch goal)
 ![solution concept](https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model/blob/master/solution_concept.png)
@@ -80,7 +79,7 @@ Many design decisions have not been made yet. Three notable decisions evident ab
 
 ## 5. Acceptance Criteria
 
-Minimum acceptance criteria is a deployed UI (UI-DNN) which calls a cloud-based REST API and visualizes its output for multiple DNN scenarios; except for UI of “similarity” DNN models (UI-DNN-Sim) which will also call a cloud-based REST API for each uploaded query image.
+The minimum acceptance criteria is a deployed UI (UI-DNN) which calls a cloud-based REST API and visualizes its output for multiple DNN scenarios; except for UI of “similarity” DNN models (UI-DNN-Sim), which will also call a cloud-based REST API for each uploaded query image.
 
 Stretch goals are:
 * Deployment of UI-DNN-Sim site to the cloud.
