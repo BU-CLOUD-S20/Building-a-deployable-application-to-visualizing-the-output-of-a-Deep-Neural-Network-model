@@ -100,7 +100,7 @@ Stretch goals are:
 
 Plans are on Taiga: https://tree.taiga.io/project/mosayyebzadeh-building-deployable-application-visualizing-the-output-deep-neural-network/backlog
 
-#### Release #1 (due by Week 5):
+### Release #1 (due by Week 5):
 
 UI: 
 * Implement simple UI-DNN HTML interface for testing published DNN models via local web server
@@ -117,7 +117,7 @@ API:
 * Run 00, 01, and 03 image classification Jypyter notebooks
 * Summarize pain points with CVBP
 
-#### Release #2 (due by Week 7):
+### Release #2 (due by Week 7):
 
 UI-DNN: 
 * Site shows uploaded image with API-returned rectangle co-ordinates
