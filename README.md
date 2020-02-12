@@ -1,12 +1,41 @@
-# Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model
-## 1. Vision and Goals Of The Project:
-Develope an application for users to deploy their operationalized models in the cloud. This application includes a front-end UI and the computer vision repository. 
+## Building a Deployable Application to Visualize the Output of a Deep Neural Network (DNN) Model
+
+Team: Matthew Boyd, Charles Henneberger, Xushan "Mulla" Hu, SeungYeun "Kelly" Lee, Nuwapa "Prim" Promchotichai  
+Mentors: Patrick Buehler, JS Tan
+
+*Updated: February 11, 2020*
+
+#### Contents
+
+1. [Vision and Goals Of The Project](#vision-goals)
+2. [Users/Personas Of The Project](#users-personas)
+3. [Scope and Features of the Project](#scope-features)
+4. [Solution Concept](#solution-concept)
+5. [Acceptance Criteria](#acceptance-criteria)
+6. [Release Planning](#release-planning)
+
+<a name="vision-goals"/>
+
+## 1. Vision and Goals Of The Project
+
+Develop an application for users to deploy their operationalized models in the cloud. This application includes a front-end UI and the computer vision repository. 
 * Providing a user interface that allows user to visualize the output of a deployed computer vision model. Users can improve on and gain insights from their deployed model by storing test images in a file system and examined for correctness through the user interface. This user interface should be deployed to the cloud.
 * Providing a modular way for different models and different input/output signatures.
+
+<a name="users-personas"/>
+
 ## 2. Users/Personas Of The Project
+
 Target Audience:
-* General Data Scientist, Software Engineers, and professional computer vision expert who are developing/testing Deep Neural Network (DNN) wants easier way to visualize the output
+
+* General Data scientist and Software Engineers
+* Quick Start for professional computer vision expert
+* Practitioners who wants to deploy computer vision model in the cloud
+
+<a name="scope-features"/>
+
 ## 3. Scope and Features of the Project
+
 * UI/Frontend
     * Simple site for users to upload and view images and DNN results
     * Allows images to be shown with API-returned rectangle coordinates for object classification and tracing
@@ -23,7 +52,11 @@ Target Audience:
    * Implement UI which, given a query image, shows the top N similar reference images.
    * Precomputes features locally for reference set, and stores them on disk for later use
    * Can deploy UI to the cloud
+
+<a name="solution-concept"/>
+
 ## 4. Solution Concept
+
 System components that are building blocks of the design:
  * Jupyter Notebooks: walk users through creating and “publishing” DNN models
  * DNN Models: users’ trained models
@@ -42,7 +75,11 @@ Many design decisions have not been made yet. Three notable decisions evident ab
  * “Similarity” DNN models will be kept local (and not published to Azure) based on current best practices due to the complexity of executing them.
   * UI-DNN-Sim as separate code: since it will return a list of similar images to be displayed (vs. text / bounding boxes for the other models), the interface will differ significantly; also, since it will interface with local models and code for finding similar images, even after publishing to the cloud, it will have different requirements.
  * Server requirement (local or cloud) for UI elements: REST APIs and local file APIs (for loading test images) cannot be accessed if the HTML/Javascript files are not loaded and access via a web server. These are web standards and cannot be avoided. 
-## 5.Acceptance criteria
+
+<a name="acceptance-criteria"/>
+
+## 5. Acceptance Criteria
+
 Minimum acceptance criteria is a deployed UI (UI-DNN) which calls a cloud-based REST API and visualizes its output for multiple DNN scenarios; except for UI of “similarity” DNN models (UI-DNN-Sim) which will also call a cloud-based REST API for each uploaded query image.
 
 Stretch goals are:
@@ -50,7 +87,11 @@ Stretch goals are:
 * REST API expands from single image to taking multiple images as input; “batch scoring”
 * Allows for the use of webcam as input.
 * Improve visualizations for UI-DNN such as adding interactive components and has appropriate UI for cell phone.
-## 6.Release Planning:
+
+<a name="release-planning"/>
+
+## 6. Release Planning
+
 Plans are on Taiga: https://tree.taiga.io/project/mosayyebzadeh-building-deployable-application-visualizing-the-output-deep-neural-network/backlog
 
 Release #1 (due by Week 5):
