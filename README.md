@@ -27,6 +27,7 @@ Develop an application for users to deploy their operationalized models in the c
 ## 2. Users/Personas Of The Project
 
 Target Audience:
+
 * General Data scientist and Software Engineers
 * Quick Start for professional computer vision expert
 * Practitioners who wants to deploy computer vision model in the cloud
