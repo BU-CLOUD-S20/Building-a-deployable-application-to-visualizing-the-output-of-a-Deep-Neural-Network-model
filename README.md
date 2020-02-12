@@ -7,6 +7,7 @@ Mentors: Patrick Buehler, JS Tan
 
 #### Contents
 
+0. [Sprint Presentations](#sprint-presentations)
 1. [Vision and Goals Of The Project](#vision-goals)
 2. [Users/Personas Of The Project](#users-personas)
 3. [Scope and Features of the Project](#scope-features)
@@ -14,11 +15,17 @@ Mentors: Patrick Buehler, JS Tan
 5. [Acceptance Criteria](#acceptance-criteria)
 6. [Release Planning](#release-planning)
 
+<a name="sprint-presentations"/>
+
+## 0. Sprint Presentations
+
+1. [Sprint 1](https://docs.google.com/presentation/d/1YJg0whEUxonBOJON-ExQi6li-OhU5VPepP93H8fXChw/edit?usp=sharing)
+
 <a name="vision-goals"/>
 
 ## 1. Vision and Goals Of The Project
 
-Develop an application for users to deploy their operationalized models in the cloud. This application includes a front-end UI for the computer vision repository. 
+Develop an application for users to deploy their operationalized Deep Neural Network (DNN) models in the cloud. This application includes a front-end UI for the computer vision repository. 
 * Provide a user interface that allows users to visualize the output of a deployed computer vision model. Users can improve on and gain insights from their deployed model by storing test images in a file system and examining them for correctness through the user interface. This user interface should be deployed to the cloud.
 * Provide a modular way for different models and different input/output signatures.
 
@@ -71,7 +78,7 @@ System components that are building blocks of the design:
 
 Figure 1: Proposed architecture
 Many design decisions have not been made yet. Three notable decisions evident above:
- * “Similarity” DNN models will be kept local (and not published to Azure) based on current best practices due to the complexity of executing them.
+ * “Similarity” DNN models may be kept local (and not published to Azure) based on current best practices due to the complexity of executing them - still investigating.
   * UI-DNN-Sim as separate code: since it will return a list of similar images to be displayed (vs. text / bounding boxes for the other models), the interface will differ significantly; also, since it will interface with local models and code for finding similar images, even after publishing to the cloud, it will have different requirements.
  * Server requirement (local or cloud) for UI elements: REST APIs and local file APIs (for loading test images) cannot be accessed if the HTML/Javascript files are not loaded and access via a web server. These are web standards and cannot be avoided. 
 
@@ -93,7 +100,7 @@ Stretch goals are:
 
 Plans are on Taiga: https://tree.taiga.io/project/mosayyebzadeh-building-deployable-application-visualizing-the-output-deep-neural-network/backlog
 
-Release #1 (due by Week 5):
+### Release #1 (due by Week 5):
 
 UI: 
 * Implement simple UI-DNN HTML interface for testing published DNN models via local web server
@@ -103,29 +110,26 @@ UI:
 Image Similarity:
 * Run “similarity” DNN model via provided Jupyter notebooks (00, 01, 12)
 * Summarize pain points with CVBP
+* Precomputes features for reference set, and stores on disk
+* Can load precomputed features and compare with a query image (on local machine, code is provided in the notebooks)
 
 API:
 * Run 00, 01, and 03 image classification Jypyter notebooks
 * Summarize pain points with CVBP
 
-…
- 
-Release #2 (due by Week 7):
+### Release #2 (due by Week 7):
 
 UI-DNN: 
 * Site shows uploaded image with API-returned rectangle co-ordinates
 * Add drop-down menu to supports image classification and object detection
 
 Image Similarity:
-* Precomputes features for reference set, and stores on disk 
-* Can load precomputed features and compare with a query image (on local machine, code is provided in the notebooks)
+* Explore options to upload “similarity” DNN models to cloud, execute if action is plausible
 
 API: 
 * Deploy API using the provided CVBP notebooks to cloud
-
-…
  
-Release #3 (due by Week 9):
+### Release #3 (due by Week 9):
 
 UI-DNN:
 * Add plotly to the interface for better visualization and interactive elements of the UI
@@ -138,31 +142,23 @@ UI-DNN-Sim:
 API:
 * Expand from taking single image input to do batch scoring with multiple images as input
 * Deploy API to the cloud
-
-…
  
-Release #4 (due by Week 11):
+### Release #4 (due by Week 11):
 
 Document and upload work to CVBP via code review
 
 UI-DNN & UI-DNN-Sim:
 * Allow for realtime webcam images captured by UI-DNN or UI-DNN-Sim as an input to test models
 
-Image Similarity:
-* Explore options to upload “similarity” DNN models to cloud, execute if action is plausible
-
 Evangelism:
 * Blog about the work and share on social media
 
-…
+### Release #5 (due by Week 13):
 
-
-Release #5 (due by Week 13):
-
-Document and upload work to CVBP via code review
+* Document and upload work to CVBP via code review
 * Addition/modification of UI interactive elements:
 	* Appropriate interface for cell phone
 *  Add Azure Blob Storage as an alternate publishing location for UI-DNN 
-* (Optional) Demo work in-person at Microsoft’s Kendall Sq Office
+* (Optional) Demo work in-person at Microsoft’s Kendall Sq. Office
 
 
