@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EC528 Testing</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <style>
+        body { padding-top:50px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1>EC528 Testing Site</h1>
+        </div>
+        <div id="cont">
+            <p id="queryImg"></p>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">File Name</th>
+                  <th scope="col">Distance</th>
+                </tr>
+              </thead>
+              <tbody id="distTable"></tbody></table>
+        </div>
+    </div>
+
+</body>
+
+<!--
+    Frameworks and examples used to build this: 
+    https://stuk.github.io/jszip/
+    http://stuk.github.io/jszip-utils/
+    https://stackoverflow.com/questions/39254218/js-get-top-5-max-elements-from-array
+    https://arjunphp.com/download-file-node-js-express-js/
+    https://stackoverflow.com/questions/3524827/sort-a-2d-array-by-the-second-value
+    https://supunkavinda.blog/js-euclidean-distance
+    https://stackoverflow.com/questions/15164655/generate-html-table-from-2d-javascript-array
+-->
+
+<script type="text/javascript" src="dist/jszip.min.js"></script>
+<script type="text/javascript" src="dist/jszip-utils.min.js"></script>
+<!--
+Mandatory in IE 6, 7, 8 and 9.
+-->
+<!--[if IE]>
+<script type="text/javascript" src="dist/jszip-utils-ie.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+    var fn_array;
+    var ref_array;
+    var dist_array = [];
+
+    function populateTable(tableData) {
+      tableData.forEach(function(rowData) {
+        var row = document.createElement('tr');
+
+        rowData.forEach(function(cellData) {
+          var cell = document.createElement('td');
+          cell.appendChild(document.createTextNode(cellData));
+          row.appendChild(cell);
+        });
+
+        document.getElementById("distTable").appendChild(row);
+      });
+    }
+
+    function eucDistance(a, b) {
+        return a
+        .map((x, i) => Math.abs( x - b[i] ) ** 2) // square the difference
+        .reduce((sum, now) => sum + now) // sum
+        ** (1/2)
+    }
+
+    function calcSimilar(top) {
+        var rows = ref_array.length;
+        for (i = 0; i < rows; i++) {
+            let euc = eucDistance(ref_array[0], ref_array[i]);
+            var arr = [fn_array[i],euc];
+            dist_array.push(arr); 
+        }
+        console.log(rows);
+        console.log(dist_array.length);
+        var topValues = dist_array.sort((a,b) => a[1]-b[1]).slice(0,top);
+        console.log(topValues);
+        populateTable(topValues);
+        document.getElementById("queryImg").appendChild(document.createTextNode("Query image: " + fn_array[0]));
+    }
+
+    // Download zip file of filenames and parse into array
+    new JSZip.external.Promise(function (resolve, reject) {
+        JSZipUtils.getBinaryContent('data/ref_filenames.zip', function(err, data) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    }).then(function (data) {
+        return JSZip.loadAsync(data);
+    }).then(function (zip) {
+        return zip.file("ref_filenames.txt").async("string");
+    }).then(function (text) {
+        //console.log(text);
+        fn_array = JSON.parse(text);
+        console.log(fn_array[0]);
+        console.log(fn_array[1]);
+    });
+
+    // Download zip file of reference image features and parse into array
+    new JSZip.external.Promise(function (resolve, reject) {
+        JSZipUtils.getBinaryContent('data/ref_features.zip', function(err, data) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    }).then(function (data) {
+        return JSZip.loadAsync(data);
+    }).then(function (zip) {
+        return zip.file("ref_features.txt").async("string");
+    }).then(function (text) {
+        //console.log(text);
+        ref_array = JSON.parse(text);
+        console.log(ref_array[0][0]);
+        console.log(ref_array[1][1]);
+        //let euc = eucDistance(ref_array[0], ref_array[1]);
+        //console.log(euc);
+        calcSimilar(5)
+        //var topValues = ref_array[0].sort((a,b) => b-a).slice(0,5);
+        //console.log(topValues);
+    });
+
+
+
+</script>
+</html>
