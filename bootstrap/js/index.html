@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Computer Vision</title>
+  <meta charset="utf-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+  <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script> -->
+</head>
+<body>
+  <ul class="nav nav-tabs shadow-sm" style="background-color: #F2F7F6">
+    <li class="nav-item">
+     <a class="nav-link active ml-4 mt-2" href="#">
+      <img src="logo.png" alt="Logo" style="width:30px;">
+    </a>
+
+    <li class="nav-item">
+      <a class="nav-link  mt-2" href="#" style="font-family:'Avenir next'; color:#171516; font-size: 20px;">Github Repo</a>
+    </li>
+    </li>
+  </ul>
+
+  <div class="container">
+    <img src="logo_cvbp_trans.png" class="mx-auto d-block mt-4" style="width:25%">
+  </div>
+
+  <div class="container">
+  <form action="/action_page.php">
+    <div class="form-group mx-md-5 mt-5 px-5">
+      <input type="text" class="form-control form-control-lg" placeholder="Enter API url here" style="font-family:'Avenir next'; color:#a9a9a9; font-size:20px;" name="text2">
+    </div>
+  </form>
+  </div>
+
+  <div class="container">
+    <p class="text-lg-left mx-5 mt-4 px-5 pt-2 font-weight-medium" style="font-family:'Avenir next'; color:#165A67; font-size:20px;" >Select deep neural network module to visualize the output</p>
+  </div>
+
+  <div class="dropdown d-flex" >
+    <button class="btn btn-outline-secondary dropdown-toggle mt-3 mx-auto d-block font-weight-medium" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family:'Avenir next'; color:#165A67; font-size:20px;">
+      DNN Modules
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="font-family:'Avenir next'; color:#165A67; font-size:20px;">
+      <button class="dropdown-item" type="button">Object Detection</button>
+      <button class="dropdown-item" type="button">Image Classification</button>
+      <button class="dropdown-item" type="button">Image Similarity</button>
+    </div>
+  </div>
+
+<!-- <div class="container mx-auto mt-5"  style="width:950px" -->
+<div class="input-group mx-auto  mt-5" style="width:950px">
+  <div class="input-group-prepend mx-auto">
+    <button class="btn btn-secondary mt-2 mr-3 shadow rounded" type="button" style="background-color: #1D7D72; color: #FFFFFF; font-family: 'Avenir next'; font-size:18px">Webcam</button>
+  </div>
+  <div class="custom-file" style="width:500px">
+    <input type="file" class="custom-file-input mx-auto d-block" id="inputGroupFile03">
+    <label class="custom-file-label mt-2 ml-3 mr-3" for="inputGroupFile03" style="color: #1D7D72; font-family: 'Avenir next'; font-size:18px">Choose file</label>
+  </div>
+  <div class="input-group-prepend mx-auto">
+    <button class="btn btn-secondary mt-2 ml-3  shadow rounded" type="button" data-target="#exampleModalCenter" style="background-color: #1D7D72; color: #FFFFFF; font-family: 'Avenir next'; font-size:18px" data-toggle="modal">Upload</button>
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Image Upload Confirmation</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary">Upload</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+
+
+<div class="mt-4 mx-auto" style="background-color: #F2F7F6; width: 950px">
+  <div class="container">
+    <p class="text-center font-weight-bold mt-5 pt-5 rounded" style="font-family:'Avenir next'; color:#165A67; font-size:24px;">RESULTS</p>
+
+  </div>
+ </div>
+
+
+</body>
+</html>
