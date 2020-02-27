@@ -9,6 +9,7 @@
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="resize.css">
   <!-- <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -44,7 +45,7 @@
         // const fileList = this.files; /* now you can work with the file list */
         // console.log(selectedFile)
         // console.log(fileList)
-        console.log(preview)
+        //console.log(preview)
       }
 	</script>
 </head>
@@ -73,11 +74,11 @@
   </form>
   </div>
 
-  <div class="container">
+  <!-- <div class="container">
     <p class="text-lg-left mx-5 mt-4 px-5 pt-2 font-weight-medium" style="font-family:'Avenir next'; color:#165A67; font-size:20px;" >Select deep neural network module to visualize the output</p>
   </div>
 
-  <!-- <div class="dropdown d-flex" >
+  <div class="dropdown d-flex" >
     <button class="btn btn-outline-secondary dropdown-toggle mt-3 mx-auto d-block font-weight-medium" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family:'Avenir next'; color:#165A67; font-size:20px;">
       DNN Modules
     </button>
@@ -89,7 +90,7 @@
   </div> -->
 
 <!-- <div class="container mx-auto mt-5"  style="width:950px" -->
-<div class="input-group mx-auto  mt-5" style="width:950px; height:950px">
+<div class="input-group mx-auto  mt-5 px-3" style="width:950px">
   <div class="input-group-prepend mx-auto">
     <button class="btn btn-secondary mt-2 mr-3 shadow rounded" type="button" style="background-color: #1D7D72; color: #FFFFFF; font-family: 'Avenir next'; font-size:18px">Webcam</button>
   </div>
@@ -125,12 +126,30 @@
   </div>
  </div>
 
+ <style type="text/css">
+ container {
+   margin: 10px;
+   width: 950px;
+   height: 950px;
+   text-align: center;
+ },
+ resize_fit_center {
+   max-width:50%;
+   max-height:50%;
+   vertical-align: middle;
+ }
+ </style>
 
-<div class="mt-4 mx-auto" style="background-color: #F2F7F6; width: 950px">
+<div class="mt-4 mx-auto" style="background-color: #F2F7F6; width: 950px; height:950px">
   <div class="container">
     <p class="text-center font-weight-bold mt-5 pt-5 rounded" style="font-family:'Avenir next'; color:#165A67; font-size:24px;">RESULTS</p>
-  </div>
-  <div id="imageresult"></div>
+  <!-- </div> -->
+
+        <div id="imageresult" class="resize_fit_center"></div>
+
+</div>
+
+   </div>
  </div>
 
 
