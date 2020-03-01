@@ -62,6 +62,7 @@
         var json = '[[{"top": "153", "left": "96", "bottom": "515", "right": "234", "label_name": "carton", "label_idx": "2", "score": "0.9971401691436768"}]]';
         var jsonsplit = json.split(" ");
         var getProbability = jsonsplit[jsonsplit.length - 1].substring(1,6);
+        console.log(getProbability)
         return getProbability;
       }
 
