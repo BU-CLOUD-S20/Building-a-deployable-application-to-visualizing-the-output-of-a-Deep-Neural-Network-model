@@ -27,17 +27,26 @@
       base64_image = "";
       //const preview = document.getElementById("output");
       // inputElement.addEventListener("change", handleFiles, false);
+      
       function handleFiles(files) {
+        num_file = files.length;
+        if (num_file > 0) {
+          const file = files[num_file-1];
+          console.log(num_file);
         //var preview = document.getElementById("output");
-        for (let i = 0; i < files.length; i++) {
-          const file = files[i];
-          if (!file.type.startsWith('image/')){ continue }
+        // for (let i = 0; i < files.length; i++) {
+         
+          // const file = files[i];
+
+          // if (!file.type.startsWith('image/')){ break }
           var preview = document.getElementById("imageresult");
-          const img = document.createElement("img");
+          var img = document.getElementById("imagenew");
+          // const img = document.createElement("img");
+          
 
           img.classList.add("obj");
           img.file = file;
-          preview.appendChild(img);
+          // preview.appendChild(img);
           const reader = new FileReader();
 
           reader.onload = (function(aImg) { return function(e) { 
@@ -61,7 +70,7 @@
         // console.log(selectedFile)
         // console.log(fileList)
         // console.log(preview)
-      }
+        }
 	</script>
 </head>
 <body>
@@ -148,7 +157,7 @@
    width: 950px;
    height: 950px;
    text-align: center;
- },
+ }
  resize_fit_center {
    max-width:50%;
    max-height:50%;
@@ -161,7 +170,9 @@
     <p class="text-center font-weight-bold mt-5 pt-5 rounded" style="font-family:'Avenir next'; color:#165A67; font-size:24px;">RESULTS</p>
   <!-- </div> -->
 
-        <div id="imageresult" class="resize_fit_center"></div>
+        <div id="imageresult" class="resize_fit_center">
+          <img src="" id="imagenew" alt="">
+        </div>
 
 </div>
 
