@@ -19,6 +19,7 @@
   <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
   <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script> -->
   <script type="text/javascript" src="script/jquery-1.6.2.min.js"></script>
+  <script src=jsonParser.js></script>
 		<script type='text/javascript'>
       // const selectedFile = document.getElementById('inputGroupFile03').files[0];
       // const numFiles = files.length;
@@ -47,6 +48,26 @@
         // console.log(fileList)
         //console.log(preview)
       }
+
+      function jsonParser(jString) {
+		let resp = JSON.parse(jString)[0]
+		if (Array.isArray(resp)) {
+			if (resp[0].hasOwnProperty("top")) {
+				//do function for detection rendering
+				return "detection"
+			}
+			return "err"
+		}
+		if(resp.hasOwnProperty("probability")) {
+			//do function for classification rendering
+			return "classification"
+		}
+		if(resp.hasOwnProperty("distance")) {
+			//do function for image similarity
+			return "similarity"
+		}
+		return "err"
+	  }
 	</script>
 </head>
 <body>
