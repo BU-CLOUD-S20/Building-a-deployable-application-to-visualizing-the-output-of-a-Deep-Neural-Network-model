@@ -53,15 +53,21 @@
         var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
         if (pattern.test(url)) {
           console.log("url is valid")
+          probability();
         } else {
           $("#exampleModalCenter").modal();
         }
-
-        //option 2:
-        // var url = String(document.getElementById("url").value);
-        // const substring1 = "azure"
-
       }
+
+      function probability() {
+        var json = '[[{"top": "153", "left": "96", "bottom": "515", "right": "234", "label_name": "carton", "label_idx": "2", "score": "0.9971401691436768"}]]';
+        var getScore = json.substring(json.indexOf("score") - 1);
+        var subsplit = getScore.split(" ");
+        var getProbability = subsplit[1].substring(1,6);
+        return getProbability;
+      }
+
+
 	</script>
 </head>
 <body>
