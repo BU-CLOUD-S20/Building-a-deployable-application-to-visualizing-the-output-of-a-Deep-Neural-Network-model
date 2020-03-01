@@ -20,6 +20,7 @@
             <table class="table">
               <thead>
                 <tr>
+                  <th scope="col">Image</th>
                   <th scope="col">File Name</th>
                   <th scope="col">Distance</th>
                 </tr>
@@ -58,8 +59,13 @@ Mandatory in IE 6, 7, 8 and 9.
       tableData.forEach(function(rowData) {
         var row = document.createElement('tr');
 
+        var cell = document.createElement('td');
+        var img = document.createElement('img');
+        img.src = 'small-150/' + rowData[0];
+        cell.appendChild(img);
+        row.appendChild(cell);
         rowData.forEach(function(cellData) {
-          var cell = document.createElement('td');
+          cell = document.createElement('td');
           cell.appendChild(document.createTextNode(cellData));
           row.appendChild(cell);
         });
@@ -77,8 +83,9 @@ Mandatory in IE 6, 7, 8 and 9.
 
     function calcSimilar(top) {
         var rows = ref_array.length;
+        var queryimg = Math.floor(Math.random() * (rows - 0 + 1) + 0);
         for (i = 0; i < rows; i++) {
-            let euc = eucDistance(ref_array[0], ref_array[i]);
+            let euc = eucDistance(ref_array[queryimg], ref_array[i]);
             var arr = [fn_array[i],euc];
             dist_array.push(arr); 
         }
@@ -87,7 +94,7 @@ Mandatory in IE 6, 7, 8 and 9.
         var topValues = dist_array.sort((a,b) => a[1]-b[1]).slice(0,top);
         console.log(topValues);
         populateTable(topValues);
-        document.getElementById("queryImg").appendChild(document.createTextNode("Query image: " + fn_array[0]));
+        document.getElementById("queryImg").appendChild(document.createTextNode("Query image: " + fn_array[queryimg]));
     }
 
     // Download zip file of filenames and parse into array
