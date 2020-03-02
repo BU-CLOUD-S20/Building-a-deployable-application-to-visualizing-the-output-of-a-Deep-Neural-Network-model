@@ -9,6 +9,7 @@
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="resize.css">
   <!-- <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -19,32 +20,24 @@
   <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script> -->
   <script type="text/javascript" src="script/jquery-1.6.2.min.js"></script>
 		<script type='text/javascript'>
-      // const selectedFile = document.getElementById('inputGroupFile03').files[0];
-      // const numFiles = files.length;
-      // console.log(selectedFile)
       const inputElement = document.getElementById("inputGroupFile03");
-      //const preview = document.getElementById("output");
-      // inputElement.addEventListener("change", handleFiles, false);
       function handleFiles(files) {
-        //var preview = document.getElementById("output");
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
           if (!file.type.startsWith('image/')){ continue }
           var preview = document.getElementById("imageresult");
-          const img = document.createElement("img");
+          var img = document.getElementById("imagenew");
+          img.className = "img-fluid";
 
           img.classList.add("obj");
           img.file = file;
-          preview.appendChild(img);
+
           const reader = new FileReader();
-          reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+          reader.onload = (function(aImg) {
+            return function(e) { aImg.src = e.target.result; }; })(img);
           reader.readAsDataURL(file);
         }
-        // const selectedFile = document.getElementById('inputGroupFile03').files[0];
-        // const fileList = this.files; /* now you can work with the file list */
-        // console.log(selectedFile)
-        // console.log(fileList)
-        console.log(preview)
+         console.log(preview)
       }
 
       function APIValidation() {
@@ -52,7 +45,8 @@
         var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
         if (pattern.test(url)) {
           console.log("url is valid")
-          probability();
+          document.getElementById("imageresult").hidden = true;
+          loading();
         } else {
           $("#exampleModalCenter").modal();
         }
@@ -66,10 +60,102 @@
         return getProbability;
       }
 
+      function loading() {
+          var x = document.getElementById("div2");
+              x.style.display = 'block';
+
+          setTimeout(function(){
+              x.style.display = 'none';
+          }, 500)
+
+          setTimeout(function(){
+            imgdetection(x, y, xwidth, xheight);
+          }, 500)
+      }
+
+      function imgdetection(x, y, xwidth, xheight, label_text) {
+        var img = document.getElementById("imagenew");
+        var width = img.naturalWidth;
+        var height = img.naturalHeight;
+
+        var c = document.getElementById("canvas");
+
+        var ctx = c.getContext("2d");
+        ctx.canvas.width = width;
+        ctx.canvas.height = height;
+
+        //  get the scale
+        var scale = Math.min(c.width / width, c.height / height);
+        // get the top left position of the image
+        var x = (c.width / 2) - (width / 2) * scale;
+        var y = (c.height / 2) - (height / 2) * scale;
+        ctx.drawImage(img, x, y, width * scale, height * scale);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "#FF0000";
+        ctx.fillStyle = "#FF0000";
+        ctx.font = "20px Verdana";
+        ctx.strokeRect(x, y, xwidth, xheight);
+        ctx.fillText(label_text, x+10, y+30);
+
+    }
+
+    function jsonParser(jString) {
+		let resp = JSON.parse(jString)
+		if (Array.isArray(resp[0])) {
+			if (resp[0][0].hasOwnProperty("top")) {
+				//will need to target a different feature if another scenario ends up doing rectangle boxes
+				for (let img of resp[0]) {
+					for (let box of img) {
+						let x = box.left
+						let y = box.top
+						let width = box.right - box.left
+						let height = box.bottom - box.top
+						let label = box.label
+						imgdetection(x, y, width, height, label)
+					}
+				}
+				return "detection"
+			}
+			return "err"
+		}
+		if(resp.hasOwnProperty("probability")) {
+			//do function for classification rendering
+			for (let img of resp) {
+				//call function
+			}
+			return "classification"
+		}
+		if(resp.hasOwnProperty("distance")) {
+			//do function for image similarity
+			for (let img of resp) {
+				//call function
+			}
+			return "similarity"
+		}
+		return "err"
+	}
 
 	</script>
+
+  <style type="text/css">
+  canvas{
+    background-color: #F2F7F6;
+    width: 100%;
+    height: 100%;
+  }
+  #hidden {
+    display: none;
+  }
+  #div2 {
+    display: none;
+  }
+</style>
+
 </head>
 <body>
+  <!-- use grid or flex -->
+
+
   <ul class="nav nav-tabs shadow-sm" style="background-color: #F2F7F6">
     <li class="nav-item">
      <a class="nav-link active ml-4 mt-2" href="https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model">
@@ -89,36 +175,49 @@
   <div class="container">
   <form action="/action_page.php">
     <div class="form-group mx-md-5 mt-5 px-5">
-      <input type="text" class="form-control form-control-lg" placeholder="http://" id="url" style="font-family:'Avenir next'; color:#a9a9a9; font-size:20px;" name="text2" required>
+      <input type="text" class="form-control form-control-lg" placeholder="Enter API url here" id="url" style="font-family:'Avenir next'; color:#a9a9a9; font-size:20px;" name="text2" required>
     </div>
   </form>
   </div>
-
-  <div class="container">
-    <p class="text-lg-left mx-5 mt-4 px-5 pt-2 font-weight-medium" style="font-family:'Avenir next'; color:#165A67; font-size:20px;" >Select deep neural network module to visualize the output</p>
-  </div>
-
-  <div class="dropdown d-flex" >
-    <button class="btn btn-outline-secondary dropdown-toggle mt-3 mx-auto d-block font-weight-medium" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family:'Avenir next'; color:#165A67; font-size:20px;">
-      DNN Modules
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="font-family:'Avenir next'; color:#165A67; font-size:20px;">
-      <button class="dropdown-item" type="button">Object Detection</button>
-      <button class="dropdown-item" type="button">Image Classification</button>
-      <button class="dropdown-item" type="button">Image Similarity</button>
+<div class="container mx-auto">
+  <div class="input-group mx-auto  mt-5 px-3 row justify-content-md-center" style="width:950px">
+    <div class="input-group-prepend mx-auto">
+      <button class="btn btn-secondary mt-2 mr-3 shadow rounded" type="button" style="background-color: #1D7D72; color: #FFFFFF; font-family: 'Avenir next'; font-size:18px">Webcam</button>
     </div>
+    <div class="custom-file" style="width:500px">
+      <input type="file" class="custom-file-input mx-auto d-block"  accept="image/*" id="inputGroupFile03" onchange="handleFiles(this.files)">
+      <br/>
+   <label class="custom-file-label mt-2 ml-3 mr-3" for="inputGroupFile03" style="color: #1D7D72; font-family: 'Avenir next'; font-size:18px">Choose file</label>
+   </div>
+     <div class="input-group-prepend mx-auto">
+       <button class="btn btn-secondary mt-2 ml-3  shadow rounded" type="button" id="uploadbtn" data-target="#exampleModalCenter" style="background-color: #1D7D72; color: #FFFFFF; font-family: 'Avenir next'; font-size:18px" onclick="APIValidation()">Upload</button>
+         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+           <div class="modal-dialog modal-dialog-centered" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLongTitle">Error</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                 </button>
+               </div>
+               <div class="modal-body">
+               Please check API URL.
+               </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+               </div>
+           </div>
+         </div>
+       </div>
   </div>
+</div>
+</div>
+     <div class="container mt-4 mx-auto" style="background-color: #F2F7F6;
+     max-width: 950px;">
+       <div class="row justify-content-md-center">
+       <p class="text-center font-weight-bold mt-5 pt-5 rounded" style="font-family:'Avenir next'; color:#165A67; font-size:24px;">RESULTS</p>
 
-<!-- <div class="container mx-auto mt-5"  style="width:950px" -->
-<div class="input-group mx-auto  mt-5" style="width:950px">
-  <div class="input-group-prepend mx-auto">
-    <button class="btn btn-secondary mt-2 mr-3 shadow rounded" type="button" style="background-color: #1D7D72; color: #FFFFFF; font-family: 'Avenir next'; font-size:18px">Webcam</button>
-  </div>
-  <div class="custom-file" style="width:500px">
-    <input type="file" class="custom-file-input mx-auto d-block"  accept="image/*" id="inputGroupFile03" onchange="handleFiles(this.files)">
-    <br/>
-    <!-- <img id="output" style="width:20%; margin-top:10px;"  src="" alt="image"/> -->
-
+          <div id="imageresult" class="mt-5"><img src="" id="imagenew"></div>
 
     <label class="custom-file-label mt-2 ml-3 mr-3" for="inputGroupFile03" style="color: #1D7D72; font-family: 'Avenir next'; font-size:18px">Choose file</label>
   </div>
@@ -140,19 +239,15 @@
               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
+          <div class="mt-5 d-flex justify-content-center">
+            <div id="div2" class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+          <canvas id="canvas" width="300" height="300"></canvas>
+
       </div>
     </div>
-  </div>
- </div>
-
-
-<div class="mt-4 mx-auto" style="background-color: #F2F7F6; width: 950px">
-  <div class="container">
-    <p class="text-center font-weight-bold mt-5 pt-5 rounded" style="font-family:'Avenir next'; color:#165A67; font-size:24px;">RESULTS</p>
-  </div>
-  <div id="imageresult"></div>
- </div>
-
-
+</div>
 </body>
 </html>
