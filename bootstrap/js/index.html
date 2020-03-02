@@ -19,7 +19,6 @@
   <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
   <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script> -->
   <script type="text/javascript" src="script/jquery-1.6.2.min.js"></script>
-<<<<<<< HEAD
 		<script type='text/javascript'>
       const inputElement = document.getElementById("inputGroupFile03");
       function handleFiles(files) {
@@ -105,8 +104,7 @@
 						let width = box.right - box.left
 						let height = box.bottom - box.top
 						let label = box.label
-						let prob = box.score
-						//call rendering functions
+						imgdetection(x, y, width, height, label)
 					}
 				}
 				return "detection"
@@ -174,8 +172,6 @@
     </div>
   </form>
   </div>
-
-<<<<<<< HEAD
 <div class="container mx-auto">
   <div class="input-group mx-auto  mt-5 px-3 row justify-content-md-center" style="width:950px">
     <div class="input-group-prepend mx-auto">
