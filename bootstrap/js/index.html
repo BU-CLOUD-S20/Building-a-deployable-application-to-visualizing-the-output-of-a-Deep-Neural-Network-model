@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Computer Vision</title>
+  <link rel = "icon" href =
+"logo_small.png"
+        type = "image/x-icon">
+  <meta charset="utf-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="resize.css">
+  <!-- <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+  <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script> -->
+  <script type="text/javascript" src="script/jquery-1.6.2.min.js"></script>
+		<script type='text/javascript'>
+      const inputElement = document.getElementById("inputGroupFile03");
+      function handleFiles(files) {
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          if (!file.type.startsWith('image/')){ continue }
+          var preview = document.getElementById("imageresult");
+          var img = document.getElementById("imagenew");
+          img.className = "img-fluid";
+
+          img.classList.add("obj");
+          img.file = file;
+
+          const reader = new FileReader();
+          reader.onload = (function(aImg) {
+            return function(e) { aImg.src = e.target.result; }; })(img);
+          reader.readAsDataURL(file);
+        }
+         console.log(preview)
+      }
+
+      function APIValidation() {
+        //option 1:
+        var url = document.getElementById("url").value;
+        var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+        if (pattern.test(url)) {
+          console.log("url is valid")
+          document.getElementById("imageresult").hidden = true;
+          loading();
+        } else {
+          $("#exampleModalCenter").modal();
+        }
+      }
+
+      function loading() {
+          var x = document.getElementById("div2");
+              x.style.display = 'block';
+
+          setTimeout(function(){
+              x.style.display = 'none';
+          }, 1000)
+
+          setTimeout(function(){
+            imgdetection(x, y, xwidth, xheight);
+          }, 2000)
+      }
+
+      function imgdetection(x, y, xwidth, xheight, label_text) {
+        var img = document.getElementById("imagenew");
+        var width = img.naturalWidth;
+        var height = img.naturalHeight;
+
+        var c = document.getElementById("canvas");
+
+        var ctx = c.getContext("2d");
+        ctx.canvas.width = width;
+        ctx.canvas.height = height;
+
+        //  get the scale
+        var scale = Math.min(c.width / width, c.height / height);
+        // get the top left position of the image
+        var x = (c.width / 2) - (width / 2) * scale;
+        var y = (c.height / 2) - (height / 2) * scale;
+        ctx.drawImage(img, x, y, width * scale, height * scale);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "#FF0000";
+        ctx.fillStyle = "#FF0000";
+        ctx.font = "20px Verdana";
+        ctx.strokeRect(x, y, xwidth, xheight);
+        ctx.fillText(label_text, x+10, y+30);
+
+    }
+
+
+	</script>
+
+  <style type="text/css">
+  canvas{
+    background-color: #F2F7F6;
+    width: 100%;
+    height: 100%;
+  }
+  #hidden {
+    display: none;
+  }
+  #div2 {
+    display: none;
+  }
+</style>
+
+</head>
+<body>
+  <!-- use grid or flex -->
+
+  <ul class="nav nav-tabs shadow-sm" style="background-color: #F2F7F6">
+    <li class="nav-item">
+     <a class="nav-link active ml-4 mt-2" href="https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model">
+      <img src="logo.png" alt="Logo" style="width:30px;">
+    </a>
+
+    <li class="nav-item">
+      <a class="nav-link  mt-2" href="https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model" style="font-family:'Avenir next'; color:#171516; font-size: 20px;">Github Repo</a>
+    </li>
+    </li>
+  </ul>
+
+  <div class="container">
+    <img src="logo_cvbp_trans.png" class="mx-auto d-block mt-4" style="width:25%">
+  </div>
+
+
+  <div class="container">
+  <form action="/action_page.php">
+    <div class="form-group mx-md-5 mt-5 px-5">
+      <input type="text" class="form-control form-control-lg" placeholder="Enter API url here" id="url" style="font-family:'Avenir next'; color:#a9a9a9; font-size:20px;" name="text2" required>
+    </div>
+  </form>
+  </div>
+
+<div class="container mx-auto">
+  <div class="input-group mx-auto  mt-5 px-3 row justify-content-md-center" style="width:950px">
+    <div class="input-group-prepend mx-auto">
+      <button class="btn btn-secondary mt-2 mr-3 shadow rounded" type="button" style="background-color: #1D7D72; color: #FFFFFF; font-family: 'Avenir next'; font-size:18px">Webcam</button>
+    </div>
+    <div class="custom-file" style="width:500px">
+      <input type="file" class="custom-file-input mx-auto d-block"  accept="image/*" id="inputGroupFile03" onchange="handleFiles(this.files)">
+      <br/>
+   <label class="custom-file-label mt-2 ml-3 mr-3" for="inputGroupFile03" style="color: #1D7D72; font-family: 'Avenir next'; font-size:18px">Choose file</label>
+   </div>
+     <div class="input-group-prepend mx-auto">
+       <button class="btn btn-secondary mt-2 ml-3  shadow rounded" type="button" id="uploadbtn" data-target="#exampleModalCenter" style="background-color: #1D7D72; color: #FFFFFF; font-family: 'Avenir next'; font-size:18px" onclick="APIValidation()">Upload</button>
+         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+           <div class="modal-dialog modal-dialog-centered" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLongTitle">Error</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                 </button>
+               </div>
+               <div class="modal-body">
+               Please check API URL.
+               </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+               </div>
+           </div>
+         </div>
+       </div>
+  </div>
+</div>
+</div>
+
+
+     <div class="container mt-4 mx-auto" style="background-color: #F2F7F6;
+     max-width: 950px;">
+       <div class"row justify-content-md-center">
+       <p class="text-center font-weight-bold mt-5 pt-5 rounded" style="font-family:'Avenir next'; color:#165A67; font-size:24px;">RESULTS</p>
+
+          <div id="imageresult" class="mt-5"><img src="" id="imagenew"></div>
+
+          <div class="mt-5 d-flex justify-content-center">
+            <div id="div2" class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+          <canvas id="canvas" width="300" height="300"></canvas>
+
+      </div>
+    </div>
+
+</body>
+</html>
