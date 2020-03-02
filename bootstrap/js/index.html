@@ -19,6 +19,7 @@
   <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
   <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script> -->
   <script type="text/javascript" src="script/jquery-1.6.2.min.js"></script>
+<<<<<<< HEAD
 		<script type='text/javascript'>
       const inputElement = document.getElementById("inputGroupFile03");
       function handleFiles(files) {
@@ -92,6 +93,42 @@
 
     }
 
+    function jsonParser(jString) {
+		let resp = JSON.parse(jString)
+		if (Array.isArray(resp[0])) {
+			if (resp[0][0].hasOwnProperty("top")) {
+				//will need to target a different feature if another scenario ends up doing rectangle boxes
+				for (let img of resp[0]) {
+					for (let box of img) {
+						let x = box.left
+						let y = box.top
+						let width = box.right - box.left
+						let height = box.bottom - box.top
+						let label = box.label
+						let prob = box.score
+						//call rendering functions
+					}
+				}
+				return "detection"
+			}
+			return "err"
+		}
+		if(resp.hasOwnProperty("probability")) {
+			//do function for classification rendering
+			for (let img of resp) {
+				//call function
+			}
+			return "classification"
+		}
+		if(resp.hasOwnProperty("distance")) {
+			//do function for image similarity
+			for (let img of resp) {
+				//call function
+			}
+			return "similarity"
+		}
+		return "err"
+	}
 
 	</script>
 
@@ -113,6 +150,7 @@
 <body>
   <!-- use grid or flex -->
 
+
   <ul class="nav nav-tabs shadow-sm" style="background-color: #F2F7F6">
     <li class="nav-item">
      <a class="nav-link active ml-4 mt-2" href="https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model">
@@ -129,7 +167,6 @@
     <img src="logo_cvbp_trans.png" class="mx-auto d-block mt-4" style="width:25%">
   </div>
 
-
   <div class="container">
   <form action="/action_page.php">
     <div class="form-group mx-md-5 mt-5 px-5">
@@ -138,6 +175,7 @@
   </form>
   </div>
 
+<<<<<<< HEAD
 <div class="container mx-auto">
   <div class="input-group mx-auto  mt-5 px-3 row justify-content-md-center" style="width:950px">
     <div class="input-group-prepend mx-auto">
@@ -171,11 +209,9 @@
   </div>
 </div>
 </div>
-
-
      <div class="container mt-4 mx-auto" style="background-color: #F2F7F6;
      max-width: 950px;">
-       <div class"row justify-content-md-center">
+       <div class="row justify-content-md-center">
        <p class="text-center font-weight-bold mt-5 pt-5 rounded" style="font-family:'Avenir next'; color:#165A67; font-size:24px;">RESULTS</p>
 
           <div id="imageresult" class="mt-5"><img src="" id="imagenew"></div>
@@ -189,6 +225,5 @@
 
       </div>
     </div>
-
 </body>
 </html>
