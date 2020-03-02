@@ -20,54 +20,71 @@
   <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script> -->
   <script type="text/javascript" src="script/jquery-1.6.2.min.js"></script>
   <script src=jsonParser.js></script>
-		<script type='text/javascript'>
-      // const selectedFile = document.getElementById('inputGroupFile03').files[0];
-      // const numFiles = files.length;
-      // console.log(selectedFile)
-      const inputElement = document.getElementById("inputGroupFile03");
-      //const preview = document.getElementById("output");
-      // inputElement.addEventListener("change", handleFiles, false);
-      function handleFiles(files) {
-        //var preview = document.getElementById("output");
-        for (let i = 0; i < files.length; i++) {
-          const file = files[i];
-          if (!file.type.startsWith('image/')){ continue }
-          var preview = document.getElementById("imageresult");
-          const img = document.createElement("img");
+	<script type='text/javascript'>
+    	// const selectedFile = document.getElementById('inputGroupFile03').files[0];
+    	// const numFiles = files.length;
+    	// console.log(selectedFile)
+		const inputElement = document.getElementById("inputGroupFile03");
+		//const preview = document.getElementById("output");
+		// inputElement.addEventListener("change", handleFiles, false);
+		function handleFiles(files) {
+		//var preview = document.getElementById("output");
+		for (let i = 0; i < files.length; i++) {
+		const file = files[i];
+		if (!file.type.startsWith('image/')){ continue }
+		var preview = document.getElementById("imageresult");
+		const img = document.createElement("img");
 
-          img.classList.add("obj");
-          img.file = file;
-          preview.appendChild(img);
-          const reader = new FileReader();
-          reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
-          reader.readAsDataURL(file);
-        }
-        // const selectedFile = document.getElementById('inputGroupFile03').files[0];
-        // const fileList = this.files; /* now you can work with the file list */
-        // console.log(selectedFile)
-        // console.log(fileList)
-        //console.log(preview)
-      }
+		img.classList.add("obj");
+		img.file = file;
+		preview.appendChild(img);
+		const reader = new FileReader();
+		reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+		reader.readAsDataURL(file);
+		}
+		// const selectedFile = document.getElementById('inputGroupFile03').files[0];
+		// const fileList = this.files; /* now you can work with the file list */
+		// console.log(selectedFile)
+		// console.log(fileList)
+		//console.log(preview)
+		}
 
-      function jsonParser(jString) {
-		let resp = JSON.parse(jString)[0]
-		if (Array.isArray(resp)) {
-			if (resp[0].hasOwnProperty("top")) {
-				//do function for detection rendering
-				return "detection"
+    	function jsonParser(jString) {
+			let resp = JSON.parse(jString)
+			if (Array.isArray(resp[0])) {
+				if (resp[0][0].hasOwnProperty("top")) {
+					//will need to target a different feature if another scenario ends up doing rectangle boxes
+					for (let img of resp[0]) {
+						for (let box of img) {
+							let x = box.left
+							let y = box.top
+							let width = box.right - box.left
+							let height = box.bottom - box.top
+							let label = box.label
+							let prob = box.score
+							//call rendering functions
+						}
+					}
+					return "detection"
+				}
+				return "err"
+			}
+			if(resp.hasOwnProperty("probability")) {
+				//do function for classification rendering
+				for (let img of resp) {
+					//call function
+				}
+				return "classification"
+			}
+			if(resp.hasOwnProperty("distance")) {
+				//do function for image similarity
+				for (let img of resp) {
+					//call function
+				}
+				return "similarity"
 			}
 			return "err"
 		}
-		if(resp.hasOwnProperty("probability")) {
-			//do function for classification rendering
-			return "classification"
-		}
-		if(resp.hasOwnProperty("distance")) {
-			//do function for image similarity
-			return "similarity"
-		}
-		return "err"
-	  }
 	</script>
 </head>
 <body>
