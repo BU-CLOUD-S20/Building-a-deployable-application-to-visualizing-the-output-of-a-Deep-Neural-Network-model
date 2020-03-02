@@ -47,23 +47,26 @@
         if (pattern.test(url)) {
           console.log("url is valid")
           document.getElementById("imageresult").hidden = true;
+
           loading();
+
+          etTimeout(function(){
+            imgdetection(x, y, xwidth, xheight, label_text);
+          }, 500)
+
         } else {
           $("#exampleModalCenter").modal();
         }
       }
 
       function loading() {
-          var x = document.getElementById("div2");
-              x.style.display = 'block';
+          var load = document.getElementById("div2");
+              load.style.display = 'block';
 
           setTimeout(function(){
-              x.style.display = 'none';
+              load.style.display = 'none';
           }, 500)
 
-          setTimeout(function(){
-            imgdetection(x, y, xwidth, xheight);
-          }, 500)
       }
 
       function imgdetection(x, y, xwidth, xheight, label_text) {
