@@ -19,25 +19,33 @@
 	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script> -->
 	<script type="text/javascript" src="script/jquery-1.6.2.min.js"></script>
 	<script type='text/javascript'>
-		const inputElement = document.getElementById("inputGroupFile03");
-		function handleFiles(files) {
-			for (let i = 0; i < files.length; i++) {
-				const file = files[i];
-				if (!file.type.startsWith('image/')){ continue }
-				var preview = document.getElementById("imageresult");
-				var img = document.getElementById("imagenew");
-				img.className = "img-fluid";
 
-				img.classList.add("obj");
-				img.file = file;
+      const inputElement = document.getElementById("inputGroupFile03");
+      base64_image = "";
 
-				const reader = new FileReader();
-				reader.onload = (function(aImg) {
-				return function(e) { aImg.src = e.target.result; }; })(img);
-				reader.readAsDataURL(file);
-			}
-			console.log(preview)
-		}
+      function handleFiles(files) {
+        num_file = files.length;
+        if (num_file > 0) {
+          const file = files[num_file-1];
+          console.log(num_file);
+          var preview = document.getElementById("imageresult");
+          var img = document.getElementById("imagenew");
+          img.classList.add("obj");
+          img.file = file;
+          const reader = new FileReader();
+
+          reader.onload = (function(aImg) { return function(e) {
+            aImg.src = e.target.result;
+            var nextSibling = document.getElementById("labelinput");
+            nextSibling.innerText = file.name;
+            }; })(img);
+
+          reader.onloadend = function () {
+          base64_image = reader.result;
+          }
+          reader.readAsDataURL(file);
+        }
+        }
 
 		function APIValidation() {
 			var url = document.getElementById("url").value;
@@ -197,7 +205,7 @@
 		<div class="custom-file" style="width:500px">
 			<input type="file" class="custom-file-input mx-auto d-block"  accept="image/*" id="inputGroupFile03" onchange="handleFiles(this.files)">
 			<br/>
-			<label class="custom-file-label mt-2 ml-3 mr-3" for="inputGroupFile03" style="color: #1D7D72; font-family: 'Avenir next'; font-size:18px">Choose file</label>
+			<label class="custom-file-label mt-2 ml-3 mr-3" for="inputGroupFile03" id="labelinput" style="color: #1D7D72; font-family: 'Avenir next'; font-size:18px">Choose file</label>
 		</div>
 
 		<div class="input-group-prepend mx-auto">
