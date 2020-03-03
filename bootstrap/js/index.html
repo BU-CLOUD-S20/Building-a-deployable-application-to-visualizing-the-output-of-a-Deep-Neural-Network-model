@@ -46,10 +46,14 @@
 				console.log("url is valid")
 				document.getElementById("imageresult").hidden = true;
 				loading();
+
+
 			} else {
 				$("#exampleModalCenter").modal();
 			}
 		}
+
+
 
 		function probability() {
 			var json = '[[{"top": "153", "left": "96", "bottom": "515", "right": "234", "label_name": "carton", "label_idx": "2", "score": "0.9971401691436768"}]]';
@@ -67,12 +71,13 @@
 				x.style.display = 'none';
 			}, 500)
 
+			var stringjson = '[[{"top": "240", "left": "430", "bottom": "440", "right": "630", "label_name": "smile", "label_idx": "2", "score": "0.9971401691436768"}]]';
 			setTimeout(function(){
-				imgdetection(x, y, xwidth, xheight);
+				jsonParser(stringjson);
 			}, 500)
 		}
 
-		function imgdetection(x, y, xwidth, xheight, label_text) {
+		function imgdetection(x, y, xwidth, xheight, label) {
 			var img = document.getElementById("imagenew");
 			var width = img.naturalWidth;
 			var height = img.naturalHeight;
@@ -86,15 +91,17 @@
 			//  get the scale
 			var scale = Math.min(c.width / width, c.height / height);
 			// get the top left position of the image
-			var x = (c.width / 2) - (width / 2) * scale;
-			var y = (c.height / 2) - (height / 2) * scale;
-			ctx.drawImage(img, x, y, width * scale, height * scale);
+			var imgx = (c.width / 2) - (width / 2) * scale;
+			var imgy = (c.height / 2) - (height / 2) * scale;
+			ctx.drawImage(img, imgx, imgy, width * scale, height * scale);
 			ctx.lineWidth = 5;
 			ctx.strokeStyle = "#FF0000";
 			ctx.fillStyle = "#FF0000";
 			ctx.font = "20px Verdana";
 			ctx.strokeRect(x, y, xwidth, xheight);
-			ctx.fillText(label_text, x+10, y+30);
+			console.log(label)
+
+			ctx.fillText(label, 10 + parseInt(x), 20 + parseInt(y));
 		}
 
 		function jsonParser(jString) {
@@ -102,13 +109,15 @@
 			if (Array.isArray(resp[0])) {
 				if (resp[0][0].hasOwnProperty("top")) {
 					//will need to target a different feature if another scenario ends up doing rectangle boxes
-					for (let img of resp[0]) {
+					for (let img of resp) {
 						for (let box of img) {
 							let x = box.left
 							let y = box.top
 							let width = box.right - box.left
 							let height = box.bottom - box.top
-							let label = box.label
+							let label = box.label_name
+							console.log(x);
+							console.log(y);
 							imgdetection(x, y, width, height, label)
 						}
 					}
@@ -202,31 +211,34 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-							
+
 						<div class="modal-body">Please check API URL.</div>
-							
+
 						<div class="modal-footer">
 							<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 						</div>
 					</div>
-
-					<div class="mt-5 d-flex justify-content-center">
-						<div id="div2" class="spinner-border" role="status">
-							<span class="sr-only">Loading...</span>
-						</div>
-					</div>
-					<canvas id="canvas" width="300" height="300"></canvas>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<div class="container mt-4 mx-auto" style="background-color: #F2F7F6; max-width: 950px;">
-		<div class="row justify-content-md-center">
+	<div class="container mt-4 mx-auto" style="background-color: #F2F7F6;
+max-width: 950px;">
+		<div class"row justify-content-md-center">
 			<p class="text-center font-weight-bold mt-5 pt-5 rounded" style="font-family:'Avenir next'; color:#165A67; font-size:24px;">RESULTS</p>
-			<div id="imageresult" class="mt-5"><img src="" id="imagenew"></div>
-		</div>
-	</div>
+
+		 <div id="imageresult" class="mt-5"><img src="" id="imagenew"></div>
+
+		 <div class="mt-5 d-flex justify-content-center">
+			 <div id="div2" class="spinner-border" role="status">
+				 <span class="sr-only">Loading...</span>
+			 </div>
+		 </div>
+		 <canvas id="canvas" width="300" height="300"></canvas>
+
+ 		</div>
 </div>
 
 </body>
