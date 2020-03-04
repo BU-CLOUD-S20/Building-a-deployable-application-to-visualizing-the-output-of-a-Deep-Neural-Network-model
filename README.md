@@ -20,6 +20,7 @@ Mentors: Patrick Buehler, JS Tan
 ## 0. Sprint Presentations
 
 1. [Sprint 1](https://docs.google.com/presentation/d/1YJg0whEUxonBOJON-ExQi6li-OhU5VPepP93H8fXChw/edit?usp=sharing)
+2. [Sprint 2](https://docs.google.com/presentation/d/1hkqTPE9fNCRs7QkaELIBK1OSxYvn8TqOkDwcS2QG1_o/edit?usp=sharing)
 
 <a name="vision-goals"/>
 
