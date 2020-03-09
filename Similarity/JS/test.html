@@ -57,9 +57,31 @@
             </div>
             <div class="tab-pane fade card-body mt-4" id="webcam" role="tabpanel" aria-labelledby="webcam-tab">
                 <p>Use your webcam to take an input picture</p>
-                <video id="video" width="640" height="480" autoplay></video>
-                <button id="snap">Snap Photo</button>
-                <canvas id="canvas" width="640" height="480"></canvas>
+                <div class="row">
+				  <div class="col-sm-6">
+				    <div class="card">
+				      <div class="card-body">
+				        <video id="video" width="640" height="480" autoplay></video>
+				      </div>
+				      <div class="card-footer text-muted">
+					    <button id="snap">Snap Photo</button>
+					  </div>
+				    </div>
+				  </div>
+				  <div class="col-sm-6">
+				    <div class="card">
+				      <div class="card-body">
+				        <canvas id="canvas" width="640" height="480"></canvas>
+				      </div>
+				      <div class="card-footer text-muted">
+					    <button id="useImage">Use Image</button>
+					  </div>
+				    </div>
+				  </div>
+				</div>
+				<div>
+		        	<p class="text-muted">Base64 encoded image:<br><span id="b64results"></span></p>
+		        </div>
             </div>
         </div>
     </div>
@@ -249,6 +271,15 @@ Mandatory in IE 6, 7, 8 and 9.
         video.srcObject = null;
       }
     })
+
+    // Trigger photo save
+    document.getElementById("useImage").addEventListener("click", function() {
+        var canvas = document.getElementById('canvas');
+		var dataURL = canvas.toDataURL();
+		console.log(dataURL);
+		document.getElementById("b64results").innerText = dataURL;
+    });
+
 
 </script>
 </body></html>
