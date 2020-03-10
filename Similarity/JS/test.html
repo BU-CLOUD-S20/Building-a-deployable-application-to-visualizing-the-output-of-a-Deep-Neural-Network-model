@@ -29,6 +29,27 @@
 		    top: .125em;
 		    position: relative;
 		}
+
+		.icon.regular svg {
+		    top: 0em;
+		    position: relative;
+		}
+
+		.img-wrap {
+			position: relative;
+			float:left;
+		}
+
+		.img-wrap .clearBtn {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			z-index: 100;
+		}
+
+		.hide{
+			display:none;
+		}
 	</style>
     
   </head>
@@ -93,8 +114,11 @@
 				</div>
 				<div>
 					<p class="mt-3 text-muted">Base64 encoded image (in img tag):</p>
-					<img id="b64img" src="">
-		        	<p class="mt-3 text-muted">Base64 encoded image (as text):<br><span id="b64results"></span></p>
+					<div class="img-wrap">
+						<button id="clear-1" type="button" class="clearBtn btn btn-danger btn-sm hide text-white" onclick="removeImg(1)"> <div class="icon regular"><i data-feather="x" class="text-white"></i></div></button>
+						<img id="b64img-1" src="">
+					</div>
+		        	<p style="clear:left;" class="pt-3 text-muted">Base64 encoded image (as text):<br><span id="b64results-1"></span></p>
 		        </div>
             </div>
         </div>
@@ -146,6 +170,12 @@
     https://kirupa.com/html5/accessing_your_webcam_in_html5.htm
     https://forum.kirupa.com/t/accessing-your-webcam-in-html5/352092/38?u=kirupa
     https://stackoverflow.com/questions/4129102/html5-video-dimensions
+    https://blog.prototypr.io/align-svg-icons-to-text-and-say-goodbye-to-font-icons-d44b3d7b26b4
+    https://feathericons.com/
+    https://stackoverflow.com/questions/36828271/how-to-show-delete-button-in-right-corner-of-image
+    https://stackoverflow.com/questions/50623279/js-event-handler-async-function/50623441
+    https://stackoverflow.com/questions/20958078/resize-a-base-64-image-in-javascript-without-using-canvas
+    https://stackoverflow.com/questions/33291436/can-you-resize-or-change-resolution-of-base64-image-through-manipulating-the-bas/33291682
 -->
 <script type="text/javascript" src="dist/jszip.min.js"></script>
 <script type="text/javascript" src="dist/jszip-utils.min.js"></script>
@@ -160,6 +190,11 @@ Mandatory in IE 6, 7, 8 and 9.
     var fn_array;
     var ref_array;
     var dist_array = [];
+    var imgList = [1, 0, 1, 1];
+    var b64o0 = "string";
+    var b64o1 = 0;
+    var b64o2 = "string";
+    var b64o3 = "string";
     // Grab elements, create settings, etc.
     var video = document.getElementById('video');
 
@@ -201,10 +236,10 @@ Mandatory in IE 6, 7, 8 and 9.
             var arr = [fn_array[i],euc];
             dist_array.push(arr); 
         }
-        console.log(rows);
-        console.log(dist_array.length);
+        // console.log(rows);
+        // console.log(dist_array.length);
         var topValues = dist_array.sort((a,b) => a[1]-b[1]).slice(0,top);
-        console.log(topValues);
+        // console.log(topValues);
         populateTable(topValues);
         document.getElementById("queryImg").appendChild(document.createTextNode("Query image: " + fn_array[queryimg]));
     }
@@ -225,8 +260,8 @@ Mandatory in IE 6, 7, 8 and 9.
     }).then(function (text) {
         //console.log(text);
         fn_array = JSON.parse(text);
-        console.log(fn_array[0]);
-        console.log(fn_array[1]);
+        // console.log(fn_array[0]);
+        // console.log(fn_array[1]);
     });
 
     // Download zip file of reference image features and parse into array
@@ -245,8 +280,8 @@ Mandatory in IE 6, 7, 8 and 9.
     }).then(function (text) {
         //console.log(text);
         ref_array = JSON.parse(text);
-        console.log(ref_array[0][0]);
-        console.log(ref_array[1][1]);
+        // console.log(ref_array[0][0]);
+        // console.log(ref_array[1][1]);
         //let euc = eucDistance(ref_array[0], ref_array[1]);
         //console.log(euc);
         calcSimilar(5)
@@ -268,7 +303,7 @@ Mandatory in IE 6, 7, 8 and 9.
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       var tabId = e.target.id;
       if (tabId == "webcam-tab") {
-        console.log("on webcam tab now")
+        // console.log("on webcam tab now")
         // Get access to the camera!
         if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             // Not adding `{ audio: true }` since we only want video now
@@ -291,14 +326,67 @@ Mandatory in IE 6, 7, 8 and 9.
       }
     })
 
-    // Trigger photo save
-    document.getElementById("useImage").addEventListener("click", function() {
-		var dataURL = canvas.toDataURL();
-		console.log(dataURL);
-		document.getElementById("b64results").innerText = dataURL;
-		document.getElementById("b64img").src=dataURL;
-    });
+    // Trigger photo save - need this unsual syntax to accomodate the async nature of the "photoSave" process
+    document.getElementById("useImage").addEventListener("click", () => photoSave(), false);
 
+    async function photoSave() {
+    	var dataURL = canvas.toDataURL();
+		//console.log(dataURL);
+		var thumbnailURL = await resizeImg(dataURL, 100)
+		//console.log(thumbnailURL);
+		for (i = 0; i < 4; i++) {
+            if (imgList[i] == 0) {
+            	console.log("imgList has empty slot at: " + i); 
+            	document.getElementById("b64results-" + i).innerText = thumbnailURL;
+				document.getElementById("b64img-" + i).src=thumbnailURL;
+				document.getElementById("clear-" + i).classList.remove("hide");
+				imgList[i] = 1;
+            }
+            if (("b64o"+i) == 0) {
+            	console.log("b64 object " + i + "is empty (set to 0)");
+            }
+        }
+    }
+
+    // Delete image from display and img list
+    function removeImg(imgNumber) {
+    	console.log("Remove Image Number: " + imgNumber);
+    	document.getElementById("b64results-" + imgNumber).innerText = "";
+		document.getElementById("b64img-" + imgNumber).src="";
+    	document.getElementById("clear-" + imgNumber).classList.add("hide");
+    	imgList[imgNumber] = 0;
+    }
+
+    function resizeImg(b64Orig, newHeight) {
+    	return new Promise(async function(resolve,reject){
+    		// Create an off-screen canvas
+	   		var rIcanvas = document.createElement('canvas'),
+	        rIctx = rIcanvas.getContext('2d');
+	        // Create an off-screen image element
+	    	var rImage = new Image();
+	    	// WHen the image is loaded, process it
+	    	rImage.onload = function() {
+	    		// Original dimensions of image
+	    		var width = rImage.naturalWidth;
+				var height = rImage.naturalHeight;
+				var ratio = width / height;
+				// Dimensions of resized image (via canvas): rIwidth and newHeight
+				var rIwidth = ratio * newHeight;
+				//console.log("rImg width: " + rIwidth);
+				//console.log("rImg height: " + newHeight);
+				// Set canvas dimensions to resized image dimensions
+				rIcanvas.width = rIwidth;
+				rIcanvas.height = newHeight;
+				// Draw the image on teh canvas at the new size
+	    		rIctx.drawImage(rImage, 0, 0, width, height, 0, 0, rIcanvas.width, rIcanvas.height);
+	    		// Export the new image as Base64 and return to calling function
+	    		var rIdu = rIcanvas.toDataURL();
+	    		resolve(rIdu);
+	    	}
+	    	// Load the image from the original Base64 source (passed into this function)
+	    	rImage.src = b64Orig;
+    	})
+    }
 
 </script>
 </body></html>
