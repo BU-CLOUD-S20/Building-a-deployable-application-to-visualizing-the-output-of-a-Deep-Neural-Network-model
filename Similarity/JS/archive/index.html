@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EC528 Testing</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"> -->
+    <style>
+        body { padding-top:50px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1>EC528 Testing Site</h1>
+        </div>
+        <div id="cont">
+            <p id="queryImg"></p>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Image</th>
+                  <th scope="col">File Name</th>
+                  <th scope="col">Distance</th>
+                </tr>
+              </thead>
+              <tbody id="distTable"></tbody></table>
+        </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<!--
+    Frameworks and examples used to build this: 
+    https://stuk.github.io/jszip/
+    http://stuk.github.io/jszip-utils/
+    https://stackoverflow.com/questions/39254218/js-get-top-5-max-elements-from-array
+    https://arjunphp.com/download-file-node-js-express-js/
+    https://stackoverflow.com/questions/3524827/sort-a-2d-array-by-the-second-value
+    https://supunkavinda.blog/js-euclidean-distance
+    https://stackoverflow.com/questions/15164655/generate-html-table-from-2d-javascript-array
+-->
+
+<script type="text/javascript" src="dist/jszip.min.js"></script>
+<script type="text/javascript" src="dist/jszip-utils.min.js"></script>
+<!--
+Mandatory in IE 6, 7, 8 and 9.
+-->
+<!--[if IE]>
+<script type="text/javascript" src="dist/jszip-utils-ie.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+    var fn_array;
+    var ref_array;
+    var dist_array = [];
+
+    function populateTable(tableData) {
+      tableData.forEach(function(rowData) {
+        var row = document.createElement('tr');
+
+        var cell = document.createElement('td');
+        var img = document.createElement('img');
+        img.src = 'small-150/' + rowData[0];
+        cell.appendChild(img);
+        row.appendChild(cell);
+        rowData.forEach(function(cellData) {
+          cell = document.createElement('td');
+          cell.appendChild(document.createTextNode(cellData));
+          row.appendChild(cell);
+        });
+
+        document.getElementById("distTable").appendChild(row);
+      });
+    }
+
+    function eucDistance(a, b) {
+        return a
+        .map((x, i) => Math.abs( x - b[i] ) ** 2) // square the difference
+        .reduce((sum, now) => sum + now) // sum
+        ** (1/2)
+    }
+
+    function calcSimilar(top) {
+        var rows = ref_array.length;
+        var queryimg = Math.floor(Math.random() * (rows - 0 + 1) + 0);
+        for (i = 0; i < rows; i++) {
+            let euc = eucDistance(ref_array[queryimg], ref_array[i]);
+            var arr = [fn_array[i],euc];
+            dist_array.push(arr); 
+        }
+        console.log(rows);
+        console.log(dist_array.length);
+        var topValues = dist_array.sort((a,b) => a[1]-b[1]).slice(0,top);
+        console.log(topValues);
+        populateTable(topValues);
+        document.getElementById("queryImg").appendChild(document.createTextNode("Query image: " + fn_array[queryimg]));
+    }
+
+    // Download zip file of filenames and parse into array
+    new JSZip.external.Promise(function (resolve, reject) {
+        JSZipUtils.getBinaryContent('data/ref_filenames.zip', function(err, data) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    }).then(function (data) {
+        return JSZip.loadAsync(data);
+    }).then(function (zip) {
+        return zip.file("ref_filenames.txt").async("string");
+    }).then(function (text) {
+        //console.log(text);
+        fn_array = JSON.parse(text);
+        console.log(fn_array[0]);
+        console.log(fn_array[1]);
+    });
+
+    // Download zip file of reference image features and parse into array
+    new JSZip.external.Promise(function (resolve, reject) {
+        JSZipUtils.getBinaryContent('data/ref_features.zip', function(err, data) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    }).then(function (data) {
+        return JSZip.loadAsync(data);
+    }).then(function (zip) {
+        return zip.file("ref_features.txt").async("string");
+    }).then(function (text) {
+        //console.log(text);
+        ref_array = JSON.parse(text);
+        console.log(ref_array[0][0]);
+        console.log(ref_array[1][1]);
+        //let euc = eucDistance(ref_array[0], ref_array[1]);
+        //console.log(euc);
+        calcSimilar(5)
+        //var topValues = ref_array[0].sort((a,b) => b-a).slice(0,5);
+        //console.log(topValues);
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+canvas{
+  width: 100%;
+}
+.icon {
+    display: inline-flex;
+    align-self: center;
+}
+
+.icon svg, .icon img {
+    height: 1em;
+    width: 1em;
+    /*fill: currentColor;*/
+}
+
+.icon.baseline svg, .icon img {
+    top: .125em;
+    position: relative;
+}
+
+.icon.regular svg {
+    top: 0em;
+    position: relative;
+}
+
+.img-wrap {
+  position: relative;
+  float:left;
+}
+
+.img-wrap-ph {
+  min-width: 100px;
+  min-height: 100px;
+  border-style: dashed;
+  border-color: grey;
+  border-width: thin;
+
+}
+
+.img-wrap .clearBtn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 100;
+}
+
+.hide{
+  display:none;
+}
