@@ -2,22 +2,18 @@
 <html lang="en">
 <head>
   <title>Computer Vision</title>
-  <link rel = "icon" href =
-"logo_small.png"
+  <link rel = "icon" href ="logo_small.png"
         type = "image/x-icon">
   <meta charset="utf-8">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="resize.css">
-  <!-- <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
-  <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script> -->
+
+
   <script type="text/javascript" src="script/jquery-1.6.2.min.js"></script>
 		<script type='text/javascript'>
       const inputElement = document.getElementById("inputGroupFile03");
@@ -47,29 +43,26 @@
         if (pattern.test(url)) {
           console.log("url is valid")
           document.getElementById("imageresult").hidden = true;
-
           loading();
-
-          etTimeout(function(){
-            imgdetection(x, y, xwidth, xheight, label_text);
+          setTimeout(function(){
+            imgdetection();
           }, 500)
-
         } else {
           $("#exampleModalCenter").modal();
         }
       }
 
       function loading() {
-          var load = document.getElementById("div2");
-              load.style.display = 'block';
+          var x = document.getElementById("div2");
+              x.style.display = 'block';
 
           setTimeout(function(){
-              load.style.display = 'none';
+              x.style.display = 'none';
           }, 500)
 
       }
 
-      function imgdetection(x, y, xwidth, xheight, label_text) {
+      function imgdetection() {
         var img = document.getElementById("imagenew");
         var width = img.naturalWidth;
         var height = img.naturalHeight;
@@ -90,11 +83,14 @@
         ctx.strokeStyle = "#FF0000";
         ctx.fillStyle = "#FF0000";
         ctx.font = "20px Verdana";
-        ctx.strokeRect(x, y, xwidth, xheight);
-        ctx.fillText(label_text, x+10, y+30);
+        ctx.strokeRect(430, 240, 200, 200);
+        ctx.fillText("Big smile!", 440, 270);
 
     }
 
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+         var tabId = e.target.id;
+    });
 
 	</script>
 
@@ -110,88 +106,319 @@
   #div2 {
     display: none;
   }
+
+
 </style>
 
 </head>
 <body>
   <!-- use grid or flex -->
-
-  <ul class="nav nav-tabs shadow-sm" style="background-color: #F2F7F6">
-    <li class="nav-item">
-     <a class="nav-link active ml-4 mt-2" href="https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model">
-      <img src="logo.png" alt="Logo" style="width:30px;">
-    </a>
-
-    <li class="nav-item">
-      <a class="nav-link  mt-2" href="https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model" style="font-family:'Avenir next'; color:#171516; font-size: 20px;">Github Repo</a>
-    </li>
-    </li>
-  </ul>
-
-  <div class="container">
-    <img src="logo_cvbp_trans.png" class="mx-auto d-block mt-4" style="width:25%">
-  </div>
-
-
-  <div class="container">
-  <form action="/action_page.php">
-    <div class="form-group mx-md-5 mt-5 px-5">
-      <input type="text" class="form-control form-control-lg" placeholder="Enter API url here" id="url" style="font-family:'Avenir next'; color:#a9a9a9; font-size:20px;" name="text2" required>
-    </div>
-  </form>
-  </div>
-
-<div class="container mx-auto">
-  <div class="input-group mx-auto  mt-5 px-3 row justify-content-md-center" style="width:950px">
-    <div class="input-group-prepend mx-auto">
-      <button class="btn btn-secondary mt-2 mr-3 shadow rounded" type="button" style="background-color: #1D7D72; color: #FFFFFF; font-family: 'Avenir next'; font-size:18px">Webcam</button>
-    </div>
-    <div class="custom-file" style="width:500px">
-      <input type="file" class="custom-file-input mx-auto d-block"  accept="image/*" id="inputGroupFile03" onchange="handleFiles(this.files)">
-      <br/>
-   <label class="custom-file-label mt-2 ml-3 mr-3" for="inputGroupFile03" style="color: #1D7D72; font-family: 'Avenir next'; font-size:18px">Choose file</label>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #1D7D72">
+    <a class="navbar-brand" href="#" style="style=font-size:20px; color: #FFFFFF">Microsoft CVBP</a>
+    <!-- <ul class="nav navbar-nav navbar-right">
+      <li> -->
+    <div class="navbar-right">
+    <a class="nav-link active" href="https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model" style="color:#FFFFFF" style="font-size:18px">
+       Github Repo <img class="ml-2" src="logo.png" alt="Logo" style="width:25px;">
+     </a>
    </div>
-     <div class="input-group-prepend mx-auto">
-       <button class="btn btn-secondary mt-2 ml-3  shadow rounded" type="button" id="uploadbtn" data-target="#exampleModalCenter" style="background-color: #1D7D72; color: #FFFFFF; font-family: 'Avenir next'; font-size:18px" onclick="APIValidation()">Upload</button>
-         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-           <div class="modal-dialog modal-dialog-centered" role="document">
-             <div class="modal-content">
-               <div class="modal-header">
-                 <h5 class="modal-title" id="exampleModalLongTitle">Error</h5>
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                   <span aria-hidden="true">&times;</span>
-                 </button>
+   <!-- </li>
+   </ul> -->
+
+ </nav>
+
+<main role="main">
+
+  <div class="jumbotron">
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="mymodel-tab" data-toggle="tab" href="#mymodel" role="tab" aria-controls="mymodel" aria-selected="true" style="font-size:18px">Use My Model</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="seeexample-tab" data-toggle="tab" href="#seeexample" role="tab" aria-controls="seeexample" aria-selected="false" style="font-size:18px">See Example</a>
+          </li>
+
+        </ul>
+        <div class="tab-content card" style="border-top-left-radius: 0rem !important; border-top-right-radius: .25rem; border-top: 0px !important;" id="myTabContent">
+            <div class="tab-pane fade show active card-body mt-4" id="mymodel" role="tabpanel" aria-labelledby="mymodel-tab">
+              <!-- for usemymodel tab -->
+                <div class="container">
+                <form action="/action_page.php">
+                  <div class="form-group mx-md-5 mt-5 px-5">
+                    <input type="text" class="form-control form-control-lg" placeholder="Enter API url here" id="url" style="color:#a9a9a9; font-size:20px;" name="text2" required>
+                  </div>
+                </form>
+                </div>
+
+              <div class="container">
+                <div class="row">
+                  <p class="text-center mt-5 mx-auto font-weight-bold" style="font-size:20px; color: #1D7D72">Upload upto 4 image files from local machine, webcam, or use sample images </p>
+                <div class="input-group mx-auto mt-3 justify-content-md-center" style="width:950px">
+
+                  <div class="col">
+                  <div class="input-group-prepend mx-auto">
+
+                    <button class="btn btn-secondary shadow rounded" type="button" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px">Webcam</button>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="custom-file" style="width:500px">
+                    <div class="input-group-prepend mx-auto">
+                    <input type="file" class="custom-file-input"  accept="image/*" id="inputGroupFile03" onchange="handleFiles(this.files)">
+
+                 <label class="custom-file-label" for="inputGroupFile03" style="color: #1D7D72;  font-size:18px">Choose file</label>
+
+                 </div>
                </div>
-               <div class="modal-body">
-               Please check API URL.
                </div>
-               <div class="modal-footer">
-                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-               </div>
+
+                <div class="col">
+                   <div class="input-group-prepend mx-auto">
+
+                     <button class="btn btn-secondary shadow rounded mx-2" type="button" id="uploadbtn" data-target="#exampleModalCenter" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px" onclick="APIValidation()">Upload</button>
+                       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                         <div class="modal-dialog modal-dialog-centered" role="document">
+                           <div class="modal-content">
+                             <div class="modal-header">
+                               <h5 class="modal-title" id="exampleModalLongTitle">Error</h5>
+                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                               </button>
+                             </div>
+                             <div class="modal-body">
+                             Please check API URL.
+                             </div>
+                             <div class="modal-footer">
+                               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                             </div>
+                           </div>
+                         </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col">
+                     <div class="input-group-prepend mx-auto">
+                       <button class="btn btn-secondary shadow rounded" type="button" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px">Samples</button>
+                     </div>
+                   </div>
+
+
+
+                  </div>
+                </div>
+              </div>
+
+
+            <div class="container mt-5 mx-auto" style="max-width: 950px; background-color: #FFFFFF">
+
+               <div class="row ml-4 mr-2">
+                <div class="col-lg ml-2 mt-1">
+
+                  <img src="https://via.placeholder.com/150" class="img-fluid" alt="Responsive image">
+
+              </div>
+                <div class="col-lg ml-2 mt-1">
+
+                  <img src="https://via.placeholder.com/150" class="img-fluid" alt="Responsive image">
+
+                </div>
+                <div class="col-lg ml-2 mt-1">
+
+                  <img src="https://via.placeholder.com/150" class="img-fluid" alt="Responsive image">
+
+              </div>
+              <div class="col-lg ml-2 mt-1">
+
+                <img src="https://via.placeholder.com/150" class="img-fluid" alt="Responsive image">
+
+            </div>
            </div>
-         </div>
-       </div>
-  </div>
-</div>
-</div>
+          </div>
 
 
-     <div class="container mt-4 mx-auto" style="background-color: #F2F7F6;
-     max-width: 950px;">
-       <div class"row justify-content-md-center">
-       <p class="text-center font-weight-bold mt-5 pt-5 rounded" style="font-family:'Avenir next'; color:#165A67; font-size:24px;">RESULTS</p>
+        <div class="container mt-5 mx-auto rounded" style="background-color: #F2F7F6; max-width: 950px;">
+            <div class="row justify-content-md-center">
+               <p class="text-center font-weight-bold pt-5 rounded mx-auto" style="color:#165A67; font-size:24px;">RESULTS</p>
+               <!-- no need for this for onw -->
+                  <!-- <div id="imageresult" class="mt-5"><img src="" id="imagenew"></div> -->
+                      <!-- <div class="mt-5 d-flex justify-content-center">
+                          <div id="div2" class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                          </div>
+                      </div> -->
+                        <!-- <canvas id="canvas" width="300" height="300"></canvas> -->
+              <!-- until here -->
+          </div>
 
-          <div id="imageresult" class="mt-5"><img src="" id="imagenew"></div>
+          <div class="container mx-auto py-4">
 
-          <div class="mt-5 d-flex justify-content-center">
-            <div id="div2" class="spinner-border" role="status">
-              <span class="sr-only">Loading...</span>
+            <div class="row">
+              <div class="col-md-5 mx-auto">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">Object Detection</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5 mx-auto">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">Object Detection</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5 mx-auto">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">Object Detection</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-5 mx-auto">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">Object Detection</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <canvas id="canvas" width="300" height="300"></canvas>
 
+        </div>
+
+    </div>
+
+      <div class="tab-pane fade card-body mt-4" id="seeexample" role="tabpanel" aria-labelledby="seeexample-tab">
+        <!-- for see example tab  -->
+        <div class="container mt-5 mx-auto" style="background-color: #FFFFFF">
+
+            <div class="row">
+                <div class="col-lg mt-1">
+                    <img src="https://via.placeholder.com/150" class="img-fluid" alt="Responsive image">
+                </div>
+                  <div class="col-lg mt-1">
+                    <img src="https://via.placeholder.com/150" class="img-fluid" alt="Responsive image">
+                  </div>
+                  <div class="col-lg mt-1">
+                    <img src="https://via.placeholder.com/150" class="img-fluid" alt="Responsive image">
+                </div>
+                <div class="col-lg mt-1">
+                  <img src="https://via.placeholder.com/150" class="img-fluid" alt="Responsive image">
+              </div>
+              <div class="col-lg mt-1">
+                <img src="https://via.placeholder.com/150" class="img-fluid" alt="Responsive image">
+            </div>
+            <div class="col-lg mt-1">
+              <img src="https://via.placeholder.com/150" class="img-fluid" alt="Responsive image">
+          </div>
+
+          <div class="col-lg mt-1">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="">Object Detection
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="">Image Classification
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="">Image Similarity
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mt-5 mx-auto rounded" style="background-color: #F2F7F6; max-width: 950px;">
+        <div class="row justify-content-md-center">
+           <p class="text-center font-weight-bold pt-5 rounded mx-auto" style="color:#165A67; font-size:24px;">RESULTS</p>
+         </div>
+
+      <div class="container mx-auto">
+
+        <div class="row">
+          <div class="col-md-5 mt-4 mx-auto">
+            <div class="card mb-4 shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <div class="card-body">
+                <p class="card-text">Object Detection</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5 mt-4 mx-auto">
+            <div class="card mb-4 shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <div class="card-body">
+                <p class="card-text">Image Classification</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5 mt-4 mx-auto">
+            <div class="card mb-4 shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <div class="card-body">
+                <p class="card-text">Image Similarity</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
+
+
+  </div>
+  </div>
+  </div>
+  </div>
+
+
+</main>
 </body>
 </html>
