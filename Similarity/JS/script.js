@@ -4,14 +4,41 @@ var fn_array = [];
 var ref_array;
 var dist_array = [];
 var imgList = [0, 0, 0, 0];
-var imgListEmpty = 4;  // Number of available lots in the imgList
+var imgListEmpty = 4;  // Number of available slots in the imgList
 var b64o = [0, 0, 0, 0];
-var tempImg = new Array();
+var b64e = 0;
+var b64temp = 0;
 // Create off-screen image elements
+var tempImg = new Array();
 tempImg[0] = new Image();
 tempImg[1] = new Image();
 tempImg[2] = new Image();
 tempImg[3] = new Image();
+// Create arrays to hold example image data
+var exampleIC = ['[{"label":"asdasd","probability":"0.21354"},{"label": "klsdfjkdsfjklsdf","probability":"0.4512457"}]',
+'[{"label":"asdasd","probability":"0.21354"},{"label": "klsdfjkdsfjklsdf","probability":"0.4512457"}]',
+'[{"label":"asdasd","probability":"0.21354"},{"label": "klsdfjkdsfjklsdf","probability":"0.4512457"}]',
+'[{"label":"asdasd","probability":"0.21354"},{"label": "klsdfjkdsfjklsdf","probability":"0.4512457"}]',
+'[{"label":"asdasd","probability":"0.21354"},{"label": "klsdfjkdsfjklsdf","probability":"0.4512457"}]',
+'[{"label":"asdasd","probability":"0.21354"},{"label": "klsdfjkdsfjklsdf","probability":"0.4512457"}]',
+'[{"label":"asdasd","probability":"0.21354"},{"label": "klsdfjkdsfjklsdf","probability":"0.4512457"}]',
+'[{"label":"asdasd","probability":"0.21354"},{"label": "klsdfjkdsfjklsdf","probability":"0.4512457"}]'];
+var exampleOD = ['[[{"top": "153", "left": "96", "bottom": "515", "right": "234", "label_name": "carton", "label_idx": "2", "score": "0.9971401691436768"}]]',
+'[[{"top": "153", "left": "96", "bottom": "515", "right": "234", "label_name": "carton", "label_idx": "2", "score": "0.9971401691436768"}]]',
+'[[{"top": "153", "left": "96", "bottom": "515", "right": "234", "label_name": "carton", "label_idx": "2", "score": "0.9971401691436768"}]]',
+'[[{"top": "153", "left": "96", "bottom": "515", "right": "234", "label_name": "carton", "label_idx": "2", "score": "0.9971401691436768"}]]',
+'[[{"top": "153", "left": "96", "bottom": "515", "right": "234", "label_name": "carton", "label_idx": "2", "score": "0.9971401691436768"}]]',
+'[[{"top": "153", "left": "96", "bottom": "515", "right": "234", "label_name": "carton", "label_idx": "2", "score": "0.9971401691436768"}]]',
+'[[{"top": "153", "left": "96", "bottom": "515", "right": "234", "label_name": "carton", "label_idx": "2", "score": "0.9971401691436768"}]]',
+'[[{"top": "153", "left": "96", "bottom": "515", "right": "234", "label_name": "carton", "label_idx": "2", "score": "0.9971401691436768"}]]'];
+var exampleIS = ['[{"features": []}]',
+'[{"features": []}]',
+'[{"features": []}]',
+'[{"features": []}]',
+'[{"features": []}]',
+'[{"features": []}]',
+'[{"features": []}]',
+'[{"features": []}]'];
 // Grab elements, create settings, etc.
 var video = document.getElementById('video');
 
@@ -133,6 +160,72 @@ async function parseSimFileFeatures() {
   })
 }
 
+// Handle sample image clicks - need this unsual syntax to accomodate the async nature of the "photoSave" process
+document.querySelectorAll('.sImg').forEach(item => {
+  item.addEventListener('click', () => handleSamples(item), false)
+});
+
+// Handle sample image clicks - actual work
+async function handleSamples(imgItem) {
+  if (imgListEmpty == 0) {
+    displayError(1);
+    return;
+  }
+  var tmpCanvas = document.createElement("canvas");
+  tmpCanvas.width = imgItem.naturalWidth;
+  tmpCanvas.height = imgItem.naturalHeight;
+  var tmpCtx = tmpCanvas.getContext("2d");
+  tmpCtx.drawImage(imgItem, 0, 0);
+  b64temp = tmpCanvas.toDataURL();
+  await photoSave(0,b64temp);
+  b64temp = 0;
+}
+
+// Handle example image clicks - need this unsual syntax to accomodate the async nature of the process
+document.querySelectorAll('.eImg').forEach(item => {
+  item.addEventListener('click', () => exampleClick(item), false)
+});
+
+// Handle example image clicks - actual work
+async function exampleClick(imgItem) {
+  var tmpCanvas = document.createElement("canvas");
+  tmpCanvas.width = imgItem.naturalWidth;
+  tmpCanvas.height = imgItem.naturalHeight;
+  var tmpCtx = tmpCanvas.getContext("2d");
+  tmpCtx.drawImage(imgItem, 0, 0);
+  b64e = tmpCanvas.toDataURL();
+  // Image classification
+  let exampleId = imgItem.getAttribute("data-eid");
+  var exampleData = exampleIC[exampleId];
+  var showExample = await jsonParser(exampleData, 7);
+  
+  // Object detection
+  exampleData = exampleOD[exampleId];
+  showExample = await jsonParser(exampleData, 8);
+
+  // Image similarity
+  exampleData = exampleIS[exampleId];
+  showExample = await jsonParser(exampleData, 9);
+  
+  //console.log(test);
+  // await photoSave(0,b64temp);
+  // b64temp = 0;
+}
+
+function exampleModels() {
+  var icCheck = document.getElementById("icCheck").checked;
+  var odCheck = document.getElementById("odCheck").checked;
+  var isCheck = document.getElementById("isCheck").checked;
+  var icDiv = document.getElementById("resultsDiv7");
+  var odDiv = document.getElementById("resultsDiv8");
+  var isDiv = document.getElementById("resultsDiv9");
+  if (icCheck) icDiv.classList.remove("hide");
+  else icDiv.classList.add("hide");
+  if (odCheck) odDiv.classList.remove("hide");
+  else odDiv.classList.add("hide");
+  if (isCheck) isDiv.classList.remove("hide");
+  else isDiv.classList.add("hide");
+}
 
 
 // Trigger photo take
@@ -147,18 +240,31 @@ document.getElementById("snap").addEventListener("click", function() {
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   var tabId = e.target.id;
   //console.log(tabId);
-  if (tabId == "webcam-tab") {
-    // console.log("on webcam tab now")
-    // Get access to the camera!
-    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  switch(tabId) {
+    case "webcam-tab":
+      bodySwap(0);
+      if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         // Not adding `{ audio: true }` since we only want video now
         navigator.mediaDevices.getUserMedia({ video: {width: 640, height: 480} }).then(function(stream) {
             //video.src = window.URL.createObjectURL(stream);
             video.srcObject = stream;
             video.play();
         });
-    }
-  } else if (video.srcObject != null) {
+      }
+      break;
+    case "examples-tab":
+      bodySwap(1);
+      clearVideoSrc();
+      break;
+    default:
+      bodySwap(0);
+      clearVideoSrc();
+      break;
+  } 
+})
+
+function clearVideoSrc() {
+  if (video.srcObject != null) {
     var stream = video.srcObject;
     var tracks = stream.getTracks();
 
@@ -169,7 +275,31 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
     video.srcObject = null;
   }
-})
+}
+
+function bodySwap(bodyToShow) {
+  // bodyToShow = 1  ==>  show "examples" body
+  if (bodyToShow) {
+    document.getElementById("thumbnails").classList.add("hide");
+    document.getElementById("resultsDiv0").classList.add("hide");
+    document.getElementById("resultsDiv1").classList.add("hide");
+    document.getElementById("resultsDiv2").classList.add("hide");
+    document.getElementById("resultsDiv3").classList.add("hide");
+    document.getElementById("resultsDiv7").classList.remove("hide");
+    document.getElementById("resultsDiv8").classList.remove("hide");
+    document.getElementById("resultsDiv9").classList.remove("hide");
+  } else {
+    // bodyToShow = 0  ==>  show default body
+    document.getElementById("thumbnails").classList.remove("hide");
+    document.getElementById("resultsDiv0").classList.remove("hide");
+    document.getElementById("resultsDiv1").classList.remove("hide");
+    document.getElementById("resultsDiv2").classList.remove("hide");
+    document.getElementById("resultsDiv3").classList.remove("hide");
+    document.getElementById("resultsDiv7").classList.add("hide");
+    document.getElementById("resultsDiv8").classList.add("hide");
+    document.getElementById("resultsDiv9").classList.add("hide");
+  }
+}
 
 // Trigger photo save - need this unsual syntax to accomodate the async nature of the "photoSave" process
 document.getElementById("useImage").addEventListener("click", () => photoSave(), false);
@@ -177,8 +307,14 @@ document.getElementById("useImage").addEventListener("click", () => photoSave(),
 async function photoSave(saveType, b64i) {
   if (saveType == 0)
     var dataURL = b64i;
-  else 
+  else {
+    // Basically this gets called only when an attempt is made to save the webcam image
+    if (imgListEmpty == 0) {
+      displayError(1);
+      return;
+    }
     var dataURL = webCamCanvas.toDataURL();
+  }
   //console.log(dataURL);
   var thumbnailURL = await resizeImg(dataURL, 100);
   var fullimgURL = await resizeImg(dataURL, 480);
@@ -332,32 +468,32 @@ function loading(status) {
 }
 
 function renderImage(i) {
-  var img = document.getElementById("resultsImg" + i);
-  
-  // !!!!!!!!!!!!! MCB CHANGES  !!!!!!!!!!!!!!!!!
-  // UPDATED TO LOAD DOWN-SAMPLED IMAGE IN <IMG> ELEMENT
-  // TAKES A MOMENT TO LOAD, HENCE THE ONLOAD FUNCTION
-  img.onload = function(){
-    var width = img.naturalWidth;
-    var height = img.naturalHeight;
-
-    var c = document.getElementById("resultsCanvas" + i);
-    var ctx = c.getContext("2d");
-
-    ctx.canvas.height = height;
-    ctx.canvas.width = width; 
-
-    var scale = Math.min(c.width / width, c.height / height);
-    // get the top left position of the image
-    var imgx = (c.width / 2) - (width / 2) * scale;
-    var imgy = (c.height / 2) - (height / 2) * scale;
-    ctx.drawImage(img, imgx, imgy, width * scale, height * scale);
+  return new Promise(async function(resolve,reject){
+    var img = document.getElementById("resultsImg" + i);
     
-    // MAY WANT TO HIDE OR CLEAR THE <IMG> TAG AFTER DRAWING THE CANVAS
+    img.onload = function(){
+      var width = img.naturalWidth;
+      var height = img.naturalHeight;
 
-  };
-  img.src = b64o[i];  // ADDITION
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      var c = document.getElementById("resultsCanvas" + i);
+      var ctx = c.getContext("2d");
+
+      ctx.canvas.height = height;
+      ctx.canvas.width = width; 
+
+      var scale = Math.min(c.width / width, c.height / height);
+      // get the top left position of the image
+      var imgx = (c.width / 2) - (width / 2) * scale;
+      var imgy = (c.height / 2) - (height / 2) * scale;
+      ctx.drawImage(img, imgx, imgy, width * scale, height * scale);
+      img.src = "";
+      resolve();
+    };
+    if (i < 7)
+      img.src = b64o[i];
+    else 
+      img.src = b64e; 
+  })
 }
 
 function imgdetection(i, x, y, xwidth, xheight, label) {
@@ -381,8 +517,8 @@ function imgclassification(i, label, probability) {
   ctx.fillStyle = "#FF0000";
   ctx.font = "20px Verdana";
 
-  ctx.fillText(label, 0, 0);
-  ctx.fillText(probability, 0, 10);
+  ctx.fillText(label, 10, 30);
+  ctx.fillText(parseFloat(probability).toFixed(2), 10, 60);
 }
 
 // "count" indicates the number of similar results to return; use 5 for now
@@ -405,20 +541,25 @@ async function imgsimilarity(i, count, queryFeatures) {
   }
 }
 
-function jsonParser(jString) {
+async function jsonParser(jString, ovr) {
   let resp = JSON.parse(jString)
   if (Array.isArray(resp[0])) {
     if (resp[0][0].hasOwnProperty("top")) {
+      // "[[top: #, ]]"
       //will need to target a different feature if another scenario ends up doing rectangle boxes
       for (let i in resp) {
-        renderImage(i);
+        let j = i
+        if (ovr) {
+          j = ovr
+        }
+        await renderImage(j);
         for (let box of resp[i]) {
           let x = box.left
           let y = box.top
           let width = box.right - box.left
           let height = box.bottom - box.top
           let label = box.label_name
-          imgdetection(i, x, y, width, height, label)
+          imgdetection(j, x, y, width, height, label)
         }
       }
       return "detection"
@@ -426,19 +567,29 @@ function jsonParser(jString) {
     return "err"
   }
 
-  if(resp.hasOwnProperty("probability")) {
+  // '[{"label":"asdasd","probability":"0.21354"},{"label": "klsdfjkdsfjklsdf","probability":"0.4512457"}]'
+  if(resp[0].hasOwnProperty("probability")) {
     for (let i in resp) {
-      renderImage(i);
+      let j = i
+      if (ovr) {
+        j = ovr
+      }
+      await renderImage(j);
       let label = resp[i].label
       let prob = resp[i].probability
-      imgclassification(i, label, probability);
+      imgclassification(j, label, prob);
     }
     return "classification"
   }
 
-  if(resp.hasOwnProperty("distance")) {
-    for (let img of resp) {
-      //call function
+  if(resp[0].hasOwnProperty("features")) {
+    for (let i in resp) {
+      let j = i
+      if (ovr) {
+        j = ovr
+      }
+      await renderImage(j);
+      imgsimilarity(j, 5)
     }
     return "similarity"
   }
@@ -470,20 +621,5 @@ function APIRequest() {
   xhr.onerror = function() {
     displayError(2);  // Display generic API error message in bold, red text
     //document.getElementById("progress").innerHTML = "Error during API request."
-  }
-}
-
-// For development
-// Takes Base64 of uploaded images and displays them in resultsImg elements on the page
-// NOTE: img dimensions are not available until the Base64 code is loaded in as the src 
-// ... of an img element; img element does NOT have to be rendered in the DOM if you just
-// ... want the dimensions, though! 
-function test() {
-  for (let i = 0; i < 4; i++) {
-    var img = document.getElementById("resultsImg" + i);
-    if (b64o[i].length > 0)
-      img.src = b64o[i];
-    else 
-      img.src = "";
   }
 }

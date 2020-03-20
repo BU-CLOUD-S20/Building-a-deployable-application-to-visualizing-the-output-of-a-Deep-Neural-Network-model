@@ -21,5 +21,7 @@
     https://stackoverflow.com/questions/18333427/how-to-insert-a-row-in-an-html-table-body-in-javascript
     https://stackoverflow.com/questions/11985156/clone-div-and-change-id
     https://www.geeksforgeeks.org/remove-all-the-child-elements-of-a-dom-node-in-javascript/
+    https://flaviocopes.com/how-to-add-event-listener-multiple-elements-javascript/
+    https://stackoverflow.com/questions/11235206/twitter-bootstrap-form-file-element-upload-button
 -->
 

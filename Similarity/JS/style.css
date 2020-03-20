@@ -46,3 +46,15 @@ canvas{
 .hide{
   display:none;
 }
+
+.sImg {
+  cursor: pointer;
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.eImg {
+  cursor: pointer;
+  max-width: 150px;
+  max-height: 150px;
+}
