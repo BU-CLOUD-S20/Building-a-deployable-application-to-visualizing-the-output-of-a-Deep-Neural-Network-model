@@ -37,7 +37,6 @@
       }
 
       function APIValidation() {
-        //option 1:
         var url = document.getElementById("url").value;
         var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
         if (pattern.test(url)) {
@@ -48,8 +47,35 @@
             imgdetection();
           }, 500)
         } else {
-          $("#exampleModalCenter").modal();
+          $('.alert').show();
         }
+      }
+
+      function webcamActivate(){
+        var video = document.querySelector("#videoElement");
+
+        if (navigator.mediaDevices.getUserMedia) {
+          navigator.mediaDevices.getUserMedia({ video: true })
+          .then(function (stream) {
+            video.srcObject = stream;
+          })
+          .catch(function (err0r) {
+            console.log("Something went wrong!");
+          });
+        }
+      }
+
+      function webcamStop(){
+        //doesn't stop webcam even after clicking "close"
+        //webcam left open even after closing out the modal
+        var stream = video.srcObject;
+        var tracks = stream.getTracks();
+        for (var i = 0; i < tracks.length; i++) {
+          var track = tracks[i];
+          track.stop();
+        }
+
+        video.srcObject = null;
       }
 
       function loading() {
@@ -158,8 +184,63 @@
 
                   <div class="col">
                   <div class="input-group-prepend mx-auto">
+                    <!--Webcam Feature-->
+                    <button class="btn btn-secondary shadow rounded" type="button" onclick="webcamActivate()" data-toggle="modal" data-target="#webModal" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px">Webcam</button>
+                    <style>
+                    .modal-dialog {
+                      width: 100% !important;
+                      height: 100% !important;
+                      margin: 0 !important;
+                      padding: 0 !important;
+                      max-width:none !important;
+                    }
+                    .modal-content {
+                      height: auto !important;
+                      min-height: 100% !important;
+                      border-radius: 0 !important;
+                      background-color: #ececec !important
+                    }
+                    </style>
+                    <div class="modal fade right" id="webModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                      <div class="modal-dialog momodel modal-fluid" role="document">
+                        <div class="modal-content ">
+                          <style>
+                          #container {
+	                           margin: 0px auto;
+	                           width: 500px;
+	                           height: 370px;
+	                           border: 10px #333 solid;
+                          }
+                          #videoElement {
+	                           width: 500px;
+	                           height: 375px;
+	                           background-color: #666;
+                          }
+                          </style>
 
-                    <button class="btn btn-secondary shadow rounded" type="button" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px">Webcam</button>
+                          <div class=" modal-header text-center">
+                            <h5 class="modal-title w-100" id="exampleModalPreviewLabel">Webcam</h5>
+                            <button  type="button" class="close " data-dismiss="modal" aria-label="Close">
+                              <span style="font-size: 1.3em;" aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <h1 class="section-heading text-center wow fadeIn my-5 pt-3">Please allow access to your webcam</h1>
+                            <div class="container">
+                              <video autoplay="true" id="videoElement">
+	                            </video>
+                              <div class="text-left">
+                                <button id="captureImage" type="button" class="btn btn-primary">Capture Image</button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary btn-md btn-rounded">Add Images</button>
+                            <button type="button" class="btn btn-danger btn-md btn-rounded" onclick="webcamStop()"data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="col">
@@ -174,29 +255,16 @@
                </div>
 
                 <div class="col">
-                   <div class="input-group-prepend mx-auto">
+                  <div class="input-group-prepend mx-auto">
 
-                     <button class="btn btn-secondary shadow rounded mx-2" type="button" id="uploadbtn" data-target="#exampleModalCenter" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px" onclick="APIValidation()">Upload</button>
-                       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                         <div class="modal-dialog modal-dialog-centered" role="document">
-                           <div class="modal-content">
-                             <div class="modal-header">
-                               <h5 class="modal-title" id="exampleModalLongTitle">Error</h5>
-                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                 <span aria-hidden="true">&times;</span>
-                               </button>
-                             </div>
-                             <div class="modal-body">
-                             Please check API URL.
-                             </div>
-                             <div class="modal-footer">
-                               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                             </div>
-                           </div>
-                         </div>
-                        </div>
-                      </div>
+                  <button class="btn btn-secondary shadow rounded mx-2" type="button" id="uploadbtn" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px" onclick="APIValidation()">Upload</button>
+
+                   <div class="alert alert-danger alert-dismissable" style="display: none">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                       Please check API url.
+                   </div>
                   </div>
+                </div>
                   <div class="col">
                      <div class="input-group-prepend mx-auto">
                        <button class="btn btn-secondary shadow rounded" type="button" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px">Samples</button>
