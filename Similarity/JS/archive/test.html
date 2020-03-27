@@ -1,0 +1,392 @@
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>EC528 Testing Site 2</title>
+
+    <!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<script src="https://kit.fontawesome.com/db3ce764a0.js" crossorigin="anonymous"></script>  <!-- DO NOT use in production -->
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+	<style type="text/css">
+		canvas{
+			width: 100%;
+		}
+		.icon {
+		    display: inline-flex;
+		    align-self: center;
+		}
+
+		.icon svg, .icon img {
+		    height: 1em;
+		    width: 1em;
+		    /*fill: currentColor;*/
+		}
+
+		.icon.baseline svg, .icon img {
+		    top: .125em;
+		    position: relative;
+		}
+
+		.icon.regular svg {
+		    top: 0em;
+		    position: relative;
+		}
+
+		.img-wrap {
+			position: relative;
+			float:left;
+		}
+
+		.img-wrap .clearBtn {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			z-index: 100;
+		}
+
+		.hide{
+			display:none;
+		}
+	</style>
+    
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">Microsoft CVBP</a>
+</nav>
+
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="similarity-tab" data-toggle="tab" href="#similarity" role="tab" aria-controls="similarity" aria-selected="true">Similarity Example</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="webcam-tab" data-toggle="tab" href="#webcam" role="tab" aria-controls="webcam" aria-selected="false">Webcam Example</a>
+          </li>
+        </ul>
+        <div class="tab-content card" style="border-top-left-radius: 0rem !important; border-top-right-radius: .25rem; border-top: 0px !important;" id="myTabContent">
+            <div class="tab-pane fade show active card-body mt-4" id="similarity" role="tabpanel" aria-labelledby="similarity-tab">
+                <p id="queryImg"></p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Image</th>
+                            <th scope="col">File Name</th>
+                            <th scope="col">Distance</th>
+                        </tr>
+                    </thead>
+                <tbody id="distTable"></tbody></table>
+            </div>
+            <div class="tab-pane fade card-body mt-4" id="webcam" role="tabpanel" aria-labelledby="webcam-tab">
+                <p>Use your webcam to take an input picture</p>
+                <div class="row">
+				  <div class="col-sm-6">
+				    <div class="card">
+			    	  <div class="card-header text-muted">
+			    	  	<button id="snap" class="float-right">Snap Photo</button>
+					    <!-- <i class="fas fa-video text-danger"></i> --> <div class="icon baseline"><i data-feather="video" class="text-danger"></i></div> LIVE Webcam
+					  </div>
+				      <div class="card-body">
+				      	<div class="embed-responsive embed-responsive-4by3">
+						  <video id="video" class="embed-responsive-item" autoplay></video>
+						</div>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="col-sm-6">
+				    <div class="card">
+				      <div class="card-header text-muted">
+				      	<button id="useImage" class="float-right">Use Image</button>
+					    <div class="icon baseline"><i data-feather="camera" class="text-black-50"></i></div> Captured Image
+					  </div>
+				      <div class="card-body">
+				        <canvas id="canvas" width="30" height="30"></canvas>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<div>
+					<p class="mt-3 text-muted">Base64 encoded image (in img tag):</p>
+					<div class="img-wrap">
+						<button id="clear-1" type="button" class="clearBtn btn btn-danger btn-sm hide text-white" onclick="removeImg(1)"> <div class="icon regular"><i data-feather="x" class="text-white"></i></div></button>
+						<img id="b64img-1" src="">
+					</div>
+		        	<p style="clear:left;" class="pt-3 text-muted">Base64 encoded image (as text):<br><span id="b64results-1"></span></p>
+		        </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- <div class="container"> -->
+    <!-- Example row of columns -->
+    <!-- <div class="row">
+      <div class="col-md-4">
+        <h2>Heading</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2>Heading</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2>Heading</h2>
+        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+      </div>
+    </div>
+
+    <hr>
+
+  </div> --> <!-- /container -->
+
+</main>
+
+<footer class="container">
+  <p>EC528 Example</p>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<!--
+    Frameworks and examples used to build this: 
+    https://stuk.github.io/jszip/
+    http://stuk.github.io/jszip-utils/
+    https://stackoverflow.com/questions/39254218/js-get-top-5-max-elements-from-array
+    https://arjunphp.com/download-file-node-js-express-js/
+    https://stackoverflow.com/questions/3524827/sort-a-2d-array-by-the-second-value
+    https://supunkavinda.blog/js-euclidean-distance
+    https://stackoverflow.com/questions/15164655/generate-html-table-from-2d-javascript-array
+    https://davidwalsh.name/browser-camera
+    https://kirupa.com/html5/accessing_your_webcam_in_html5.htm
+    https://forum.kirupa.com/t/accessing-your-webcam-in-html5/352092/38?u=kirupa
+    https://stackoverflow.com/questions/4129102/html5-video-dimensions
+    https://blog.prototypr.io/align-svg-icons-to-text-and-say-goodbye-to-font-icons-d44b3d7b26b4
+    https://feathericons.com/
+    https://stackoverflow.com/questions/36828271/how-to-show-delete-button-in-right-corner-of-image
+    https://stackoverflow.com/questions/50623279/js-event-handler-async-function/50623441
+    https://stackoverflow.com/questions/20958078/resize-a-base-64-image-in-javascript-without-using-canvas
+    https://stackoverflow.com/questions/33291436/can-you-resize-or-change-resolution-of-base64-image-through-manipulating-the-bas/33291682
+-->
+<script type="text/javascript" src="dist/jszip.min.js"></script>
+<script type="text/javascript" src="dist/jszip-utils.min.js"></script>
+<!--
+Mandatory in IE 6, 7, 8 and 9.
+-->
+<!--[if IE]>
+<script type="text/javascript" src="dist/jszip-utils-ie.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+	feather.replace()
+    var fn_array;
+    var ref_array;
+    var dist_array = [];
+    var imgList = [1, 0, 1, 1];
+    var b64o0 = "string";
+    var b64o1 = 0;
+    var b64o2 = "string";
+    var b64o3 = "string";
+    // Grab elements, create settings, etc.
+    var video = document.getElementById('video');
+
+    // Elements for taking the snapshot
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+
+    function populateTable(tableData) {
+      tableData.forEach(function(rowData) {
+        var row = document.createElement('tr');
+
+        var cell = document.createElement('td');
+        var img = document.createElement('img');
+        img.src = 'small-150/' + rowData[0];
+        cell.appendChild(img);
+        row.appendChild(cell);
+        rowData.forEach(function(cellData) {
+          cell = document.createElement('td');
+          cell.appendChild(document.createTextNode(cellData));
+          row.appendChild(cell);
+        });
+
+        document.getElementById("distTable").appendChild(row);
+      });
+    }
+
+    function eucDistance(a, b) {
+        return a
+        .map((x, i) => Math.abs( x - b[i] ) ** 2) // square the difference
+        .reduce((sum, now) => sum + now) // sum
+        ** (1/2)
+    }
+
+    function calcSimilar(top) {
+        var rows = ref_array.length;
+        var queryimg = Math.floor(Math.random() * (rows - 0 + 1) + 0);
+        for (i = 0; i < rows; i++) {
+            let euc = eucDistance(ref_array[queryimg], ref_array[i]);
+            var arr = [fn_array[i],euc];
+            dist_array.push(arr); 
+        }
+        // console.log(rows);
+        // console.log(dist_array.length);
+        var topValues = dist_array.sort((a,b) => a[1]-b[1]).slice(0,top);
+        // console.log(topValues);
+        populateTable(topValues);
+        document.getElementById("queryImg").appendChild(document.createTextNode("Query image: " + fn_array[queryimg]));
+    }
+
+    // Download zip file of filenames and parse into array
+    new JSZip.external.Promise(function (resolve, reject) {
+        JSZipUtils.getBinaryContent('data/ref_filenames.zip', function(err, data) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    }).then(function (data) {
+        return JSZip.loadAsync(data);
+    }).then(function (zip) {
+        return zip.file("ref_filenames.txt").async("string");
+    }).then(function (text) {
+        //console.log(text);
+        fn_array = JSON.parse(text);
+        // console.log(fn_array[0]);
+        // console.log(fn_array[1]);
+    });
+
+    // Download zip file of reference image features and parse into array
+    new JSZip.external.Promise(function (resolve, reject) {
+        JSZipUtils.getBinaryContent('data/ref_features.zip', function(err, data) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    }).then(function (data) {
+        return JSZip.loadAsync(data);
+    }).then(function (zip) {
+        return zip.file("ref_features.txt").async("string");
+    }).then(function (text) {
+        //console.log(text);
+        ref_array = JSON.parse(text);
+        // console.log(ref_array[0][0]);
+        // console.log(ref_array[1][1]);
+        //let euc = eucDistance(ref_array[0], ref_array[1]);
+        //console.log(euc);
+        calcSimilar(5)
+        //var topValues = ref_array[0].sort((a,b) => b-a).slice(0,5);
+        //console.log(topValues);
+    });
+
+    
+
+    // Trigger photo take
+    document.getElementById("snap").addEventListener("click", function() {
+    	var width = video.videoWidth;
+    	var height = video.videoHeight;
+        context.canvas.width = width;
+		context.canvas.height = height;
+		context.drawImage(video, 0, 0, width, height);
+    });
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      var tabId = e.target.id;
+      if (tabId == "webcam-tab") {
+        // console.log("on webcam tab now")
+        // Get access to the camera!
+        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            // Not adding `{ audio: true }` since we only want video now
+            navigator.mediaDevices.getUserMedia({ video: {width: 640, height: 480} }).then(function(stream) {
+                //video.src = window.URL.createObjectURL(stream);
+                video.srcObject = stream;
+                video.play();
+            });
+        }
+      } else {
+        var stream = video.srcObject;
+        var tracks = stream.getTracks();
+
+        for (var i = 0; i < tracks.length; i++) {
+            var track = tracks[i];
+            track.stop();
+        }
+
+        video.srcObject = null;
+      }
+    })
+
+    // Trigger photo save - need this unsual syntax to accomodate the async nature of the "photoSave" process
+    document.getElementById("useImage").addEventListener("click", () => photoSave(), false);
+
+    async function photoSave() {
+    	var dataURL = canvas.toDataURL();
+		//console.log(dataURL);
+		var thumbnailURL = await resizeImg(dataURL, 100)
+		//console.log(thumbnailURL);
+		for (i = 0; i < 4; i++) {
+            if (imgList[i] == 0) {
+            	console.log("imgList has empty slot at: " + i); 
+            	document.getElementById("b64results-" + i).innerText = thumbnailURL;
+				document.getElementById("b64img-" + i).src=thumbnailURL;
+				document.getElementById("clear-" + i).classList.remove("hide");
+				imgList[i] = 1;
+            }
+            if (("b64o"+i) == 0) {
+            	console.log("b64 object " + i + "is empty (set to 0)");
+            }
+        }
+    }
+
+    // Delete image from display and img list
+    function removeImg(imgNumber) {
+    	console.log("Remove Image Number: " + imgNumber);
+    	document.getElementById("b64results-" + imgNumber).innerText = "";
+		document.getElementById("b64img-" + imgNumber).src="";
+    	document.getElementById("clear-" + imgNumber).classList.add("hide");
+    	imgList[imgNumber] = 0;
+    }
+
+    function resizeImg(b64Orig, newHeight) {
+    	return new Promise(async function(resolve,reject){
+    		// Create an off-screen canvas
+	   		var rIcanvas = document.createElement('canvas'),
+	        rIctx = rIcanvas.getContext('2d');
+	        // Create an off-screen image element
+	    	var rImage = new Image();
+	    	// WHen the image is loaded, process it
+	    	rImage.onload = function() {
+	    		// Original dimensions of image
+	    		var width = rImage.naturalWidth;
+				var height = rImage.naturalHeight;
+				var ratio = width / height;
+				// Dimensions of resized image (via canvas): rIwidth and newHeight
+				var rIwidth = ratio * newHeight;
+				//console.log("rImg width: " + rIwidth);
+				//console.log("rImg height: " + newHeight);
+				// Set canvas dimensions to resized image dimensions
+				rIcanvas.width = rIwidth;
+				rIcanvas.height = newHeight;
+				// Draw the image on teh canvas at the new size
+	    		rIctx.drawImage(rImage, 0, 0, width, height, 0, 0, rIcanvas.width, rIcanvas.height);
+	    		// Export the new image as Base64 and return to calling function
+	    		var rIdu = rIcanvas.toDataURL();
+	    		resolve(rIdu);
+	    	}
+	    	// Load the image from the original Base64 source (passed into this function)
+	    	rImage.src = b64Orig;
+    	})
+    }
+
+</script>
+</body></html>
