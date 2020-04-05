@@ -63,6 +63,7 @@
             console.log("Something went wrong!");
           });
         }
+
       }
 
       function webcamStop(){
@@ -76,6 +77,13 @@
         }
 
         video.srcObject = null;
+      }
+
+      function captureImage(){
+        width = Photos.width
+        height = Photos.height
+        console.log("capture video");
+        Photos.getContext('2d').drawImage(videoElement,0,0, width, hieght);
       }
 
       function loading() {
@@ -230,7 +238,8 @@
                               <video autoplay="true" id="videoElement">
 	                            </video>
                               <div class="text-left">
-                                <button id="captureImage" type="button" class="btn btn-primary">Capture Image</button>
+                                <button id="captureImage" type="button" class="btn btn-primary" onclick="captureImage()">Capture Image</button>
+                                <canvas id="Photos">
                               </div>
                             </div>
                           </div>
