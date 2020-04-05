@@ -1,197 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Computer Vision</title>
-  <link rel = "icon" href ="logo_small.png"
-        type = "image/x-icon">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="resize.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-
-  <script type="text/javascript" src="script/jquery-1.6.2.min.js"></script>
-		<script type='text/javascript'>
-      const inputElement = document.getElementById("inputGroupFile03");
-      function handleFiles(files) {
-        for (let i = 0; i < files.length; i++) {
-          const file = files[i];
-          if (!file.type.startsWith('image/')){ continue }
-          var preview = document.getElementById("imageresult");
-          var img = document.getElementById("imagenew");
-          img.className = "img-fluid";
-
-          img.classList.add("obj");
-          img.file = file;
-
-          const reader = new FileReader();
-          reader.onload = (function(aImg) {
-            return function(e) { aImg.src = e.target.result; }; })(img);
-          reader.readAsDataURL(file);
-        }
-         console.log(preview)
-      }
-
-      function APIValidation() {
-        var url = document.getElementById("url").value;
-        var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-        if (pattern.test(url)) {
-          console.log("url is valid")
-          document.getElementById("imageresult").hidden = true;
-          loading();
-          setTimeout(function(){
-            imgdetection();
-          }, 500)
-        } else {
-          $('.alert').show();
-        }
-      }
-
-      function webcamActivate(){
-        var video = document.querySelector("#videoElement");
-
-        if (navigator.mediaDevices.getUserMedia) {
-          navigator.mediaDevices.getUserMedia({ video: true })
-          .then(function (stream) {
-            video.srcObject = stream;
-          })
-          .catch(function (err0r) {
-            console.log("Something went wrong!");
-          });
-        }
-
-      }
-
-      function webcamStop(){
-        //doesn't stop webcam even after clicking "close"
-        //webcam left open even after closing out the modal
-        var stream = video.srcObject;
-        var tracks = stream.getTracks();
-        for (var i = 0; i < tracks.length; i++) {
-          var track = tracks[i];
-          track.stop();
-        }
-
-        video.srcObject = null;
-      }
-
-      function captureImage(){
-        width = Photos.width
-        height = Photos.height
-        console.log("capture video");
-        Photos.getContext('2d').drawImage(videoElement,0,0, width, hieght);
-      }
-
-      function loading() {
-          var x = document.getElementById("div2");
-              x.style.display = 'block';
-
-          setTimeout(function(){
-              x.style.display = 'none';
-          }, 500)
-
-      }
-
-      function imgdetection() {
-        var img = document.getElementById("imagenew");
-        var width = img.naturalWidth;
-        var height = img.naturalHeight;
-
-        var c = document.getElementById("canvas");
-
-        var ctx = c.getContext("2d");
-        ctx.canvas.width = width;
-        ctx.canvas.height = height;
-
-        //  get the scale
-        var scale = Math.min(c.width / width, c.height / height);
-        // get the top left position of the image
-        var x = (c.width / 2) - (width / 2) * scale;
-        var y = (c.height / 2) - (height / 2) * scale;
-        ctx.drawImage(img, x, y, width * scale, height * scale);
-        ctx.lineWidth = 5;
-        ctx.strokeStyle = "#FF0000";
-        ctx.fillStyle = "#FF0000";
-        ctx.font = "20px Verdana";
-        ctx.strokeRect(430, 240, 200, 200);
-        ctx.fillText("Big smile!", 440, 270);
-
-    }
-
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-         var tabId = e.target.id;
-    });
-
-	</script>
-
-  <style type="text/css">
-  canvas{
-    background-color: #F2F7F6;
-    width: 100%;
-    height: 100%;
-  }
-  #hidden {
-    display: none;
-  }
-  #div2 {
-    display: none;
-  }
-
-
-</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Microsoft CVBP</title>
+	<link rel = "icon" href ="https://ec528simtest.blob.core.windows.net/ec528simtest/img/logo_small.png" type = "image/x-icon">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	 crossorigin="anonymous">
+	<link href="style.css" rel="stylesheet" type="text/css" />
 
 </head>
-<body>
-  <!-- use grid or flex -->
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #1D7D72">
-    <a class="navbar-brand" href="#" style="style=font-size:20px; color: #FFFFFF">Microsoft CVBP</a>
-    <!-- <ul class="nav navbar-nav navbar-right">
-      <li> -->
-    <div class="navbar-right">
-    <a class="nav-link active" href="https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model" style="color:#FFFFFF" style="font-size:18px">
-       Github Repo <img class="ml-2" src="logo.png" alt="Logo" style="width:25px;">
-     </a>
-   </div>
-   <!-- </li>
-   </ul> -->
 
- </nav>
+<body>
+	<!-- Nav Bar -->
+	<nav class="navbar navbar-toggleable-md navbar-dark fixed-top" style="background-color: #1D7D72">
+		<a class="navbar-brand" href="#">Microsoft CVBP</a>
+		<div class="ml-auto">
+			<a class="nav-link" href="https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model"
+			 style="color:#FFFFFF;">
+				Github Repo <img class="ml-2" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/github_logo.png" alt="Github Logo" style="width:25px;">
+     </a>
+    </div>
+  </nav>
 
 <main role="main">
-
   <div class="jumbotron">
     <div class="container">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="mymodel-tab" data-toggle="tab" href="#mymodel" role="tab" aria-controls="mymodel" aria-selected="true" style="font-size:18px">Use My Model</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="seeexample-tab" data-toggle="tab" href="#seeexample" role="tab" aria-controls="seeexample" aria-selected="false" style="font-size:18px">See Example</a>
-          </li>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="mymodel-tab" data-toggle="tab" href="#mymodel" role="tab" aria-controls="mymodel" aria-selected="true" style="font-size:18px">Use My Model</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="seeexample-tab" data-toggle="tab" href="#seeexample" role="tab" aria-controls="seeexample" aria-selected="false" style="font-size:18px">See Example</a>
+        </li>
+      </ul>
+      <div class="tab-content card" style="border-top-left-radius: 0rem !important; border-top-right-radius: .25rem; border-top: 0px !important;" id="myTabContent">
+        <!-- for usemymodel tab -->
+        <div class="tab-pane fade show active card-body mt-4" id="mymodel" role="tabpanel" aria-labelledby="mymodel-tab" style="padding-left:0px !important; padding-right:0px !important;">
+          <!-- Image upload and thumbnail container -->
+          <div class="container mx-auto">
+            <form onsubmit="return false">
+              <div class="form-group mx-md-5 mt-4 px-5">
+                <input type="text" class="form-control form-control-lg" placeholder="Enter API url here" id="url" style="color:#a9a9a9; font-size:20px;" name="text2" required>
+              </div>
+            </form>
 
-        </ul>
-        <div class="tab-content card" style="border-top-left-radius: 0rem !important; border-top-right-radius: .25rem; border-top: 0px !important;" id="myTabContent">
-            <div class="tab-pane fade show active card-body mt-4" id="mymodel" role="tabpanel" aria-labelledby="mymodel-tab">
-              <!-- for usemymodel tab -->
-                <div class="container">
-                <form action="/action_page.php">
-                  <div class="form-group mx-md-5 mt-5 px-5">
-                    <input type="text" class="form-control form-control-lg" placeholder="Enter API url here" id="url" style="color:#a9a9a9; font-size:20px;" name="text2" required>
-                  </div>
-                </form>
-                </div>
-
-              <div class="container">
-                <div class="row">
-                  <p class="text-center mt-5 mx-auto font-weight-bold" style="font-size:20px; color: #1D7D72">Upload upto 4 image files from local machine, webcam, or use sample images </p>
-                <div class="input-group mx-auto mt-3 justify-content-md-center" style="width:950px">
-
-                  <div class="col">
-                  <div class="input-group-prepend mx-auto">
+            <div class="row">
+              <p class="text-center mt-5 mx-auto font-weight-bold" style="font-size:20px; color: #1D7D72">Upload upto 4 image files from local machine, webcam, or use sample images </p>
+              <div class="input-group mt-3 mb-2 justify-content-md-center">
+                <div class="col">
+                  <div class="input-group-prepend justify-content-sm-center ml-3">
                     <!--Webcam Feature-->
                     <button class="btn btn-secondary shadow rounded" type="button" onclick="webcamActivate()" data-toggle="modal" data-target="#webModal" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px">Webcam</button>
                     <style>
@@ -238,305 +97,308 @@
                               <video autoplay="true" id="videoElement">
 	                            </video>
                               <div class="text-left">
-                                <button id="captureImage" type="button" class="btn btn-primary" onclick="captureImage()">Capture Image</button>
-                                <canvas id="Photos">
+                                <button id="snap" type="button" class="btn btn-primary">Capture Image</button>
+                              </div>
+                              <div class="hide">
+                                <canvas id="webCamCanvas" width="30" height="30"></canvas>
                               </div>
                             </div>
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-primary btn-md btn-rounded">Add Images</button>
+                            <button type="button" id="useImage" class="btn btn-primary btn-md btn-rounded">Add Images</button>
                             <button type="button" class="btn btn-danger btn-md btn-rounded" onclick="webcamStop()"data-dismiss="modal">Close</button>
                           </div>
-                        </div>
-                      </div>
-                    </div>
+                        </div>  <!-- END Modal-Content -->
+                      </div>  <!-- END Modal-Dialog -->
+                    </div>  <!-- END Modal -->
                   </div>
-                </div>
+                 </div>
+
+                <div class="col">
+                  <div class="input-group-prepend justify-content-sm-center mx-1">
+                    <button class="btn btn-secondary shadow rounded" type="button" data-toggle="modal" data-target="#sampleModal" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px">Samples</button>
+                    <style>
+                    .modal-dialog2 {
+                      width: 100% !important;
+                      height: 100% !important;
+                      margin: 0 !important;
+                      padding: 0 !important;
+                      max-width:none !important;
+                    }
+                    </style>
+                    <div class="modal right" id="sampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                      <div class="modal-dialog2 momodel modal-fluid" role="document">
+                        <div class="modal-content">
+
+                          <div class=" modal-header text-center">
+                            <h5 class="modal-title w-100" id="exampleModalPreviewLabel">Samples Images</h5>
+                              <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                                <span style="font-size: 1.3em;" aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                            <h1 class="section-heading text-center wow fadeIn my-5 pt-3">Please select sample images to test your model</h1>
+                            <div class="container mx-auto">
+                              <div class="row">
+                                <div class="col-sm-2">
+                                  <img id="sample1" data-eid="1" class="rounded mr-2 mb-2 sImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/can_1.jpg">
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample2" data-eid="2" class="rounded mr-2 mb-2 sImg"  src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/can_15.jpg">
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample3" data-eid="3" class="rounded mr-2 mb-2 sImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/can_28.jpg">
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample4" data-eid="4" class="rounded mr-2 mb-2 sImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/carton_33.jpg">
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample5" data-eid="5" class="rounded mr-2 mb-2 sImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/carton_40.jpg">
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample6" data-eid="6" class="rounded mr-2 mb-2 sImg"  src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/carton_50.jpg">
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample7" data-eid="7" class="rounded mr-2 mb-2 sImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/milk_bottle_66.jpg">
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample8" data-eid="8" class="rounded mr-2 mb-2 sImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/milk_bottle_77.jpg">
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample9" data-eid="9" class="rounded mr-2 mb-2 sImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/water_bottle_111.jpg">
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample10" data-eid="10" class="rounded mr-2 mb-2 sImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/water_bottle_115.jpg">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger btn-md btn-rounded" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>  <!-- END Modal-Content -->
+                      </div>  <!-- END Modal-Dialog -->
+                    </div>  <!-- END Modal -->
+                  </div>
+                 </div>
+
                 <div class="col">
                   <div class="custom-file" style="width:500px">
-                    <div class="input-group-prepend mx-auto">
-                    <input type="file" class="custom-file-input"  accept="image/*" id="inputGroupFile03" onchange="handleFiles(this.files)">
+                    <div class="input-group-prepend">
+                      <input type="file" multiple class="custom-file-input"  accept="image/*" id="inputGroupFile03" onchange="handleFiles(this.files)">
+                      <label class="custom-file-label" for="inputGroupFile03" style="color: #1D7D72;  font-size:18px">Choose file</label>
 
-                 <label class="custom-file-label" for="inputGroupFile03" style="color: #1D7D72;  font-size:18px">Choose file</label>
-
-                 </div>
-               </div>
-               </div>
-
+                    </div>
+                   </div>
+                </div>
                 <div class="col">
                   <div class="input-group-prepend mx-auto">
-
-                  <button class="btn btn-secondary shadow rounded mx-2" type="button" id="uploadbtn" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px" onclick="APIValidation()">Upload</button>
-
-                   <div class="alert alert-danger alert-dismissable" style="display: none">
-                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                       Please check API url.
-                   </div>
-                  </div>
-                </div>
-                  <div class="col">
-                     <div class="input-group-prepend mx-auto">
-                       <button class="btn btn-secondary shadow rounded" type="button" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px">Samples</button>
-                     </div>
-                   </div>
-
-
-
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="container-fluid mt-5 mx-auto" style="position: static; max-width: 950px; background-color: #FFFFFF">
-                 <div class="row mt-5" style="position: static">
-                  <div class="col-sm mt-1 mx-auto">
-                    <div style="position: relative">
-                      <div class="container-fluid rounded" id="img1" style="width: 150px; height: 150px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
-                      <button class="btn btn-primary btn-sm rounded" id="close1" type="button" style="position: absolute; top: 0px; right: 150px; background-color: #FF0000; border-color: #FF0000">X</button>
-                  </div>
-                  </div>
-
-                  <div class="col-sm mt-1 mx-auto" style="position: static">
-                    <div style="position: relative">
-                      <div class="container-fluid rounded" id="img2" style="width: 150px; height: 150px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
-                      <button class="btn btn-primary btn-sm rounded" id="close2" type="button" style="position: absolute; top: 0px; right: 150px; background-color: #FF0000; border-color: #FF0000">X</button>
-                    </div>
-                  </div>
-
-                  <div class="col-sm mt-1 mx-auto" style="position: static">
-                    <div style="position: relative">
-                      <div class="container-fluid rounded" id="img3" style="width: 150px; height: 150px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
-                      <button class="btn btn-primary btn-sm rounded" id="close3" type="button" style="position: absolute; top: 0px; right: 150px;  background-color: #FF0000; border-color: #FF0000">X</button>
-                    </div>
-                  </div>
-
-                  <div class="col-sm mt-1 mx-auto" style="position: static">
-                    <div style="position: relative">
-                      <div class="container-fluid rounded" id="img4" style="width: 150px; height: 150px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
-                      <button class="btn btn-primary btn-sm rounded" id="close4" type="button" style="position: absolute; top: 0px; right: 150px; background-color: #FF0000; border-color: #FF0000">X</button>
+                    <button class="btn btn-secondary shadow rounded mx-2" type="button" id="uploadbtn" data-target="#exampleModalCenter" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px" onclick="APIRequest()"> Upload</button>
+                    <div class="alert alert-danger alert-dismissable" style="display:none;">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      Please check API url.
                     </div>
                   </div>
                 </div>
-             </div>
 
+              </div>  <!-- END Input Group -->
 
-        <div class="container mt-5 mx-auto rounded" style="background-color: #F2F7F6; max-width: 950px;">
-            <div class="row justify-content-md-center">
-               <p class="text-center font-weight-bold pt-5 rounded mx-auto" style="color:#165A67; font-size:24px;">RESULTS</p>
-               <!-- no need for this for onw -->
-                  <!-- <div id="imageresult" class="mt-5"><img src="" id="imagenew"></div> -->
-                      <!-- <div class="mt-5 d-flex justify-content-center">
-                          <div id="div2" class="spinner-border" role="status">
-                            <span class="sr-only">Loading...</span>
-                          </div>
-                      </div> -->
-                        <!-- <canvas id="canvas" width="300" height="300"></canvas> -->
-              <!-- until here -->
+              <!-- Thumbnails -->
+              <div id="thumbnails" class="col">
+                <div class="img-wrap img-wrap-ph mr-4 mt-4 rounded" id="b64imgwrap-0">
+                  <button id="clear-0" type="button" class="clearBtn btn btn-danger btn-sm hide text-white" onclick="removeImg(0)"> <div class="icon regular">X</div></button>
+                  <img id="b64img-0" class="rounded" src="">
+                </div>
+                <div class="img-wrap img-wrap-ph mr-4 mt-4 rounded" id="b64imgwrap-1">
+                  <button id="clear-1" type="button" class="clearBtn btn btn-danger btn-sm hide text-white" onclick="removeImg(1)"> <div class="icon regular">X</div></button>
+                  <img id="b64img-1" class="rounded" src="">
+                </div>
+                <div class="img-wrap img-wrap-ph mr-4 mt-4 rounded" id="b64imgwrap-2">
+                  <button id="clear-2" type="button" class="clearBtn btn btn-danger btn-sm hide text-white" onclick="removeImg(2)"> <div class="icon regular">X</div></button>
+                  <img id="b64img-2" class="rounded" src="">
+                </div>
+                <div class="img-wrap img-wrap-ph mr-4 mt-4 rounded" id="b64imgwrap-3">
+                  <button id="clear-3" type="button" class="clearBtn btn btn-danger btn-sm hide text-white" onclick="removeImg(3)"> <div class="icon regular">X</div></button>
+                  <img id="b64img-3" class="rounded" src="">
+                </div>
+              </div>  <!-- END Thumbnails -->
+            </div>  <!-- END Row -->
+          </div>  <!-- END Image upload and thumbnail container -->
+
+          <!-- <div class="container mx-auto mt-3" style="max-width: 70%">
+
+						<div class="progress">
+						<div class="progress-bar progress-bar-striped bg-info progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+					</div>
+
+				</div> -->
+        <style>
+        #progressBar {
+          position: center;
+          max-width: 70%;
+          margin-top: 5px !important;
+          background-color:#EFEEEC;
+          margin-left: 180px;
+          margin-right: 180px;
+        }
+
+        #myBar {
+          width: 10%;
+          height: 20px;
+          background-color: #b8dbd7 ;
+          /* #C6DEFF */
+           /* #1589FF */
+          text-align: center;
+          line-height: 20px;
+          color: white;
+        }
+        </style>
+
+        <!-- progress bar -->
+          <div id="progressBar">
+            <div id="myBar">0%</div>
           </div>
 
-          <div class="container mx-auto py-4">
-<!--displays result images-->
-            <div class="row">
-              <div class="col-md-5 mx-auto">
+          <!-- Results Container -->
+          <div class="container mt-4 mx-auto" style="clear: both; background-color: #F2F7F6;">
+            <p class="text-center font-weight-bold pt-4" style="color:#165A67; font-size:24px;">RESULTS</p>
+            <!--displays result images-->
+            <div class="row mt-4">
+              <div class="col-md-6 mx-auto" id="resultsDiv0">
                 <div class="card mb-4 shadow-sm">
-                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div id="resultsDiv0-content" style="overflow:hidden;" class="card-img-top" >
+                    <canvas id="resultsCanvas0" width="30" height="30"></canvas>
+                    <img id="resultsImg0">
+                  </div>
                   <div class="card-body">
                     <p class="card-text">Object Detection</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      </div>
-                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-5 mx-auto">
+              </div>  <!-- END Col -->
+              <div class="col-md-6 mx-auto" id="resultsDiv1">
                 <div class="card mb-4 shadow-sm">
-                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div id="resultsDiv1-content" style="overflow:hidden;" class="card-img-top" >
+                    <canvas id="resultsCanvas1" width="30" height="30"></canvas>
+                    <img id="resultsImg1">
+                  </div>
                   <div class="card-body">
                     <p class="card-text">Object Detection</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      </div>
-
-                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-5 mx-auto">
+              </div>  <!-- END Col -->
+              <div class="col-md-6 mx-auto" id="resultsDiv2">
                 <div class="card mb-4 shadow-sm">
-                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div id="resultsDiv2-content" style="overflow:hidden;" class="card-img-top" >
+                    <canvas id="resultsCanvas2" width="30" height="30"></canvas>
+                    <img id="resultsImg2">
+                  </div>
                   <div class="card-body">
                     <p class="card-text">Object Detection</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      </div>
-                    </div>
                   </div>
                 </div>
-              </div>
-
-              <div class="col-md-5 mx-auto">
+              </div>  <!-- END Col -->
+              <div class="col-md-6 mx-auto" id="resultsDiv3">
                 <div class="card mb-4 shadow-sm">
-                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div id="resultsDiv3-content" style="overflow:hidden;" class="card-img-top" >
+                    <canvas id="resultsCanvas3" width="30" height="30"></canvas>
+                    <img id="resultsImg3">
+                  </div>
                   <div class="card-body">
                     <p class="card-text">Object Detection</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      </div>
-
-                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+              </div>  <!-- END Col -->
 
-        </div>
+            </div>  <!-- END Row -->
 
-    </div>
+          </div>  <!-- END Results Container -->
 
-      <div class="tab-pane fade card-body mt-4" id="seeexample" role="tabpanel" aria-labelledby="seeexample-tab">
+        </div>  <!-- END Tab-Pane Use My Model -->
+
         <!-- for see example tab  -->
-        <div class="container mt-5 mx-auto" style="background-color: #FFFFFF">
+        <div class="tab-pane fade card-body mt-3" id="seeexample" role="tabpanel" aria-labelledby="seeexample-tab" style="padding-left:0px !important; padding-right:0px !important;">
+          <div id="exampleImages" class="container mx-auto" style="background-color: #FFFFFF">
+            <img id="example0" data-eid="0" class="rounded mr-2 mb-2 eImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/can_8.jpg">
+            <img id="example1" data-eid="1" class="rounded mr-2 mb-2 eImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/can_31.jpg">
+            <img id="example2" data-eid="2" class="rounded mr-2 mb-2 eImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/carton_47.jpg">
+            <img id="example3" data-eid="3" class="rounded mr-2 mb-2 eImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/carton_59.jpg">
+            <img id="example4" data-eid="4" class="rounded mr-2 mb-2 eImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/milk_bottle_76.jpg">
+            <img id="example5" data-eid="5" class="rounded mr-2 mb-2 eImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/milk_bottle_97.jpg">
+            <img id="example6" data-eid="6" class="rounded mr-2 mb-2 eImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/water_bottle_105.jpg">
+            <img id="example7" data-eid="7" class="rounded mr-2 mb-2 eImg" src="https://ec528simtest.blob.core.windows.net/ec528simtest/img/water_bottle_123.jpg">
+
+            <div class="mt-3 text-center">
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" id="odCheck" onclick='exampleModels()' checked>Object Detection
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" id="icCheck" onclick='exampleModels()' checked>Image Classification
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" id="isCheck" onclick='exampleModels()' checked>Image Similarity
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="container mt-5 mx-auto" style="background-color: #F2F7F6;">
+            <p class="text-center font-weight-bold pt-1" style="color:#165A67; font-size:24px;">RESULTS</p>
             <div class="row">
-              <div class="col-sm mt-3 ">
-                <div style="position: relative">
-                  <div class="container-fluid rounded" id="ex1" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
-                  <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px; background-color: #FF0000; border-color: #FF0000">X</button> -->
+              <div class="col-md-4 mt-4 mx-auto" id="resultsDiv8">
+                <div class="card mb-4 shadow-sm">
+                  <div id="resultsDiv8-content" style="overflow:hidden;" class="card-img-top" >
+                    <canvas id="resultsCanvas8" width="30" height="30"></canvas>
+                    <img id="resultsImg8">
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">Object Detection</p>
+                  </div>
                 </div>
               </div>
-
-              <div class="col-sm mt-3 " style="position: static">
-                <div style="position: relative">
-                  <div class="container-fluid rounded" id="ex2" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
-                  <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px; background-color: #FF0000; border-color: #FF0000">X</button> -->
+              <div class="col-md-4 mt-4 mx-auto" id="resultsDiv7">
+                <div class="card mb-4 shadow-sm">
+                  <div id="resultsDiv7-content" style="overflow:hidden;" class="card-img-top" >
+                    <canvas id="resultsCanvas7" width="30" height="30"></canvas>
+                    <img id="resultsImg7">
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">Image Classification</p>
+                  </div>
                 </div>
               </div>
-
-              <div class="col-sm mt-3 " style="position: static">
-                <div style="position: relative">
-                  <div class="container-fluid rounded" id="ex3" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
-                  <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px;  background-color: #FF0000; border-color: #FF0000">X</button> -->
-                </div>
-              </div>
-
-            <div class="col-sm mt-3 " style="position: static">
-              <div style="position: relative">
-                <div class="container-fluid rounded" id="ex4" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
-                <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px;  background-color: #FF0000; border-color: #FF0000">X</button> -->
-              </div>
-            </div>
-
-            <div class="col-sm mt-3 " style="position: static">
-              <div style="position: relative">
-                <div class="container-fluid rounded" id="ex5" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
-                <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px;  background-color: #FF0000; border-color: #FF0000">X</button> -->
-              </div>
-            </div>
-
-            <div class="col-sm mt-3 " style="position: static">
-              <div style="position: relative">
-                <div class="container-fluid rounded" id="ex6" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
-                <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px;  background-color: #FF0000; border-color: #FF0000">X</button> -->
-              </div>
-            </div>
-
-            <div class="col-sm mt-3 " style="position: static">
-              <div style="position: relative">
-                <div class="container-fluid rounded" id="ex7" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
-                <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px;  background-color: #FF0000; border-color: #FF0000">X</button> -->
-              </div>
-            </div>
-
-            <div class="col-sm mt-3 " style="position: static">
-              <div style="position: relative">
-                <div class="container-fluid rounded" id="ex8" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
-                <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px;  background-color: #FF0000; border-color: #FF0000">X</button> -->
-              </div>
-            </div>
-
-            <div class="col-sm mt-4 text-center">
-              <div class="form-check-inline">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" value="" id="ObjectDetection">Object Detection
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" value="" id="ImageClassification">Image Classification
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" value="" id="ImageSimilarity">Image Similarity
-                </label>
-              </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container mt-5 mx-auto rounded" style="background-color: #F2F7F6; max-width: 950px;">
-        <div class="row justify-content-md-center">
-           <p class="text-center font-weight-bold pt-5 rounded mx-auto" style="color:#165A67; font-size:24px;">RESULTS</p>
-         </div>
-
-      <div class="container mx-auto">
-<!--"see example" image results-->
-        <div class="row">
-          <div class="col-md-5 mt-4 mx-auto">
-            <div class="card mb-4 shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-              <div class="card-body">
-                <p class="card-text">Object Detection</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+              <div class="col-md-4 mt-4 mx-auto" id="resultsDiv9">
+                <div class="card mb-4 shadow-sm">
+                  <div id="resultsDiv9-content" style="overflow:hidden;" class="card-img-top" >
+                    <canvas id="resultsCanvas9" width="30" height="30"></canvas>
+                    <img id="resultsImg9">
+                  </div>
+                  <div class="card-body imSim text-center">
+                    <p class="card-text">Image Similarity</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-5 mt-4 mx-auto">
-            <div class="card mb-4 shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-              <div class="card-body">
-                <p class="card-text">Image Classification</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-5 mt-4 mx-auto">
-            <div class="card mb-4 shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-              <div class="card-body">
-                <p class="card-text">Image Similarity</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-
-  </div>
-  </div>
-  </div>
-  </div>
-
+        </div>  <!-- END Tab-Pane See Example -->
+      </div>  <!-- END Tab-Content -->
+    </div>  <!-- END Jumbotron Container -->
+  </div>  <!-- END Jumbotron -->
 
 </main>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.3.0/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip-utils/0.1.0/jszip-utils.min.js"></script>
+<script src="script.js"></script>
+<script src="example_imgs.js"></script>
+
 </body>
 </html>
