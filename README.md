@@ -23,6 +23,8 @@ Mentors: Patrick Buehler, JS Tan
 2. [Sprint 2](https://docs.google.com/presentation/d/1hkqTPE9fNCRs7QkaELIBK1OSxYvn8TqOkDwcS2QG1_o/edit?usp=sharing)
 3. [Sprint 3](https://docs.google.com/presentation/d/e/2PACX-1vQK62-UelDsav2z0NQxnhVZvvVc4rSX7UKYpC7E7_pOrJso_WwE5MalFHqyyqyUJK_AVrTSesXwhf02/pub?start=false&loop=false&delayms=10000)
 
+[EbbRT Paper Presentation](https://docs.google.com/presentation/d/e/2PACX-1vS__BZnB0DOHts27Xy7mbrzuihj3NCLJqTEy0SGE59aD2FTb8tLfRyOVHXdg--Fl12IZK5yiBSiU9S_/pub?start=false&loop=false&delayms=3000)
+
 <a name="vision-goals"/>
 
 ## 1. Vision and Goals Of The Project
