@@ -5,7 +5,6 @@ Mentors: Patrick Buehler, Young Park, JS Tan
 
 *Updated: May 2, 2020*
 
-
 #### Contents
 
 0. [Sprint Presentations](#sprint-presentations)
