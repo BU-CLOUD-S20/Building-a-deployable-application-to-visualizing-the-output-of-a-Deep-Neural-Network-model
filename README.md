@@ -2,6 +2,7 @@
 
 Team: Matthew Boyd, Charles Henneberger, Xushan "Mulla" Hu, SeungYeun "Kelly" Lee, Nuwapa "Prim" Promchotichai  
 Mentors: Patrick Buehler, Young Park, JS Tan
+
 *Updated: May 2, 2020*
 
 [Pull Request link](https://github.com/mcboyd-bu/computervision-recipes/tree/contrib_html_demo/contrib/html_demo)
