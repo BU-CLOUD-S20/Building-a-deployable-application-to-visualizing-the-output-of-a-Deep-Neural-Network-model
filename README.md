@@ -1,7 +1,7 @@
 ## Building a Deployable Application to Visualize the Output of a Deep Neural Network (DNN) Model
 
 Team: Matthew Boyd, Charles Henneberger, Xushan "Mulla" Hu, SeungYeun "Kelly" Lee, Nuwapa "Prim" Promchotichai  
-Mentors: Patrick Buehler, JS Tan, Young Park
+Mentors: Patrick Buehler, Young Park, JS Tan
 
 *Updated: May 2, 2020*
 
