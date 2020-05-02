@@ -20,8 +20,8 @@ Mentors: Patrick Buehler, Young Park, JS Tan
 ## Course Contents
 
 #### For demo:
-[Pull Request link](https://github.com/mcboyd-bu/computervision-recipes/tree/contrib_html_demo/contrib/html_demo)
-[Front-End UI](https://javascript-work-1.matthewboyd1.repl.co/index_new.html)
+* [Pull Request link](https://github.com/mcboyd-bu/computervision-recipes/tree/contrib_html_demo/contrib/html_demo)
+* [Deployed UI](https://ec528simtest.blob.core.windows.net/ec528simtest/index.html)
 
 #### Paper Presentation
 [EbbRT Paper Presentation](https://docs.google.com/presentation/d/e/2PACX-1vS__BZnB0DOHts27Xy7mbrzuihj3NCLJqTEy0SGE59aD2FTb8tLfRyOVHXdg--Fl12IZK5yiBSiU9S_/pub?start=false&loop=false&delayms=3000)
