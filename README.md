@@ -195,6 +195,7 @@ Evangelism:
 
 ## 7. How to install and run the project - HTML Demo
 
+
 ### Project Description
 
 This project provides an HTML web page that allows users to visualize the output of a deployed computer vision DNN model. Users can improve on and gain insights from their deployed model by uploading query/test images and examining the model's results for correctness through the user interface. The web page includes some sample query/test images from the Microsoft image set, as well as example output for 3 types of models: Image Classification, Object Detection, and Image Similarity.
