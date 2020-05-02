@@ -151,23 +151,24 @@ UI:
 	* Create two tabs on UI; first tab allows users to test and visualize their own DNN models, second tab allows users to select from example set of images and visualize the output of DNN model from Microsoft on the example set of images.
 	* Website display the visualization of DNN model output from deployed API on 4 images.
 
-API:
-* Expand from taking single image input to do batch scoring with multiple images as input
-* Deploy API to the cloud
-
 Image Similarity:
 * Test Image Similarity Jupyter notebook, verify that there are no errors.
 * Implement simple HTML interface for testing published “similarity” DNN models via local web server
 	* Site returns list of similar images to be displayed based on features
 * Run website from local PC
+
+API:
+* Expand from taking single image input to do batch scoring with multiple images as input
+* Deploy API to the cloud
+
  
 ### Release #4 (due by Week 11 - Sprint 4):
 
-Connect front-end and back-end to create a functional UI.
+* Connect front-end and back-end to create a functional UI.
 
-Minimum viable product (MVP) is completed.
+* Minimum viable product (MVP) is completed.
 
-Document and upload work to Microsoft CVBP github repository via code review
+* Document and upload work to Microsoft CVBP github repository via code review
 
 UI:
 * Addition/Modification of UI elements:
@@ -179,7 +180,7 @@ UI:
 
 ### Release #5 (due by Week 13 - Sprint 5):
 
-#### Wrap up the project.
+* Wrap up the project.
 
 * Document and upload work to CVBP via code review.
 
