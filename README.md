@@ -3,11 +3,14 @@
 Team: Matthew Boyd, Charles Henneberger, Xushan "Mulla" Hu, SeungYeun "Kelly" Lee, Nuwapa "Prim" Promchotichai  
 Mentors: Patrick Buehler, Young Park, JS Tan
 
+* [Pull Request link](https://github.com/mcboyd-bu/computervision-recipes/tree/contrib_html_demo/contrib/html_demo)
+* [Front-End UI](https://javascript-work-1.matthewboyd1.repl.co/index_new.html)
+
 *Updated: May 2, 2020*
 
 #### Contents
 
-0. [Sprint Presentations](#sprint-presentations)
+0. [Sprint Presentations and Paper Presentation](#sprint-presentations)
 1. [Vision and Goals Of The Project](#vision-goals)
 2. [Users/Personas Of The Project](#users-personas)
 3. [Scope and Features of the Project](#scope-features)
@@ -24,8 +27,7 @@ Mentors: Patrick Buehler, Young Park, JS Tan
 3. [Sprint 3](https://docs.google.com/presentation/d/e/2PACX-1vQK62-UelDsav2z0NQxnhVZvvVc4rSX7UKYpC7E7_pOrJso_WwE5MalFHqyyqyUJK_AVrTSesXwhf02/pub?start=false&loop=false&delayms=10000)
 4. [Sprint 4](https://docs.google.com/presentation/d/e/2PACX-1vRIiyPYAzG6Amfh6nCoxzAFCrNwjDsKj0FHbRbf2pdrmHBDS4wSKhoE6sC6WU5Xfa5EOSA3Eei0STx1/pub?start=false&loop=false&delayms=3000
 )
-* [Pull Request link](https://github.com/mcboyd-bu/computervision-recipes/tree/contrib_html_demo/contrib/html_demo)
-* [Front-End UI](https://javascript-work-1.matthewboyd1.repl.co/index_new.html)
+
 5. [Sprint 5](https://docs.google.com/presentation/d/1mIWCY0Zoe-XiN_F12nO8Dr-s3WKh5lZNGZBeu_A_PJA/edit?usp=sharing)
 
 #### Paper Presentation
