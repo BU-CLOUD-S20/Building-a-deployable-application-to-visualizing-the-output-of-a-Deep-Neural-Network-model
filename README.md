@@ -22,11 +22,12 @@ Mentors: Patrick Buehler, Young Park, JS Tan
 * [Pull Request link](https://github.com/mcboyd-bu/computervision-recipes/tree/contrib_html_demo/contrib/html_demo)
 * [Deployed UI](https://ec528simtest.blob.core.windows.net/ec528simtest/index.html)
 
+#### Final Presentation & Video Recording
+* [Final Presentation](https://docs.google.com/presentation/d/1p4YKnUZrRpQU7KijOA1PT55oeCP8YcHYFsjS2q-X7e8/edit?usp=sharing)
+
 #### Paper Presentation
 [EbbRT Paper Presentation](https://docs.google.com/presentation/d/e/2PACX-1vS__BZnB0DOHts27Xy7mbrzuihj3NCLJqTEy0SGE59aD2FTb8tLfRyOVHXdg--Fl12IZK5yiBSiU9S_/pub?start=false&loop=false&delayms=3000)
 
-#### Final Presentation & Video Recording
-* [Final Presentation](https://docs.google.com/presentation/d/1p4YKnUZrRpQU7KijOA1PT55oeCP8YcHYFsjS2q-X7e8/edit?usp=sharing)
 
 <a name="sprint-presentations"/>
 
