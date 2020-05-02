@@ -46,6 +46,50 @@
           reader.readAsDataURL(file);
         }
         }
+<<<<<<< Updated upstream
+=======
+      }
+
+      function loading() {
+          var x = document.getElementById("div2");
+              x.style.display = 'block';
+
+          setTimeout(function(){
+              x.style.display = 'none';
+          }, 500)
+      }
+      function imgdetection() {
+        var img = document.getElementById("imagenew");
+        var width = img.naturalWidth;
+        var height = img.naturalHeight;
+
+        var c = document.getElementById("canvas");
+
+        var ctx = c.getContext("2d");
+        ctx.canvas.width = width;
+        ctx.canvas.height = height;
+
+        //  get the scale
+        var scale = Math.min(c.width / width, c.height / height);
+        // get the top left position of the image
+        var x = (c.width / 2) - (width / 2) * scale;
+        var y = (c.height / 2) - (height / 2) * scale;
+        ctx.drawImage(img, x, y, width * scale, height * scale);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "#FF0000";
+        ctx.fillStyle = "#FF0000";
+        ctx.font = "20px Verdana";
+        ctx.strokeRect(430, 240, 200, 200);
+        ctx.fillText("Big smile!", 440, 270);
+
+    }
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+         var tabId = e.target.id;
+    });
+    //
+    // $('#sampleModal').modal('toggle');
+>>>>>>> Stashed changes
 
 		function APIValidation() {
 			var url = document.getElementById("url").value;
@@ -169,6 +213,7 @@
 </head>
 
 <body>
+<<<<<<< Updated upstream
 <!-- use grid or flex -->
 
 
@@ -249,6 +294,494 @@ max-width: 950px;">
  		</div>
 </div>
 
+=======
+  <!-- use grid or flex -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #1D7D72">
+    <a class="navbar-brand" href="#" style="style=font-size:20px; color: #FFFFFF">Microsoft CVBP</a>
+    <!-- <ul class="nav navbar-nav navbar-right">
+      <li> -->
+    <div class="navbar-right">
+    <a class="nav-link active" href="https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model" style="color:#FFFFFF" style="font-size:18px">
+       Github Repo <img class="ml-2" src="logo.png" alt="Logo" style="width:25px;">
+     </a>
+   </div>
+   <!-- </li>
+   </ul> -->
+
+ </nav>
+
+<main role="main">
+
+  <div class="jumbotron">
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="mymodel-tab" data-toggle="tab" href="#mymodel" role="tab" aria-controls="mymodel" aria-selected="true" style="font-size:18px">Use My Model</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="seeexample-tab" data-toggle="tab" href="#seeexample" role="tab" aria-controls="seeexample" aria-selected="false" style="font-size:18px">See Example</a>
+          </li>
+
+        </ul>
+        <div class="tab-content card" style="border-top-left-radius: 0rem !important; border-top-right-radius: .25rem; border-top: 0px !important;" id="myTabContent">
+            <div class="tab-pane fade show active card-body mt-4" id="mymodel" role="tabpanel" aria-labelledby="mymodel-tab">
+              <!-- for usemymodel tab -->
+                <div class="container">
+                <form action="/action_page.php">
+                  <div class="form-group mx-md-5 mt-5 px-5">
+                    <input type="text" class="form-control form-control-lg" placeholder="Enter API url here" id="url" style="color:#a9a9a9; font-size:20px;" name="text2" required>
+                  </div>
+                </form>
+                </div>
+
+              <div class="container">
+                <div class="row">
+                  <p class="text-center mt-5 mx-auto font-weight-bold" style="font-size:20px; color: #1D7D72">Upload upto 4 image files from local machine, webcam, or use sample images </p>
+                <div class="input-group mx-auto mt-3 justify-content-md-center" style="width:950px">
+
+                  <!-- <div class="col">
+                  <div class="input-group-prepend mx-auto">
+
+                    <button class="btn btn-secondary shadow rounded" type="button" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px">Webcam</button>
+                  </div>
+                </div> -->
+
+                <div class="col mx-auto">
+                    <div class="input-group-prepend mx-auto">
+                      <!-- <button class="btn btn-secondary shadow rounded" type="button" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px">Webcam</button> -->
+                      <!--Webcam Feature-->
+                      <button class="btn btn-secondary shadow rounded" type="button" onclick="webcamActivate()" data-toggle="modal" data-target="#webModal" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px">Webcam</button>
+                      <style>
+                      .modal-dialog {
+                        width: 100% !important;
+                        height: 100% !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        max-width:none !important;
+                      }
+                      .modal-content {
+                        height: auto !important;
+                        min-height: 100% !important;
+                        border-radius: 0 !important;
+                        background-color: #ececec !important
+                      }
+                      </style>
+                      <div class="modal fade right" id="webModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                        <div class="modal-dialog momodel modal-fluid" role="document">
+                          <div class="modal-content ">
+                            <style>
+                            #container {
+  	                           margin: 0px auto;
+  	                           width: 500px;
+  	                           height: 370px;
+  	                           border: 10px #333 solid;
+                            }
+                            #videoElement {
+  	                           width: 500px;
+  	                           height: 375px;
+  	                           background-color: #666;
+                            }
+                            </style>
+
+                            <div class=" modal-header text-center">
+                              <h5 class="modal-title w-100" id="exampleModalPreviewLabel">Webcam</h5>
+                              <button  type="button" class="close " data-dismiss="modal" aria-label="Close">
+                                <span style="font-size: 1.3em;" aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <h1 class="section-heading text-center wow fadeIn my-5 pt-3">Please allow access to your webcam</h1>
+                              <div class="container">
+                                <video autoplay="true" id="videoElement">
+  	                            </video>
+                                <div class="text-left">
+                                  <button id="snap" type="button" class="btn btn-primary">Capture Image</button>
+                                </div>
+                                <div class="hide">
+                                  <canvas id="webCamCanvas" width="30" height="30"></canvas>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" id="useImage" class="btn btn-primary btn-md btn-rounded">Add Images</button>
+                              <button type="button" class="btn btn-danger btn-md btn-rounded" onclick="webcamStop()"data-dismiss="modal">Close</button>
+                            </div>
+                          </div>  <!-- END Modal-Content -->
+                        </div>  <!-- END Modal-Dialog -->
+                      </div>  <!-- END Modal -->
+                    </div>
+                   </div>
+
+
+
+                <div class="col">
+                  <div class="custom-file" style="width:500px">
+                    <div class="input-group-prepend mx-auto">
+                      <input type="file" class="custom-file-input"  accept="image/*" id="inputGroupFile03" onchange="handleFiles(this.files)">
+                      <label class="custom-file-label" for="inputGroupFile03" style="color: #1D7D72;  font-size:18px">Choose file</label>
+                    </div>
+                  </div>
+               </div>
+
+
+                <div class="col">
+                  <div class="input-group-prepend mx-auto">
+                    <button class="btn btn-secondary shadow rounded" type="button" data-toggle="modal" data-target="#sampleModal" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px">Samples</button>
+                    <style>
+                    .modal-dialog2 {
+                      width: 100% !important;
+                      height: 100% !important;
+                      margin: 0 !important;
+                      padding: 0 !important;
+                      max-width:none !important;
+                    }
+                    </style>
+                    <div class="modal right" id="sampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                      <div class="modal-dialog2 momodel modal-fluid" role="document">
+                        <div class="modal-content">
+
+                          <div class=" modal-header text-center">
+                            <h5 class="modal-title w-100" id="exampleModalPreviewLabel">Samples Images</h5>
+                              <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                                <span style="font-size: 1.3em;" aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                            <h1 class="section-heading text-center wow fadeIn my-5 pt-3">Please select sample images to test your model</h1>
+                            <div class="container mx-auto">
+                              <div class="row">
+                                <div class="col-sm-2">
+                                  <img id="sample1" data-eid="1" class="rounded mr-2 mb-2 eImg" style="width:150px; height:200px" src="can_1.jpg">
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample2" data-eid="2" class="rounded mr-2 mb-2 eImg" style="width:150px; height:200px" src="can_28.jpg">
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample3" data-eid="3" class="rounded mr-2 mb-2 eImg" style="width:150px; height:200px" src="can_31.jpg"> <!-- change to can_15 -->
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample4" data-eid="4" class="rounded mr-2 mb-2 eImg" style="width:150px; height:200px" src="carton_47.jpg"> <!-- change to carton_33 -->
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample5" data-eid="5" class="rounded mr-2 mb-2 eImg" style="width:150px; height:200px" src="carton_50.jpg">
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample6" data-eid="6" class="rounded mr-2 mb-2 eImg" style="width:150px; height:200px" src="carton_59.jpg"> <!-- change to carton_40 -->
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample7" data-eid="7" class="rounded mr-2 mb-2 eImg" style="width:150px; height:200px" src="milk_bottle_66.jpg">
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample8" data-eid="8" class="rounded mr-2 mb-2 eImg" style="width:150px; height:200px" src="milk_bottle_76.jpg"> <!-- change to milk_bottle_77 -->
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample9" data-eid="9" class="rounded mr-2 mb-2 eImg" style="width:150px; height:200px" src="water_bottle_105.jpg"> <!-- change to water_bottle_111 -->
+                                </div>
+                                <div class="col-sm-2">
+                                  <img id="sample10" data-eid="10" class="rounded mr-2 mb-2 eImg" style="width:150px; height:200px" src="water_bottle_115.jpg">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger btn-md btn-rounded" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>  <!-- END Modal-Content -->
+                      </div>  <!-- END Modal-Dialog -->
+                    </div>  <!-- END Modal -->
+                  </div>
+                 </div>
+
+
+                <div class="col">
+                   <div class="input-group-prepend mx-auto">
+
+                     <button class="btn btn-secondary shadow rounded mx-2" type="button" id="uploadbtn" data-target="#exampleModalCenter" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px" onclick="APIValidation()">Upload</button>
+                       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                         <div class="modal-dialog modal-dialog-centered" role="document">
+                           <div class="modal-content">
+                             <div class="modal-header">
+                               <h5 class="modal-title" id="exampleModalLongTitle">Error</h5>
+                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                               </button>
+                             </div>
+                             <div class="modal-body">
+                             Please check API URL.
+                             </div>
+                             <div class="modal-footer">
+                               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                             </div>
+                           </div>
+                         </div>
+                        </div>
+                      </div>
+                  </div>
+                  <!-- <div class="col">
+                     <div class="input-group-prepend mx-auto">
+                       <button class="btn btn-secondary shadow rounded" type="button" style="background-color: #1D7D72; color: #FFFFFF; font-size:18px; width: 100px">Samples</button>
+                     </div>
+                   </div> -->
+
+
+
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="container-fluid mt-5 mx-auto" style="position: static; max-width: 950px; background-color: #FFFFFF">
+                 <div class="row mt-5" style="position: static">
+                  <div class="col-sm mt-1 mx-auto">
+                    <div style="position: relative">
+                      <div class="container-fluid rounded" id="img1" style="width: 150px; height: 150px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
+                      <button class="btn btn-primary btn-sm rounded" id="close1" type="button" style="position: absolute; top: 0px; right: 150px; background-color: #FF0000; border-color: #FF0000">X</button>
+                  </div>
+                  </div>
+
+                  <div class="col-sm mt-1 mx-auto" style="position: static">
+                    <div style="position: relative">
+                      <div class="container-fluid rounded" id="img2" style="width: 150px; height: 150px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
+                      <button class="btn btn-primary btn-sm rounded" id="close2" type="button" style="position: absolute; top: 0px; right: 150px; background-color: #FF0000; border-color: #FF0000">X</button>
+                    </div>
+                  </div>
+
+                  <div class="col-sm mt-1 mx-auto" style="position: static">
+                    <div style="position: relative">
+                      <div class="container-fluid rounded" id="img3" style="width: 150px; height: 150px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
+                      <button class="btn btn-primary btn-sm rounded" id="close3" type="button" style="position: absolute; top: 0px; right: 150px;  background-color: #FF0000; border-color: #FF0000">X</button>
+                    </div>
+                  </div>
+
+                  <div class="col-sm mt-1 mx-auto" style="position: static">
+                    <div style="position: relative">
+                      <div class="container-fluid rounded" id="img4" style="width: 150px; height: 150px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
+                      <button class="btn btn-primary btn-sm rounded" id="close4" type="button" style="position: absolute; top: 0px; right: 150px; background-color: #FF0000; border-color: #FF0000">X</button>
+                    </div>
+                  </div>
+                </div>
+             </div>
+
+
+        <div class="container mt-5 mx-auto rounded" style="background-color: #F2F7F6; max-width: 950px;">
+            <div class="row justify-content-md-center">
+               <p class="text-center font-weight-bold pt-5 rounded mx-auto" style="color:#165A67; font-size:24px;">RESULTS</p>
+               <!-- no need for this for onw -->
+                  <!-- <div id="imageresult" class="mt-5"><img src="" id="imagenew"></div> -->
+                      <!-- <div class="mt-5 d-flex justify-content-center">
+                          <div id="div2" class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                          </div>
+                      </div> -->
+                        <!-- <canvas id="canvas" width="300" height="300"></canvas> -->
+              <!-- until here -->
+          </div>
+
+          <div class="container mx-auto py-4">
+
+            <div class="row">
+              <div class="col-md-5 mx-auto">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">Object Detection</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5 mx-auto">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">Object Detection</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5 mx-auto">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">Object Detection</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-5 mx-auto">
+                <div class="card mb-4 shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">Object Detection</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+    </div>
+
+      <div class="tab-pane fade card-body mt-4" id="seeexample" role="tabpanel" aria-labelledby="seeexample-tab">
+        <!-- for see example tab  -->
+        <div class="container mt-5 mx-auto" style="background-color: #FFFFFF">
+            <div class="row">
+              <div class="col-sm mt-3 ">
+                <div style="position: relative">
+                  <div class="container-fluid rounded" id="ex1" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
+                  <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px; background-color: #FF0000; border-color: #FF0000">X</button> -->
+                </div>
+              </div>
+
+              <div class="col-sm mt-3 " style="position: static">
+                <div style="position: relative">
+                  <div class="container-fluid rounded" id="ex2" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
+                  <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px; background-color: #FF0000; border-color: #FF0000">X</button> -->
+                </div>
+              </div>
+
+              <div class="col-sm mt-3 " style="position: static">
+                <div style="position: relative">
+                  <div class="container-fluid rounded" id="ex3" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
+                  <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px;  background-color: #FF0000; border-color: #FF0000">X</button> -->
+                </div>
+              </div>
+
+            <div class="col-sm mt-3 " style="position: static">
+              <div style="position: relative">
+                <div class="container-fluid rounded" id="ex4" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
+                <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px;  background-color: #FF0000; border-color: #FF0000">X</button> -->
+              </div>
+            </div>
+
+            <div class="col-sm mt-3 " style="position: static">
+              <div style="position: relative">
+                <div class="container-fluid rounded" id="ex5" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
+                <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px;  background-color: #FF0000; border-color: #FF0000">X</button> -->
+              </div>
+            </div>
+
+            <div class="col-sm mt-3 " style="position: static">
+              <div style="position: relative">
+                <div class="container-fluid rounded" id="ex6" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
+                <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px;  background-color: #FF0000; border-color: #FF0000">X</button> -->
+              </div>
+            </div>
+
+            <div class="col-sm mt-3 " style="position: static">
+              <div style="position: relative">
+                <div class="container-fluid rounded" id="ex7" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
+                <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px;  background-color: #FF0000; border-color: #FF0000">X</button> -->
+              </div>
+            </div>
+
+            <div class="col-sm mt-3 " style="position: static">
+              <div style="position: relative">
+                <div class="container-fluid rounded" id="ex8" style="width: 100px; height: 100px; border-style: dashed; border-width: 2px; border-color: #A4A4A4"></div>
+                <!-- <button class="btn btn-primary btn-sm rounded" type="button" style="position: absolute; top: 0px; right: 140px;  background-color: #FF0000; border-color: #FF0000">X</button> -->
+              </div>
+            </div>
+
+            <div class="col-sm mt-4 text-center">
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="">Object Detection
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="">Image Classification
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="">Image Similarity
+                </label>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mt-5 mx-auto rounded" style="background-color: #F2F7F6; max-width: 950px;">
+        <div class="row justify-content-md-center">
+           <p class="text-center font-weight-bold pt-5 rounded mx-auto" style="color:#165A67; font-size:24px;">RESULTS</p>
+         </div>
+
+      <div class="container mx-auto">
+
+        <div class="row">
+          <div class="col-md-5 mt-4 mx-auto">
+            <div class="card mb-4 shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <div class="card-body">
+                <p class="card-text">Object Detection</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5 mt-4 mx-auto">
+            <div class="card mb-4 shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <div class="card-body">
+                <p class="card-text">Image Classification</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5 mt-4 mx-auto">
+            <div class="card mb-4 shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <div class="card-body">
+                <p class="card-text">Image Similarity</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  </div>
+  </div>
+  </div>
+
+
+</main>
+>>>>>>> Stashed changes
 </body>
 
 </html>
