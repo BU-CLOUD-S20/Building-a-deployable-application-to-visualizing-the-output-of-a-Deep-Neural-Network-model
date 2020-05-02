@@ -26,17 +26,18 @@ Mentors: Patrick Buehler, Young Park, JS Tan
 #### Paper Presentation
 [EbbRT Paper Presentation](https://docs.google.com/presentation/d/e/2PACX-1vS__BZnB0DOHts27Xy7mbrzuihj3NCLJqTEy0SGE59aD2FTb8tLfRyOVHXdg--Fl12IZK5yiBSiU9S_/pub?start=false&loop=false&delayms=3000)
 
+#### Final Presentation & Video Recording
+* [Final Presentation](https://docs.google.com/presentation/d/1p4YKnUZrRpQU7KijOA1PT55oeCP8YcHYFsjS2q-X7e8/edit?usp=sharing)
 
 <a name="sprint-presentations"/>
 
-## 0. Sprint Presentations and Paper Presentation
+## 0. Sprint Presentations
 
 1. [Sprint 1](https://docs.google.com/presentation/d/1YJg0whEUxonBOJON-ExQi6li-OhU5VPepP93H8fXChw/edit?usp=sharing)
 2. [Sprint 2](https://docs.google.com/presentation/d/1hkqTPE9fNCRs7QkaELIBK1OSxYvn8TqOkDwcS2QG1_o/edit?usp=sharing)
 3. [Sprint 3](https://docs.google.com/presentation/d/e/2PACX-1vQK62-UelDsav2z0NQxnhVZvvVc4rSX7UKYpC7E7_pOrJso_WwE5MalFHqyyqyUJK_AVrTSesXwhf02/pub?start=false&loop=false&delayms=10000)
 4. [Sprint 4](https://docs.google.com/presentation/d/e/2PACX-1vRIiyPYAzG6Amfh6nCoxzAFCrNwjDsKj0FHbRbf2pdrmHBDS4wSKhoE6sC6WU5Xfa5EOSA3Eei0STx1/pub?start=false&loop=false&delayms=3000
 )
-
 5. [Sprint 5](https://docs.google.com/presentation/d/1mIWCY0Zoe-XiN_F12nO8Dr-s3WKh5lZNGZBeu_A_PJA/edit?usp=sharing)
 
 
@@ -44,7 +45,7 @@ Mentors: Patrick Buehler, Young Park, JS Tan
 
 ## 1. Vision and Goals Of The Project
 
-Develop an application for users to deploy their operationalized Deep Neural Network (DNN) models in the cloud. This application includes a front-end UI for the computer vision repository. 
+Develop an application for users to upload images and visualize the output of deployed Deep Neural Network (DNN) models in a simple HTML user interface
 * Provide a user interface that allows users to visualize the output of a deployed computer vision model. Users can improve on and gain insights from their deployed model by storing test images in a file system and examining them for correctness through the user interface. This user interface should be deployed to the cloud.
 * Provide a modular way for different models and different input/output signatures.
 
