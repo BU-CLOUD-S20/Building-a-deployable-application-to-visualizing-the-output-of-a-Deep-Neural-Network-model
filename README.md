@@ -15,7 +15,7 @@ Mentors: Patrick Buehler, Young Park, JS Tan
 4. [Solution Concept](#solution-concept)
 5. [Acceptance Criteria](#acceptance-criteria)
 6. [Release Planning](#release-planning)
-7. [How to install and run the project - HTML Demo](#install-run)
+7. [How to install and run the project](#install-run)
 
 ## Course Contents
 
@@ -199,7 +199,7 @@ Evangelism:
 
 <a name="install-run"/>
 
-## 7. How to install and run the project - HTML Demo
+## 7. How to install and run the project 
 
 
 ### Project Description
