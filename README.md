@@ -8,7 +8,7 @@ Mentors: Patrick Buehler, Young Park, JS Tan
 
 #### Contents
 
-0. [Sprint Presentations and Paper Presentation](#sprint-presentations)
+0. [Sprint Presentations](#sprint-presentations)
 1. [Vision and Goals Of The Project](#vision-goals)
 2. [Users/Personas Of The Project](#users-personas)
 3. [Scope and Features of the Project](#scope-features)
