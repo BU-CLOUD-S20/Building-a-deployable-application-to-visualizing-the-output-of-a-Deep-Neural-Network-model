@@ -193,9 +193,7 @@ Evangelism:
 * Demo work to Microsoft via virtual Microsoft Lunch and Learn Session
 
 
-## 7. How to install and run the project
-
-## HTML Demo
+## 7. How to install and run the project - HTML Demo
 
 ### Project Description
 
