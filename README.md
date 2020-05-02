@@ -93,7 +93,7 @@ System components that are building blocks of the design:
      * Models must implement scoring functions as outlined in the Miscrosoft CVBP repository
  * Local Web Server: used to serve/execute UI elements in MVP
  * Azure Blob Storage: alternate publishing location for UI elements (as stretch goal)
-![solution concept](https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model/blob/master/solution_concept.png)
+![solution concept](https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model/blob/master/media/solution_concept.png)
 
 Figure 1: Proposed architecture
 Many design decisions have not been made yet. Three notable decisions evident above:
@@ -241,10 +241,10 @@ To use a deployed model in the Use My Model tab:
 
 1. Enter the model's API URL in the text field
 2. Upload or select images to use:
-	2.1. Webcam
-    		i. Allow the browser to use your web cam
-    		ii. Select Capture Image to take a picture
-    		iii. Select Add Images to add the captured image
+	* Webcam
+		* Allow the browser to use your web cam
+    		* Select Capture Image to take a picture
+    		* Select Add Images to add the captured image
   	2.2. Samples
     	2.3. Select an image by clicking on it
 3. Choose Files
@@ -271,7 +271,7 @@ In "See Example" tab on the website, users can click on example images and view 
 
 
 
-### Authors
+### Authors -- don't know if we still need this section here
 
 This work was completed by a team of students from the Boston University College of Engineering as part of the EC528 Cloud Computing class. The project was completed in collaboration with three Microsoft engineers who proposed the project and acted as team mentors.
 
