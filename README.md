@@ -4,6 +4,7 @@ Team: Matthew Boyd, Charles Henneberger, Xushan "Mulla" Hu, SeungYeun "Kelly" Le
 Mentors: Patrick Buehler, Young Park, JS Tan
 
 [Pull Request link](https://github.com/mcboyd-bu/computervision-recipes/tree/contrib_html_demo/contrib/html_demo)
+
 [Front-End UI](https://javascript-work-1.matthewboyd1.repl.co/index_new.html)
 
 *Updated: May 2, 2020*
