@@ -44,7 +44,7 @@ Mentors: Patrick Buehler, Young Park, JS Tan
 
 ## 1. Vision and Goals Of The Project
 
-Develop an application for users to upload images and visualize the output of deployed Deep Neural Network (DNN) models in a simple HTML user interface
+The goal of the project is to develop an application for users to upload images and visualize the output of deployed Deep Neural Network (DNN) models in a simple HTML user interface
 * Provide a user interface that allows users to visualize the output of a deployed computer vision model. Users can improve on and gain insights from their deployed model by storing test images in a file system and examining them for correctness through the user interface. This user interface should be deployed to the cloud.
 * Provide a modular way for different models and different input/output signatures.
 
