@@ -95,13 +95,14 @@ Many design decisions have not been made yet. Three notable decisions evident ab
 
 ## 5. Acceptance Criteria
 
-The minimum acceptance criteria is a deployed UI (UI-DNN) which calls a cloud-based REST API and visualizes its output for multiple DNN scenarios; except for UI of “similarity” DNN models (UI-DNN-Sim), which will also call a cloud-based REST API for each uploaded query image.
+Minimum acceptance criteria is a deployed UI (UI-DNN) which calls a cloud-based REST API and visualizes its output for multiple DNN scenarios (Image Classification and Object Detection).
 
 Stretch goals are:
-* Deployment of UI-DNN-Sim site to the cloud.
-* REST API expands from single image to taking multiple images as input; “batch scoring”
+* UI supports visualization for image similarity model.
+* REST API expands from single image input to taking multiple images as input; “batch scoring”
 * Allows for the use of webcam as input.
-* Improve visualizations for UI-DNN such as adding interactive components and has appropriate UI for cell phone.
+* Improve visualizations for user interface; create appropriate UI for cell phone.
+* Add another option on UI to allow users to view the example output of DNN models from Microsoft.
 
 <a name="release-planning"/>
 
@@ -109,65 +110,81 @@ Stretch goals are:
 
 Plans are on Taiga: https://tree.taiga.io/project/mosayyebzadeh-building-deployable-application-visualizing-the-output-deep-neural-network/backlog
 
-### Release #1 (due by Week 5):
+### Release #1 (due by Week 5 - Sprint 1):
 
 UI: 
-* Implement simple UI-DNN HTML interface for testing published DNN models via local web server
-	* Site shows uploaded image
-	* Site shows uploaded image with hard-coded rectangle co-ordinates
+* Design a simple HTML interface for testing published DNN models via local web server
+	* Create a hi-fi wireframe of the user interface
 
 Image Similarity:
-* Run “similarity” DNN model via provided Jupyter notebooks (00, 01, 12)
-* Summarize pain points with CVBP
-* Precomputes features for reference set, and stores on disk
-* Can load precomputed features and compare with a query image (on local machine, code is provided in the notebooks)
+* Run “similarity” DNN model via provided Jupyter notebooks (00, 01, 12) on Microsoft CVBP github repository.
+* Summarize pain points from the provided Jupyter notebooks and present the pain points to mentors.
 
 API:
-* Run 00, 01, and 03 image classification Jypyter notebooks
-* Summarize pain points with CVBP
+* Run 00, 01, and 03 image classification Jypyter notebooks from Microsoft CVBP github repository.
+* Summarize pain points with CVBP github repo and present the pain points to mentors.
 
-### Release #2 (due by Week 7):
+### Release #2 (due by Week 7 - Sprint 2):
 
-UI-DNN: 
-* Site shows uploaded image with API-returned rectangle co-ordinates
-* Add drop-down menu to supports image classification and object detection
-
+UI: 
+* Implement simple HTML interface for testing published DNN models based on hi-fi wireframe designed 
+* Add functionalities to the front-end so that:
+	* website allows single image input
+	* webite shows uploaded image with hard-coded rectangle co-ordinates (to visualize the output of DNN models)
+	* there is error checking for valid API input
+	
 Image Similarity:
+* Write up image similarity Jupyter notebook to:
+	* Precomputes image features for reference set, and stores on disk
+	* Load precomputed features and compare with a query image (on local machine, code is provided in the notebooks)
 * Explore options to upload “similarity” DNN models to cloud, execute if action is plausible
 
 API: 
 * Deploy API using the provided CVBP notebooks to cloud
  
-### Release #3 (due by Week 9):
+### Release #3 (due by Week 9 - Sprint 3):
 
-UI-DNN:
-* Add plotly to the interface for better visualization and interactive elements of the UI
-
-UI-DNN-Sim:
-* Implement simple UI-DNN-Sim HTML interface for testing published “similarity” DNN models via local web server
-	* Site returns list of similar images to be displayed based on features
-* Run website from local PC
+UI:
+* Add functionalities to front-end and back-end:
+	* Website allows multiple images (upto 4 images) input and display the 4 input images.
+	* Create two tabs on UI; first tab allows users to test and visualize their own DNN models, second tab allows users to select from example set of images and visualize the output of DNN model from Microsoft on the example set of images.
 
 API:
 * Expand from taking single image input to do batch scoring with multiple images as input
 * Deploy API to the cloud
+
+Image Similarity:
+* Test Image Similarity Jupyter notebook, verify that there are no errors.
+* Implement simple HTML interface for testing published “similarity” DNN models via local web server
+	* Site returns list of similar images to be displayed based on features
+* Run website from local PC
  
-### Release #4 (due by Week 11):
+### Release #4 (due by Week 11 - Sprint 4):
 
-Document and upload work to CVBP via code review
+Connect front-end and back-end to create a functional UI.
 
-UI-DNN & UI-DNN-Sim:
-* Allow for realtime webcam images captured by UI-DNN or UI-DNN-Sim as an input to test models
+Minimum viable product (MVP) is completed.
+
+Document and upload work to Microsoft CVBP github repository via code review
+
+UI:
+* Addition/Modification of UI elements:
+	* Remove white spaces from the UI
+	* Change modal pop-up to collapsible component.
+	* Add steps on how to navigate the UI to the website.
+	* Add "About" tab to give detailed information about the project on the website.
+
+
+### Release #5 (due by Week 13 - Sprint 5):
+
+* Document and upload work to CVBP via code review.
+
+* Wrap up the project.
 
 Evangelism:
 * Blog about the work and share on social media
+* Demo work to Microsoft via virtual Microsoft Lunch and Learn 
 
-### Release #5 (due by Week 13):
 
-* Document and upload work to CVBP via code review
-* Addition/modification of UI interactive elements:
-	* Appropriate interface for cell phone
-*  Add Azure Blob Storage as an alternate publishing location for UI-DNN 
-* (Optional) Demo work in-person at Microsoft’s Kendall Sq. Office
 
 
