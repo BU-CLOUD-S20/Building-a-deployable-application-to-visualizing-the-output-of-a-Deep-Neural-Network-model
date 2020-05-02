@@ -3,7 +3,7 @@
 Team: Matthew Boyd, Charles Henneberger, Xushan "Mulla" Hu, SeungYeun "Kelly" Lee, Nuwapa "Prim" Promchotichai  
 Mentors: Patrick Buehler, JS Tan, Young Park
 
-*Updated: February 12, 2020*
+*Updated: May 2, 2020*
 
 #### Contents
 
