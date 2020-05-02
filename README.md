@@ -149,6 +149,7 @@ UI:
 * Add functionalities to front-end and back-end:
 	* Website allows multiple images (upto 4 images) input and display the 4 input images.
 	* Create two tabs on UI; first tab allows users to test and visualize their own DNN models, second tab allows users to select from example set of images and visualize the output of DNN model from Microsoft on the example set of images.
+	* Website display the visualization of DNN model output from deployed API on 4 images.
 
 API:
 * Expand from taking single image input to do batch scoring with multiple images as input
@@ -178,13 +179,13 @@ UI:
 
 ### Release #5 (due by Week 13 - Sprint 5):
 
-* Document and upload work to CVBP via code review.
+##### Wrap up the project.
 
-* Wrap up the project.
+* Document and upload work to CVBP via code review.
 
 Evangelism:
 * Blog about the work and share on social media
-* Demo work to Microsoft via virtual Microsoft Lunch and Learn 
+* Demo work to Microsoft via virtual Microsoft Lunch and Learn Session
 
 
 
