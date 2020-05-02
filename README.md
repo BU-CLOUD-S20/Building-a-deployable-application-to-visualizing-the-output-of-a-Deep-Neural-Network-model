@@ -246,9 +246,9 @@ To use a deployed model in the Use My Model tab:
 		* Select Capture Image to take a picture
 		* Select Add Images to add the captured image
 	* Samples
-    	* Select an image by clicking on it
-3. Choose Files
-	* Select images to upload from your machine's file explorer
+    		* Select an image by clicking on it
+	* Choose Files
+		* Select images to upload from your machine's file explorer
 4. Select Upload to send the images to the model's API
 5. View results below!
 
