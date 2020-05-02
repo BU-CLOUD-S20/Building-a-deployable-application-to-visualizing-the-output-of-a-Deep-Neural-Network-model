@@ -179,7 +179,7 @@ UI:
 
 ### Release #5 (due by Week 13 - Sprint 5):
 
-##### Wrap up the project.
+#### Wrap up the project.
 
 * Document and upload work to CVBP via code review.
 
