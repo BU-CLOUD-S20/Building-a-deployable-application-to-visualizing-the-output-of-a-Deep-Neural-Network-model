@@ -5,9 +5,14 @@ Mentors: Patrick Buehler, Young Park, JS Tan
 
 *Updated: May 2, 2020*
 
-[Pull Request link](https://github.com/mcboyd-bu/computervision-recipes/tree/contrib_html_demo/contrib/html_demo)
+## Course Contents
 
+#### For demo:
+[Pull Request link](https://github.com/mcboyd-bu/computervision-recipes/tree/contrib_html_demo/contrib/html_demo)
 [Front-End UI](https://javascript-work-1.matthewboyd1.repl.co/index_new.html)
+
+#### Paper Presentation
+[EbbRT Paper Presentation](https://docs.google.com/presentation/d/e/2PACX-1vS__BZnB0DOHts27Xy7mbrzuihj3NCLJqTEy0SGE59aD2FTb8tLfRyOVHXdg--Fl12IZK5yiBSiU9S_/pub?start=false&loop=false&delayms=3000)
 
 
 #### Contents
@@ -19,6 +24,7 @@ Mentors: Patrick Buehler, Young Park, JS Tan
 4. [Solution Concept](#solution-concept)
 5. [Acceptance Criteria](#acceptance-criteria)
 6. [Release Planning](#release-planning)
+7. [How to install and run the project - HTML Demo](#install-run)
 
 <a name="sprint-presentations"/>
 
@@ -32,8 +38,6 @@ Mentors: Patrick Buehler, Young Park, JS Tan
 
 5. [Sprint 5](https://docs.google.com/presentation/d/1mIWCY0Zoe-XiN_F12nO8Dr-s3WKh5lZNGZBeu_A_PJA/edit?usp=sharing)
 
-#### Paper Presentation
-[EbbRT Paper Presentation](https://docs.google.com/presentation/d/e/2PACX-1vS__BZnB0DOHts27Xy7mbrzuihj3NCLJqTEy0SGE59aD2FTb8tLfRyOVHXdg--Fl12IZK5yiBSiU9S_/pub?start=false&loop=false&delayms=3000)
 
 <a name="vision-goals"/>
 
@@ -192,6 +196,7 @@ Evangelism:
 * Blog about the work and share on social media
 * Demo work to Microsoft via virtual Microsoft Lunch and Learn Session
 
+<a name="install-run"/>
 
 ## 7. How to install and run the project - HTML Demo
 
@@ -234,17 +239,17 @@ git clone git@github.com:microsoft/ComputerVision.git
 To use a deployed model in the Use My Model tab:
 
 1. Enter the model's API URL in the text field
-1. Upload or select images to use:
-  1. Webcam
-    a. Allow the browser to use your web cam
-    b. Select Capture Image to take a picture
-    c. Select Add Images to add the captured image
-  1. Samples
-    a. Select an image by clicking on it
-  1. Choose Files
-    a. Select images to upload from your machine's file explorer
-1. Select Upload to send the images to the model's API
-1. View results below!
+2. Upload or select images to use:
+	2.1. Webcam
+    		i. Allow the browser to use your web cam
+    		ii. Select Capture Image to take a picture
+    		iii. Select Add Images to add the captured image
+  	2.2. Samples
+    	2.3. Select an image by clicking on it
+3. Choose Files
+	3.1. Select images to upload from your machine's file explorer
+4. Select Upload to send the images to the model's API
+5. View results below!
 
 To view examples in the See Example tab:
 
