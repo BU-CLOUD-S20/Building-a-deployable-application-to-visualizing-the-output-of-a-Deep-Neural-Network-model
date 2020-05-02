@@ -243,12 +243,12 @@ To use a deployed model in the Use My Model tab:
 2. Upload or select images to use:
 	* Webcam
 		* Allow the browser to use your web cam
-    		* Select Capture Image to take a picture
-    		* Select Add Images to add the captured image
-  	2.2. Samples
-    	2.3. Select an image by clicking on it
+		* Select Capture Image to take a picture
+		* Select Add Images to add the captured image
+	* Samples
+    	* Select an image by clicking on it
 3. Choose Files
-	3.1. Select images to upload from your machine's file explorer
+	* Select images to upload from your machine's file explorer
 4. Select Upload to send the images to the model's API
 5. View results below!
 
