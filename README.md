@@ -28,6 +28,7 @@ Mentors: Patrick Buehler, Young Park, JS Tan
 
 #### Final Presentation & Video Recording
 * [Final Presentation](https://docs.google.com/presentation/d/1p4YKnUZrRpQU7KijOA1PT55oeCP8YcHYFsjS2q-X7e8/edit?usp=sharing)
+* [Video Recording](https://www.youtube.com/watch?v=EoCRrYv3WD0)
 
 #### Paper Presentation
 [EbbRT Paper Presentation](https://docs.google.com/presentation/d/e/2PACX-1vS__BZnB0DOHts27Xy7mbrzuihj3NCLJqTEy0SGE59aD2FTb8tLfRyOVHXdg--Fl12IZK5yiBSiU9S_/pub?start=false&loop=false&delayms=3000)
@@ -231,10 +232,10 @@ Some of the notebooks in the JupyterCode repository will also instruct you to ru
 #### Setup
 - Clone the repo
 ```bash
-git clone git@github.com:microsoft/ComputerVision.git
+git clone git@github.com:BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model.git
 ```
 
-- Execute the notebooks in JupyterCode in your conda environment to deploy a model and upload necessary code for the web page to work
+- Execute the notebooks in FinalCode/JupyterCode in your conda environment to deploy a model and upload necessary code for the web page to work
 
 #### Using the web page
 
@@ -272,7 +273,7 @@ In "See Example" tab on the website, users can click on example images and view 
 
 
 
-### Authors -- don't know if we still need this section here
+### Authors
 
 This work was completed by a team of students from the Boston University College of Engineering as part of the EC528 Cloud Computing class. The project was completed in collaboration with three Microsoft engineers who proposed the project and acted as team mentors.
 
