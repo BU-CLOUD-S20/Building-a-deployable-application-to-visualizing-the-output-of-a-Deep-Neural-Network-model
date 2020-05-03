@@ -3,9 +3,11 @@
 Team: Matthew Boyd, Charles Henneberger, Xushan "Mulla" Hu, SeungYeun "Kelly" Lee, Nuwapa "Prim" Promchotichai  
 Mentors: Patrick Buehler, Young Park, JS Tan
 
-*Updated: May 2, 2020*
+*Updated: May 3, 2020*
 
 #### Contents
+
+[Course Contents](#course-contents)
 
 0. [Sprint Presentations](#sprint-presentations)
 1. [Vision and Goals Of The Project](#vision-goals)
@@ -15,6 +17,8 @@ Mentors: Patrick Buehler, Young Park, JS Tan
 5. [Acceptance Criteria](#acceptance-criteria)
 6. [Release Planning](#release-planning)
 7. [How to install and run the project](#install-run)
+
+<a name="course-contents"/>
 
 ## Course Contents
 
@@ -85,28 +89,24 @@ Target Audience:
 System components that are building blocks of the design:
  * Jupyter Notebooks: walk users through creating and “publishing” DNN models
  * DNN Models: users’ trained models
- * UI-DNN: HTML interface for testing published DNN models (all except “Similarity” DNN models)
- * UI-DNN-Sim: HTML interface for testing published “Similarity” DNN models
- * Test Images: existing images the user uploads through UI-DNN or UI-DNN-Sim to test their models
- * Capture Images: realtime webcam images captured by UI-DNN or UI-DNN-Sim to test models
- * Azure Container/Kubernetes: DNN model publishing locations, with focus on simplicity and low cost (e.g., CPU vs GPU resources) - can publish to either service
+ * UI: HTML interface for testing published DNN models
+ * Test Images: existing images the user uploads through UI to test their models
+ * Capture Images: realtime webcam images captured through UI to test models
+ * Azure Container/Kubernetes/App Service: DNN model publishing locations, with focus on simplicity, low cost (e.g., CPU vs GPU resources), and ability to set CORS policy - can publish to any service that meets all needs
  * REST API: communication end-point where UI elements and Azure-published models interact
      * Models must implement scoring functions as outlined in the Miscrosoft CVBP repository
  * Local Web Server: used to serve/execute UI elements in MVP
  * Azure Blob Storage: alternate publishing location for UI elements (as stretch goal)
 ![solution concept](https://github.com/BU-CLOUD-S20/Building-a-deployable-application-to-visualizing-the-output-of-a-Deep-Neural-Network-model/blob/master/media/solution_concept.png)
 
-Figure 1: Proposed architecture
-Many design decisions have not been made yet. Three notable decisions evident above:
- * “Similarity” DNN models may be kept local (and not published to Azure) based on current best practices due to the complexity of executing them - still investigating.
-  * UI-DNN-Sim as separate code: since it will return a list of similar images to be displayed (vs. text / bounding boxes for the other models), the interface will differ significantly; also, since it will interface with local models and code for finding similar images, even after publishing to the cloud, it will have different requirements.
+Figure 1: Solution architecture
  * Server requirement (local or cloud) for UI elements: REST APIs and local file APIs (for loading test images) cannot be accessed if the HTML/Javascript files are not loaded and access via a web server. These are web standards and cannot be avoided. 
 
 <a name="acceptance-criteria"/>
 
 ## 5. Acceptance Criteria
 
-Minimum acceptance criteria is a deployed UI (UI-DNN) which calls a cloud-based REST API and visualizes its output for multiple DNN scenarios (Image Classification and Object Detection).
+Minimum acceptance criteria is a deployed UI which calls a cloud-based REST API and visualizes its output for multiple DNN scenarios (Image Classification and Object Detection).
 
 Stretch goals are:
 * UI supports visualization for image similarity model.
