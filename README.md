@@ -213,8 +213,8 @@ This project provides an HTML web page that allows users to visualize the output
 
 | Directory | Description |
 | --- | --- |
-| [JupyterCode](JupyterCode)| Contains helper notebooks that upload files and deploy models that allow the web page to work |
-| [UICode](UICode)| Contains HTML, CSS, and JavaScript files to implement the web page |
+| [JupyterCode](FinalCode/JupyterCode)| Contains helper notebooks that upload files and deploy models that allow the web page to work |
+| [UICode](FinalCode/UICode)| Contains HTML, CSS, and JavaScript files to implement the web page |
 | [media](media)| Image files embedded as screenshots in this and other readmes |
 
 
